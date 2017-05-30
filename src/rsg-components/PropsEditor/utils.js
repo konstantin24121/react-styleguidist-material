@@ -141,9 +141,10 @@ function getTabsForProps(code, componentName) {
 export function generateNewCode(code, componentName, props) {
   const tabs = getTabsForProps(code, componentName);
   const formattedProps = props.join(`\n${tabs}`);
-  const regExp = new RegExp(`<${componentName}(.|\t|\n)+/>`, 'g');
-  return code.replace(
+  const regExp = new RegExp(`(<${componentName}(.|\t|\n)+)/?>.`, 'g');
+  const newCode = code.replace(
     regExp,
-    `<${componentName}\n${tabs}${formattedProps}\n${tabs.slice(0, -1)}/>`
+    `<${componentName}\n${tabs}${formattedProps}\n${tabs.slice(0, -1)}`
   );
+  return newCode;
 }

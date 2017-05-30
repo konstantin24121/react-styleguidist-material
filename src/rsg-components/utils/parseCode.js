@@ -34,15 +34,15 @@ function findComponent(node, componentName, code) {
  */
 function getPureProps(name, code) {
   // Отрезаем все что до пропса
-	let regexp = new RegExp(`${name}=(\\{)`, 'gui');
-	let match = regexp.exec(code);
-	const cutStart = code.slice(match.index);
+  let regexp = new RegExp(`${name}=(\\{)`, 'gui');
+  let match = regexp.exec(code);
+  const cutStart = code.slice(match.index);
 
   // Отрезаем все что после последней }
-	regexp = /(\}\n)/;
-	match = regexp.exec(cutStart);
-	const pureProp = cutStart.slice(0, match.index + 1);
-	return pureProp;
+  regexp = /(\}(\n|\t| |>))/;
+  match = regexp.exec(cutStart);
+  const pureProp = cutStart.slice(0, match.index + 1);
+  return pureProp;
 }
 
 /**
