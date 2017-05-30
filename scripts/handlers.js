@@ -1,6 +1,5 @@
-const displayNameHandler = require('react-docgen-displayname-handler').default;
 const recast = require('recast');
-const doctrine = require("doctrine");
+const doctrine = require('doctrine');
 
 function getClassLeadingComments(path) {
   let leadingComments;
@@ -78,5 +77,4 @@ module.exports = [
   handlerImportString,
   handlerComponentType,
   versionHandler,
-  displayNameHandler,
 ]

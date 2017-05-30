@@ -122,16 +122,18 @@ class ReactComponentRenderer extends PureComponent {
         <div>
           {description}
         </div>
-        <div className={s.importLine}>
-          <CopyToClipboard
-            text={importString}
-            onCopy={this.handleCopy}
-          >
-            <span>
-              {importString}
-            </span>
-          </CopyToClipboard>
-        </div>
+        {importString &&
+          <div className={s.importLine}>
+            <CopyToClipboard
+              text={importString}
+              onCopy={this.handleCopy}
+            >
+              <span>
+                {importString}
+              </span>
+            </CopyToClipboard>
+          </div>
+        }
         <div className={s.props}>
           <h3 className={s.heading}>Props</h3>
           {props}
@@ -145,15 +147,15 @@ class ReactComponentRenderer extends PureComponent {
         {examples}
         {changelog}
       </div>
-   );
+    );
   }
 }
 
 ReactComponentRenderer.propTypes = {
   name: PropTypes.string.isRequired,
   pathLine: PropTypes.string.isRequired,
-  importString: PropTypes.string.isRequired,
-  version: PropTypes.string.isRequired,
+  importString: PropTypes.string,
+  version: PropTypes.string,
   description: PropTypes.node,
   props: PropTypes.node,
   examples: PropTypes.node,
