@@ -141,10 +141,16 @@ function getTabsForProps(code, componentName) {
 export function generateNewCode(code, componentName, props) {
   const tabs = getTabsForProps(code, componentName);
   const formattedProps = props.join(`\n${tabs}`);
-  const regExp = new RegExp(`(<${componentName}(.|\t|\n)+)/?>.`, 'g');
-  const newCode = code.replace(
-    regExp,
-    `<${componentName}\n${tabs}${formattedProps}\n${tabs.slice(0, -1)}`
-  );
+  const regExp = new RegExp(`(<${componentName})(?:.|\t|\n)+(/>)`, 'g');
+  const regExpWithChildren = new RegExp(`(<${componentName})(?:.|\t|\n)+(>(?:.|\t|\n)+</${componentName}>)`, 'g');
+  let newCode;
+  const replacer = (str, start, end) =>
+    `${start}\n${tabs}${formattedProps}\n${tabs.slice(0, -1)}${end}`;
+
+  if (regExpWithChildren.test(code)) {
+    newCode = code.replace(regExpWithChildren, replacer);
+  } else if (regExp.test(code)) {
+    newCode = code.replace(regExp, replacer);
+  }
   return newCode;
 }

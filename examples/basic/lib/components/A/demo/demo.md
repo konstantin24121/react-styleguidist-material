@@ -4,4 +4,24 @@ Declaration
 
 Для использования компонента достаточно обернуть им любой узел или текст.
 
-    <A onClick={() => {console.log(1)}} >Link</A>
+    <A name="zad" onClick={() => {console.log(1)}}>Link</A>
+
+Зад
+
+    <A
+      name="zad"
+      onClick={() => {console.log(1)}}
+    >
+      Link
+    </A>
+
+Еще пример
+
+    <A name="zad"
+      onClick={() => {console.log(1)}}>Link</A>
+
+Еще пример
+
+    <A name="zad"
+      onClick={() => {console.log(1)}}>Link
+      </A>

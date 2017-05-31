@@ -67,11 +67,13 @@ $sidebarWidth: 256px;
   font-weight: lighter;
   line-height: 48px;
   display: block;
-  padding: 0.5rem 15px;
+  padding: 0.5rem 48px 0.5rem 15px;
   color: white;
   background-color: rgb(0, 188, 212);
   position: relative;
   z-index: 1;
+  overflow: auto;
+  white-space: nowrap;
 }
 
 .doc {
