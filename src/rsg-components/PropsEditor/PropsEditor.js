@@ -94,6 +94,7 @@ export default class PropsEditor extends PureComponent {
     const props = fields.map((field) => generateProps(field.toJS()));
     const simpleProps = props.filter((prop) => prop).toArray();
     const newCode = generateNewCode(code, componentName, simpleProps);
+    console.log(newCode);
     this.props.onSubmit(newCode);
   };
 

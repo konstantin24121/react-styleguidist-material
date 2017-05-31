@@ -55,8 +55,27 @@ class StyleGuideRenderer extends Component {
     });
   }
 
+  componentDidMount() {
+    setTimeout(this.resizeText, 500);
+  }
+
   componentWillUpdate(nextProps, nextState) {
     localStorage.setItem(`${this.constructor.displayName}DrawerOpen`, nextState.drawerOpen);
+  }
+
+  resizeText = () => {
+    const step = 0.1;
+    const minFontSize = 9;
+    const style = getComputedStyle(this.titleRef);
+    const scrollWidth = this.titleRef.scrollWidth;
+    const width = this.titleRef.offsetWidth;
+    if (scrollWidth > width) {
+      const fontsize = parseInt(style.fontSize, 10) - step;
+      if (fontsize >= minFontSize){
+        this.titleRef.style.fontSize = `${fontsize}px`;
+       this.resizeText();
+      }
+    }
   }
 
   handleOpenDrawer = () => {
@@ -81,7 +100,7 @@ class StyleGuideRenderer extends Component {
           <div className={s.header}>
             {singleExample &&
               <div className={s.titleline}>
-                {targetComponentName}
+                Component: {targetComponentName}
               </div>
             }
             {sidebar &&
@@ -94,7 +113,7 @@ class StyleGuideRenderer extends Component {
               </IconButton>
             }
             {!sidebar &&
-              <a href="/#">
+              <a href={`/#${targetComponentName}`}>
                 <IconButton
                   tooltip="Back to styleguide"
                   tooltipPosition="bottom-left"
@@ -114,7 +133,11 @@ class StyleGuideRenderer extends Component {
           {singleExample && components}
           {sidebar &&
             <Drawer open={drawerOpen} docked={!this.state.isMobile}>
-              <h1 className={s.heading}>{title}</h1>
+              <h1 className={s.heading} >
+                <div ref={(el) => (this.titleRef = el)}>
+                  {title}
+                </div>
+              </h1>
               <IconButton
                 tooltip={drawerOpen ? 'Close filter' : 'Open filter'}
                 tooltipPosition="bottom-left"
