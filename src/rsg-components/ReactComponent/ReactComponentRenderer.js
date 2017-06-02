@@ -117,23 +117,24 @@ class ReactComponentRenderer extends PureComponent {
             }
           </h2>
           <div className={s.pathLine}>{pathLine}</div>
+          {importString &&
+            <div className={s.importLine}>
+              <CopyToClipboard
+                text={importString}
+                onCopy={this.handleCopy}
+              >
+                <span>
+                  {importString}
+                </span>
+              </CopyToClipboard>
+            </div>
+          }
           {sidebar && <a className={s.anchorLink} href={`#${name}`}>#</a>}
         </header>
-        <div>
+        <div className={s.description}>
           {description}
         </div>
-        {importString &&
-          <div className={s.importLine}>
-            <CopyToClipboard
-              text={importString}
-              onCopy={this.handleCopy}
-            >
-              <span>
-                {importString}
-              </span>
-            </CopyToClipboard>
-          </div>
-        }
+
         <div className={s.props}>
           <h3 className={s.heading}>Props</h3>
           {props}
