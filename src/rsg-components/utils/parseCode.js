@@ -36,9 +36,8 @@ function getPureProps(name, code) {
   let regexp = new RegExp(`${name}=(\\{)`, 'gui');
   let match = regexp.exec(code);
   const cutStart = code.slice(match.index);
-
   // Отрезаем все что после последней }
-  regexp = /(\}(\n|\t| |>))/;
+  regexp = /(\})(?:\n|\t| |>)*[\w/]/;
   match = regexp.exec(cutStart);
   const pureProp = cutStart.slice(0, match.index + 1);
   return pureProp;
@@ -55,8 +54,7 @@ function getPureCode(name, code) {
   const regexp = new RegExp(`${name}=\\{((.*\\n?\\s*)*)\\}`, 'gui');
   try {
     return regexp.exec(pureProps)[1];
-  }
-  catch (e) {
+  } catch (e) {
     throw new Error(e);
   }
 }
@@ -111,7 +109,7 @@ function parseProps(conponentNode, code) {
   return props;
 }
 
-export default function(code, componentName) {
+export default function (code, componentName) {
   const parseCode = acorn.parse(code, {
     plugins: { jsx: true },
   });

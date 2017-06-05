@@ -132,8 +132,7 @@ function getTabsForProps(code, componentName) {
   try {
     const tabs = regExp.exec(code)[1];
     return tabs;
-  }
-  catch (e) {
+  } catch (e) {
     return '\t';
   }
 }

@@ -78,6 +78,7 @@
     sans-serif;
   margin-top: 0;
   margin-bottom: 15px;
+  line-height: 1.618;
 }
 
 .h3 {
@@ -167,5 +168,6 @@
 
   li {
     display: list-item;
+    margin-bottom: 0.5em;
   }
 }

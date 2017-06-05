@@ -60,7 +60,7 @@ export default class Playground extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     return (
       nextState.code !== this.state.code
-   );
+    );
   }
 
   componentWillUnmount() {
@@ -97,8 +97,7 @@ export default class Playground extends Component {
       // if previewDelay is enabled debounce the code
       this.queuedChange = debounce(queuedChange, previewDelay);
       this.queuedChange();
-    }
-    else {
+    } else {
       // otherwise execute it
       queuedChange();
     }
@@ -125,6 +124,6 @@ export default class Playground extends Component {
           }
         }
       />
-   );
+    );
   }
 }

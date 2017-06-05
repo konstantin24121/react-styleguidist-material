@@ -19,7 +19,12 @@ Sample component:
         required="Best component ever"
         integer={5}
         node={<div>😱</div>}
-        stringObjects={{1: 'Alexander', 2:'Nevski'}}
+        stringObjects={
+          {
+            1: 'Alexander',
+            2:'Nevski'
+          }
+        }
         arrayOfShapes={[
           { id: 1, name: 'Like' },
           { id: 4, name: 'that' },

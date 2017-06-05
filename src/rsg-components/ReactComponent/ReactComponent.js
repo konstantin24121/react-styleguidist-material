@@ -53,8 +53,7 @@ export default class ReactComponent extends Component {
       const regexp = /v(\d(\.\d+){1,2}((-(?=\w+)[\w\.]*)|))/;
       const match = regexp.exec(changelog[0].content);
       return match ? match[1] : component.props.version;
-    }
-    catch (e) {
+    } catch (e) {
       return component.props.version;
     }
   };
@@ -100,6 +99,6 @@ export default class ReactComponent extends Component {
           </Paper>
         }
       </span>
-   );
+    );
   }
 }

@@ -56,7 +56,9 @@ class StyleGuideRenderer extends Component {
   }
 
   componentDidMount() {
-    setTimeout(this.resizeText, 500);
+    if (this.props.sidebar) {
+      setTimeout(this.resizeText, 500);
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
