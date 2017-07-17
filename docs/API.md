@@ -7,7 +7,7 @@ First, you need to initialize the API with your style guide config.
 Using a JavaScript object:
 
 ```javascript
-const styleguidist = require('react-styleguidist');
+const styleguidist = require('react-styleguidis-material');
 const styleguide = styleguidist({
   components: './lib/components/**/*.js',
   updateWebpackConfig(webpackConfig) {
@@ -32,14 +32,14 @@ const styleguide = styleguidist({
 Using a config file:
 
 ```javascript
-const styleguidist = require('react-styleguidist');
+const styleguidist = require('react-styleguidist-material');
 const styleguide = styleguidist(require('../styleguide.config.js'));
 ```
 
 Or auto searching a config file:
 
 ```javascript
-const styleguidist = require('react-styleguidist');
+const styleguidist = require('react-styleguidist-material');
 const styleguide = styleguidist();
 ```
 
@@ -63,7 +63,7 @@ See all available [config options](./Configuration.md).
 #### Example
 
 ```javascript
-const styleguidist = require('react-styleguidist');
+const styleguidist = require('react-styleguidist-material');
 styleguidist(require('../styleguide.config.js')).build((err, config) => {
   if (err) {
     console.log(err);
@@ -90,7 +90,7 @@ styleguidist(require('../styleguide.config.js')).build((err, config) => {
 #### Example
 
 ```javascript
-const styleguidist = require('react-styleguidist');
+const styleguidist = require('react-styleguidist-material');
 styleguidist(require('../styleguide.config.js')).build((err, config) => {
   if (err) {
     console.log(err);
@@ -119,6 +119,6 @@ module.exports = [
     {
       // User webpack config
     },
-    require('react-styleguidist')().makeWebpackConfig(),
+    require('react-styleguidist-material')().makeWebpackConfig(),
 ];
 ```
