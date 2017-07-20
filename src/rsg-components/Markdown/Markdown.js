@@ -12,31 +12,31 @@ import s from './Markdown.css';
 
 // Custom CSS classes for each tag: <em> → <em className={s.em}>.
 const overrides = mapValues(s, (value) => ({
-	props: {
-		className: value,
-	},
+  props: {
+    className: value,
+  },
 }));
 
 // Inline mode: replace <p> (usual root component) with <span>
 const overridesInline = {
-	...overrides,
-	p: {
-		component: 'span',
-		props: {
-			className: s.base,
-		},
-	},
+  ...overrides,
+  p: {
+    component: 'span',
+    props: {
+      className: s.base,
+    },
+  },
 };
 
 export default function Markdown({
   text,
   inline,
 }) {
-	const options = { overrides: inline ? overridesInline : overrides };
-	return renderMarkdown(text, options);
+  const options = { overrides: inline ? overridesInline : overrides };
+  return renderMarkdown(text, options);
 }
 
 Markdown.propTypes = {
-	text: PropTypes.string.isRequired,
-	inline: PropTypes.bool,
+  text: PropTypes.string.isRequired,
+  inline: PropTypes.bool,
 };

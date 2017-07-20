@@ -65,7 +65,7 @@ function renderStyleguide() {
       singleExample={singleExample}
       targetComponentName={targetComponentName}
     />,
-    document.getElementById('app')
+    document.getElementById('app'),
   );
 }
 

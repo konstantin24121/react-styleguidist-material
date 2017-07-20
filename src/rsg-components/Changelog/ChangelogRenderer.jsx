@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Markdown } from 'rsg-components';
 
 const s = require('./Changelog.css');
 
 class ChangelogRenderer extends PureComponent {
-
   constructor(props) {
     super(props);
     this.state = {

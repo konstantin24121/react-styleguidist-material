@@ -82,12 +82,12 @@ export default class Playground extends Component {
         code,
         props: this.props.props,
         componentName: this.context.targetComponentName,
-      })
-     );
+      }),
+    );
     const queuedChange = () => this.setState({
       code,
       urlProps: fields.map(
-        (field) => generateProps(field.toJS())
+        (field) => generateProps(field.toJS()),
       ).filter((prop) => prop).toArray(),
     });
 

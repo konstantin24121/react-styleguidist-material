@@ -1,15 +1,13 @@
 import React, { PropTypes } from 'react';
 
-const SectionsRenderer = ({ sections }) => {
-	return (
-		<div>
-			{sections}
-		</div>
-	);
-};
+const SectionsRenderer = ({ sections }) => (
+  <div>
+    {sections}
+  </div>
+);
 
 SectionsRenderer.propTypes = {
-	sections: PropTypes.array.isRequired,
+  sections: PropTypes.array.isRequired,
 };
 
 export default SectionsRenderer;

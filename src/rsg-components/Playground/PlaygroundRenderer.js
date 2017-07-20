@@ -65,16 +65,14 @@ export default class PlaygroundRenderer extends PureComponent {
       const settings = JSON.parse(settingsFromLink);
       if (settings.containerSizeKey === 'Custom') {
         initialState.containerSize = settings.containerSize;
-      }
-      else {
+      } else {
         initialState.containerSize = containerSizes[settings.containerSizeKey];
       }
       initialState.containerSizeLine = initialState.containerSize;
       initialState.containerSizeKey = settings.containerSizeKey;
       initialState.containerBg = settings.containerBg;
       initialState.componentsCount = settings.componentsCount;
-    }
-    else {
+    } else {
       initialState.containerSize = containerSizes.Lg;
       initialState.containerSizeLine = containerSizes.Lg;
       initialState.containerSizeKey = 'Lg';
@@ -141,7 +139,7 @@ export default class PlaygroundRenderer extends PureComponent {
     const { code, name, evalInContext,
       props, index, singleExample, urlProps, onChange, isFlow } = this.props;
     const { containerSize, containerSizeLine, containerBg, showCode, showPropsEditor,
-    containerSizeKey, isResize, componentsCount } = this.state;
+      containerSizeKey, isResize, componentsCount } = this.state;
 
     const rootClass = cn(s.root, {
       [s.root_singleExample]: singleExample,
@@ -239,6 +237,6 @@ export default class PlaygroundRenderer extends PureComponent {
           </div>
         }
       </div>
-   );
+    );
   }
 }

@@ -38,7 +38,7 @@ class Toolbar extends PureComponent {
       {
         width: PropTypes.number,
         height: PropTypes.number,
-      }
+      },
     ).isRequired,
     // NOTE: Remove comment when maintainer fix it
     // https://github.com/yannickcr/eslint-plugin-react/issues/811
@@ -172,7 +172,7 @@ class Toolbar extends PureComponent {
 
   render() {
     const { containerBg, showCode, showPropsEditor,
-    onColorChange, onCodeClick, onPropsEditorClick, onCountChange, componentsCount } = this.props;
+      onColorChange, onCodeClick, onPropsEditorClick, onCountChange, componentsCount } = this.props;
     const { isMobile, isMobileSmall, settingsLink } = this.state;
 
     return (

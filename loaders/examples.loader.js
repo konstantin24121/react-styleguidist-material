@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable */
 
 const escapeRegExp = require('lodash/escapeRegExp');
 const filter = require('lodash/filter');
@@ -19,7 +19,7 @@ function examplesLoader(source) {
   }
 
   // Replace __COMPONENT__ placeholders with the passed-in componentName
-  const query = loaderUtils.parseQuery(this.query);
+  const query = loaderUtils.getOptions(this) || {};
   const componentName = query.componentName || COMPONENT_PLACEHOLDER;
   source = source.replace(COMPONENT_PLACEHOLDER_REGEXP, componentName);
 

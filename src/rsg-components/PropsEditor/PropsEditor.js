@@ -114,6 +114,6 @@ export default class PropsEditor extends PureComponent {
         onSelect={this.handleChangeValueSelectfield}
         onCheck={this.handleChangeValueCheckBox}
       />
-   );
+    );
   }
 }

@@ -8,45 +8,45 @@ import PlaygroundRenderer from './PlaygroundRenderer';
 const code = '<button>OK</button>';
 
 test('should render component renderer', () => {
-	const actual = shallow(
-		<Playground
-			code={code}
-			evalInContext={noop}
-			name="name"
-			index={0}
-		/>,
-		{
-			context: {
-				config: {
-					showCode: false,
-				},
-			},
-		}
-	);
+  const actual = shallow(
+    <Playground
+      code={code}
+      evalInContext={noop}
+      name="name"
+      index={0}
+    />,
+    {
+      context: {
+        config: {
+          showCode: false,
+        },
+      },
+    },
+  );
 
-	expect(actual.node, 'to contain',
-		<PlaygroundRenderer
-			code={code}
-			showCode={false}
-			evalInContext={noop}
-			name="name"
-			index={0}
-		/>
-	);
+  expect(actual.node, 'to contain',
+    <PlaygroundRenderer
+      code={code}
+      showCode={false}
+      evalInContext={noop}
+      name="name"
+      index={0}
+    />,
+  );
 });
 
 test('renderer should render preview', () => {
-	const actual = shallow(
-		<PlaygroundRenderer
-			code={code}
-			showCode={false}
-			evalInContext={noop}
-			name="name"
-			index={0}
-		/>
-	);
+  const actual = shallow(
+    <PlaygroundRenderer
+      code={code}
+      showCode={false}
+      evalInContext={noop}
+      name="name"
+      index={0}
+    />,
+  );
 
-	expect(actual.node, 'to contain',
-		<Preview code={code} />
-	);
+  expect(actual.node, 'to contain',
+    <Preview code={code} />,
+  );
 });

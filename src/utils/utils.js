@@ -25,7 +25,7 @@ export function globalizeComponents(components) {
 }
 
 export function promoteInlineExamples(components) {
-  components.map(c => {
+  components.map((c) => {
     if (c.props.example) {
       c.examples = (c.examples || []).concat(c.props.example);
     }
@@ -35,9 +35,9 @@ export function promoteInlineExamples(components) {
 
 export function flattenChildren(components) {
   // If any of the components have multiple children, flatten them.
-  return flatMap(components, component => {
+  return flatMap(components, (component) => {
     if (isArray(component.props)) {
-      return component.props.map(props => extend({}, component, { props }));
+      return component.props.map((props) => extend({}, component, { props }));
     }
     return component;
   });
@@ -52,7 +52,7 @@ export function processComponents(components) {
 }
 
 export function processSections(sections) {
-  return sections.map(section => {
+  return sections.map((section) => {
     section.components = processComponents(section.components || []);
     section.sections = processSections(section.sections || []);
     return section;
@@ -93,7 +93,7 @@ export function filterComponentsByName(components, query) {
  * @return {Array}
  */
 export function filterComponentsByExactName(componens, name) {
-  return componens.filter(component => component.name === name);
+  return componens.filter((component) => component.name === name);
 }
 
 /**
@@ -105,7 +105,7 @@ export function filterComponentsByExactName(componens, name) {
  */
 export function filterComponentsInSectionsByExactName(sections, name) {
   const components = [];
-  sections.forEach(section => {
+  sections.forEach((section) => {
     if (section.components) {
       components.push(...filterComponentsByExactName(section.components, name));
     }

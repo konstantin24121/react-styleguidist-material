@@ -83,7 +83,7 @@ export default class Preview extends Component {
     }
 
     const compiledCode = this.compileCode(code);
-    console.log(code, compiledCode)
+    console.log(code, compiledCode);
     if (!compiledCode) {
       return;
     }
@@ -144,7 +144,7 @@ export default class Preview extends Component {
     const { error } = this.state;
     return (
       <div>
-        <div ref={ref => (this.mountNode = ref)} />
+        <div ref={(ref) => (this.mountNode = ref)} />
         {error && <PlaygroundError message={error} />}
       </div>
     );

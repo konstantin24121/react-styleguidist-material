@@ -12,7 +12,6 @@ import { lime500 } from 'material-ui/styles/colors';
 const s = require('./ReactComponent.css');
 
 class ReactComponentRenderer extends PureComponent {
-
   constructor(props) {
     super(props);
     this.state = {

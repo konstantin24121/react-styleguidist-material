@@ -325,7 +325,7 @@ class PropsEditorRenderer extends PureComponent {
         required: item.required,
         name: key,
         isFlow,
-      })
+      }),
     );
 
     const content = (

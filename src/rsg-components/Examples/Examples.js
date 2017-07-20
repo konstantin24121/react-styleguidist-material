@@ -3,44 +3,44 @@ import PropTypes from 'prop-types';
 import { Playground, Markdown } from 'rsg-components';
 
 const Examples = ({ examples, name, props, isFlow }, { codeKey }) => (
-	<div>
-		{examples.map((example, index) => {
-			switch (example.type) {
-				case 'code':
-					return (
-						<Playground
-							code={example.content}
-							evalInContext={example.evalInContext}
-							key={`${codeKey}/${index}`}
-							name={name}
-							index={index}
-							props={props}
+  <div>
+    {examples.map((example, index) => {
+      switch (example.type) {
+        case 'code':
+          return (
+            <Playground
+              code={example.content}
+              evalInContext={example.evalInContext}
+              key={`${codeKey}/${index}`}
+              name={name}
+              index={index}
+              props={props}
               isFlow={isFlow}
-      />
+            />
           );
-				case 'markdown':
-					return (
-						<Markdown
-							text={example.content}
-							key={index}
-      />
+        case 'markdown':
+          return (
+            <Markdown
+              text={example.content}
+              key={index}
+            />
           );
-				default:
-					return null;
-			}
-		})}
-	</div>
+        default:
+          return null;
+      }
+    })}
+  </div>
 );
 
 Examples.propTypes = {
-	examples: PropTypes.array.isRequired,
-	name: PropTypes.string,
-	props: PropTypes.object,
+  examples: PropTypes.array.isRequired,
+  name: PropTypes.string,
+  props: PropTypes.object,
   isFlow: PropTypes.bool,
 };
 
 Examples.contextTypes = {
-	codeKey: PropTypes.number.isRequired,
+  codeKey: PropTypes.number.isRequired,
 };
 
 
