@@ -4,6 +4,7 @@ import extend from 'lodash/extend';
 import isNaN from 'lodash/isNaN';
 
 export function setComponentsNames(components) {
+  // eslint-disable-next-line array-callback-return
   components.map((component) => {
     // Try to detect component name or fallback to file name or directory name.
     const { module } = component;
@@ -17,6 +18,7 @@ export function setComponentsNames(components) {
 }
 
 export function globalizeComponents(components) {
+  // eslint-disable-next-line array-callback-return
   components.map((component) => {
     global[component.name] = (!component.props || !component.props.path || component.props.path === 'default')
       ? (component.module.default || component.module)
@@ -25,6 +27,7 @@ export function globalizeComponents(components) {
 }
 
 export function promoteInlineExamples(components) {
+  // eslint-disable-next-line array-callback-return
   components.map((c) => {
     if (c.props.example) {
       c.examples = (c.examples || []).concat(c.props.example);
@@ -44,9 +47,11 @@ export function flattenChildren(components) {
 }
 
 export function processComponents(components) {
+  /* eslint-disable no-param-reassign */
   components = flattenChildren(components);
   components = promoteInlineExamples(components);
   components = setComponentsNames(components);
+  /* eslint-enable no-param-reassign */
   globalizeComponents(components);
   return components;
 }
@@ -66,6 +71,7 @@ export function processSections(sections) {
  * @return {RegExp}
  */
 export function getFilterRegExp(query) {
+  // eslint-disable-next-line no-param-reassign
   query = query
     .replace(/[^a-z0-9]/gi, '')
     .split('')

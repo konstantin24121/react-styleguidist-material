@@ -1,1 +1,1 @@
-export { default } from './StyleGuide.jsx';
+export { default } from './StyleGuide';

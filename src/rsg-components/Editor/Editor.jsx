@@ -1,10 +1,3 @@
-/* eslint
-  import/no-extraneous-dependencies: off,
-  import/no-unresolved: off,
-  import/extensions: off,
-  react/forbid-prop-types: off,
-  react/jsx-filename-extension: off
-*/
 // CodeMirror
 import 'codemirror/mode/jsx/jsx';
 import 'codemirror/lib/codemirror.css';

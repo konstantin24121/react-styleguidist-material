@@ -1,6 +1,3 @@
-/* eslint
-  react/jsx-filename-extension: off
-*/
 import React from 'react';
 
 import s from './EditorLoader.css';

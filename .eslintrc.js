@@ -1,4 +1,3 @@
-// const  webpackConfig = require('./implements/webpack.config.js');
 module.exports = {
   parser: "babel-eslint",
   parserOptions: {
@@ -31,6 +30,7 @@ module.exports = {
     "no-restricted-syntax": 0,
     "guard-for-in": 0,
     "no-duplicate-imports": 0,
+    "no-param-reassign": [1, { "props": false }],
     // React
     "react/jsx-indent": [1, 2],
     "react/prefer-stateless-function": 1,
@@ -41,6 +41,7 @@ module.exports = {
         "media"
       ]
     }],
+    "react/forbid-prop-types": 0,
     "react/sort-comp": [1, {
       order: [
         'type-annotations',
@@ -57,6 +58,7 @@ module.exports = {
         ],
       },
     }],
+    "react/no-array-index-key": 0,
 
     // Import
     // "import/extensions": [2, "never", { "svg": "always", "png": "always" }],
@@ -64,13 +66,12 @@ module.exports = {
 
     // jsx-a11y
     "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/href-no-hash": 0,
   },
   settings: {
-    "import/resolver": {
-      webpack: {
-        config: "scripts/make-webpack-config.js",
-      },
-    },
+    "import/extensions": ['.js', '.jsx'],
+    "import/core-modules": [ 'baseStyles', 'rsg-components', 'rsg-codemirror-theme.css', 'styleguide'],
+    "import/external-module-folders": [ 'utils' ],
   },
   plugins: [
     "react", "import", "jsx-a11y", "json", "jest", "babel", "flowtype"

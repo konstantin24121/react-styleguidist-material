@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import s from '../Markdown/Markdown.css';
 
@@ -12,9 +13,9 @@ const CodeRenderer = ({ className, children, plain }) => (
 );
 
 CodeRenderer.propTypes = {
-  className: PropTypes.string,
-  plain: PropTypes.bool,
-  children: PropTypes.node,
+  className: PropTypes.string.isRequired,
+  plain: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default CodeRenderer;

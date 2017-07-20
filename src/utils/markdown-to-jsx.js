@@ -5,6 +5,7 @@
  - Server-rendered code highlight.
  - Custom className for code highlight.
  */
+/* eslint-disable */
 
 import React from 'react';
 import get from 'lodash/get';
@@ -244,9 +245,10 @@ function getHTMLNodeTypeFromASTNodeType(node) {
       return 'a';
 
       // Increase level of headings
-    case 'heading':
+    case 'heading': {
       const depth = Math.min(node.depth + 2, 6);
       return `h${depth}`;
+    }
 
     case 'image':
     case 'imageReference':
@@ -365,8 +367,8 @@ function coalesceInlineHTML(ast) {
         end = siblings[idx];
       }
 
-      /* all interim elements now become children of the current node, and we splice them (including end tag)
-			 out of the sibling array so they will not be iterated-over by forEach */
+      /* all interim elements now become children of the current node, and we splice them
+      (including end tag  out of the sibling array so they will not be iterated-over by forEach */
 
       node.children = siblings.slice(index + 1, idx);
       siblings.splice(index + 1, idx - index);
@@ -381,7 +383,8 @@ function coalesceInlineHTML(ast) {
         const valueIndex = kvPair.indexOf('=');
         const key = kvPair.slice(0, valueIndex === -1 ? undefined : valueIndex);
 
-        // ignoring inline event handlers at this time - they pose enough of a security risk that they're
+        // ignoring inline event handlers at this time -
+        // they pose enough of a security risk that they're
         // not worth preserving; there's a reason React calls it "dangerouslySetInnerHTML"!
 
         if (key.indexOf('on') !== 0) {
@@ -391,8 +394,8 @@ function coalesceInlineHTML(ast) {
           if (value[0] === '"' || value[0] === '\'') {
             value = value.slice(1, value.length - 1);
           }
-
-          props[ATTRIBUTE_TO_JSX_PROP_MAP[key] || key] = attributeValueToJSXPropValue(key, value) || true;
+          const idxProp = ATTRIBUTE_TO_JSX_PROP_MAP[key] || key;
+          props[idxProp] = attributeValueToJSXPropValue(key, value) || true;
         }
 
         return props;
@@ -420,6 +423,7 @@ export default function markdownToJSX(markdown, { overrides = {} } = {}) {
 
     if (ast.type === 'code' && ast.value) {
       const className = get(overrides, 'pre.props.className');
+      /* eslint-disable react/no-danger */
       return (
         <pre key={key} className={className}>
           <code className={`lang-${ast.lang}`} dangerouslySetInnerHTML={{ __html: ast.value }} />
@@ -491,7 +495,7 @@ export default function markdownToJSX(markdown, { overrides = {} } = {}) {
       }, [tbody]);
     }
     /* React yells if things aren't in the proper structure, so need to
-		 delve into the immediate children and wrap tablerow(s) in a tbody */
+      delve into the immediate children and wrap tablerow(s) in a tbody */
 
     if (ast.type === 'tableFooter') {
       ast.children = [{
@@ -500,7 +504,7 @@ export default function markdownToJSX(markdown, { overrides = {} } = {}) {
       }];
     }
     /* React yells if things aren't in the proper structure, so need to
-		 delve into the immediate children and wrap the cells in a tablerow */
+      delve into the immediate children and wrap the cells in a tablerow */
 
     if (ast.type === 'tableHeader') {
       ast.children = [{
@@ -516,7 +520,7 @@ export default function markdownToJSX(markdown, { overrides = {} } = {}) {
       }];
     }
     /* React yells if things aren't in the proper structure, so need to
-		 delve into the immediate children and wrap the cells in a tablerow */
+      delve into the immediate children and wrap the cells in a tablerow */
 
     if (ast.type === 'footnoteReference') {
       ast.children = [{ type: 'sup', value: ast.identifier }];
@@ -537,19 +541,19 @@ export default function markdownToJSX(markdown, { overrides = {} } = {}) {
         htmlNodeType = override.component;
       }
       /* sub out the normal html tag name for the JSX / ReactFactory
-			 passed in by the caller */
+        passed in by the caller */
 
       if (override.props) {
         props = { ...override.props, ...props };
       }
       /* apply the prop overrides beneath the minimal set that are necessary
-			 to have the markdown conversion work as expected */
+     to have the markdown conversion work as expected */
     }
 
     /* their props + our props, with any duplicate keys overwritten by us
-		 (necessary evil, file an issue if something comes up that needs
-		 extra attention, only props specified in `formExtraPropsForHTMLNodeType`
-		 will be overwritten on a key collision) */
+     (necessary evil, file an issue if something comes up that needs
+     extra attention, only props specified in `formExtraPropsForHTMLNodeType`
+     will be overwritten on a key collision) */
     const finalProps = formExtraPropsForHTMLNodeType(props, ast, definitions);
 
     if (ast.children && ast.children.length === 1) {
@@ -568,19 +572,19 @@ export default function markdownToJSX(markdown, { overrides = {} } = {}) {
 
   if (typeof markdown !== 'string') {
     throw new Error(`markdown-to-jsx: the first argument must be
-						 a string`,
+           a string`,
     );
   }
 
   if (getType.call(overrides) !== '[object Object]') {
     throw new Error(`markdown-to-jsx: options.overrides (second argument property) must be
-						 undefined or an object literal with shape:
-						 {
-							htmltagname: {
-								component: string|ReactComponent(optional),
-								props: object(optional)
-							}
-						 }`,
+           undefined or an object literal with shape:
+           {
+              htmltagname: {
+                component: string|ReactComponent(optional),
+                props: object(optional)
+              }
+           }`,
     );
   }
 

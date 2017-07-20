@@ -1,10 +1,11 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import _ from 'lodash';
 import isFinite from 'lodash/isFinite';
 import ReactDOM from 'react-dom';
 import 'highlight.js/styles/tomorrow.css';
 import 'baseStyles';
-import StyleGuide from 'rsg-components/StyleGuide';
+import { StyleGuide } from 'rsg-components';
 
 import {
   getComponentNameFromHash,
@@ -24,7 +25,7 @@ global._ = _;
 let codeKey = 0;
 
 function renderStyleguide() {
-  const styleguide = require('styleguide!index.js');
+  const styleguide = require('styleguide!index.js'); // eslint-disable-line
   let components = processComponents(styleguide.components);
   let sections = processSections(styleguide.sections || []);
   let sidebar = true;

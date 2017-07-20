@@ -7,6 +7,10 @@ export default class Changelog extends Component {
     text: PropTypes.string,
   };
 
+  static defaultProps = {
+    text: '',
+  }
+
   getLastVersion = () => {
     const { text } = this.props;
     const regexp = /\(([\w\\. ,_]*)\)/g;

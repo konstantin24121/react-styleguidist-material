@@ -1,9 +1,3 @@
-/* eslint
-  import/no-extraneous-dependencies: off,
-  import/no-unresolved: off,
-  import/extensions: off,
-  react/forbid-prop-types: off,
-*/
 import React, { Component, PropTypes } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import Components from 'rsg-components/Components';

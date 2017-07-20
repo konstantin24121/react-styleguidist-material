@@ -1,1 +1,1 @@
-export { default } from './MessageRenderer.js';
+export { default } from './MessageRenderer';
