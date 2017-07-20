@@ -2,6 +2,10 @@ import React from 'react';
 import _ from 'lodash';
 import isFinite from 'lodash/isFinite';
 import ReactDOM from 'react-dom';
+import 'highlight.js/styles/tomorrow.css';
+import 'baseStyles';
+import StyleGuide from 'rsg-components/StyleGuide';
+
 import {
   getComponentNameFromHash,
   filterComponentsByExactName,
@@ -10,11 +14,8 @@ import {
   processComponents,
   processSections,
 } from './utils/utils';
-import StyleGuide from 'rsg-components/StyleGuide';
 
-import 'highlight.js/styles/tomorrow.css';
 import './styles.css';
-import 'baseStyles';
 
 // Make libraries available in examples
 global.React = React;
@@ -46,7 +47,8 @@ function renderStyleguide() {
     sections = [];
     sidebar = false;
 
-    // if a single component is filtered and a fenced block index is specified hide the other examples
+    // if a single component is filtered
+    // and a fenced block index is specified hide the other examples
     if (components.length === 1 && isFinite(targetComponentIndex)) {
       components[0] = filterComponentExamples(components[0], targetComponentIndex);
       singleExample = true;

@@ -3,3 +3,5 @@ examples/**/styleguide/index.html
 .publish/
 node_modules/
 Changelog.md
+
+npm-debug.log

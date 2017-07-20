@@ -73,6 +73,7 @@
     "postcss-nested-ancestors": "^1.0.0",
     "postcss-simple-vars": "^3.0.0",
     "prettyjson": "1.1.3",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-addons-test-utils": "~15.3.2",
     "react-codemirror": "0.2.6",
@@ -91,6 +92,10 @@
     "remark-parse": "~2.2.0",
     "semver-utils": "1.1.1",
     "style-loader": "^0.17.0",
+    "stylelint": "^8.0.0",
+    "stylelint-config-css-modules": "^1.1.0",
+    "stylelint-config-standard": "^17.0.0",
+    "stylelint-performance-animation": "^1.2.2",
     "unified": "~5.1.0",
     "unist-util-visit": "~1.1.0",
     "url-loader": "^0.5.8",
@@ -111,7 +116,6 @@
     "cross-env": "~3.1.3",
     "css-modules-require-hook": "~4.0.5",
     "dog-names": "~1.0.2",
-    "enzyme": "~2.5.1",
     "eslint": "~3.9.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-import-resolver-webpack": "^0.8.1",
@@ -122,50 +126,14 @@
     "eslint-plugin-json": "^1.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.10.3",
-    "gh-pages": "~0.11.0",
-    "lint-staged": "~3.2.1",
-    "mock-require": "~1.3.0",
-    "prop-types": "^15.5.10",
-    "semantic-release": "~4.3.5",
-    "semantic-release-tamia": "~1.0.0",
-    "sinon": "~1.17.6",
-    "unexpected": "~10.18.1",
-    "unexpected-react": "~3.2.4",
     "webpack": "^2.5.1"
   },
   "scripts": {
-    "test": "npm run lint && npm run test:ava",
-    "test:ava": "cross-env NODE_ENV=test ava",
-    "test:watch": "cross-env NODE_ENV=test ava --watch",
     "start": "node bin/styleguidist.js server --config examples/basic/styleguide.config.js",
-    "lint": "eslint . --ext .js",
-    "lint-staged": "lint-staged",
-    "build": "node bin/styleguidist.js build --config examples/basic/styleguide.config.js",
-    "publish": "npm run build",
-    "gh-pages": "gh-pages -d examples/basic/styleguide",
-    "phantomjs": "phantomjs test/phantom.js examples/basic/styleguide/index.html",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
-  },
-  "release": {
-    "analyzeCommits": "semantic-release-tamia/analyzeCommits",
-    "generateNotes": "semantic-release-tamia/generateNotes",
-    "verifyRelease": "semantic-release-tamia/verifyRelease"
-  },
-  "ava": {
-    "files": [
-      "src/**/*.spec.js",
-      "test/*.spec.js"
-    ],
-    "source": [
-      "src/**/*.js",
-      "loaders/**/*.js",
-      "scripts/**/*.js"
-    ],
-    "require": [
-      "babel-register",
-      "./test/avasetup"
-    ],
-    "babel": "inherit"
+    "lint": "npm run eslint & npm run stylelint",
+    "stylelint": "stylelint src/**/*.css",
+    "eslint": "eslint --ext .jsx --ext .js src",
+    "build": "node bin/styleguidist.js build --config examples/basic/styleguide.config.js"
   },
   "keywords": [
     "react",

@@ -15,18 +15,6 @@ module.exports = {
     jest: true,
   },
   globals: {
-    // Enviroment variables
-    __DEVELOPMENT__: true,
-    __LOGLEVEL__: true,
-    __DEVTOOLS__: true,
-
-    // Global library
-    log: true,
-
-    //Enzyme
-    shallow: true,
-    render: true,
-    mount: true,
   },
   "rules": {
     "linebreak-style": 0,
@@ -70,18 +58,19 @@ module.exports = {
       },
     }],
 
-    // NOTE: Remove rule when maintainer fix it
-    // https://github.com/yannickcr/eslint-plugin-react/issues/811
-    "react/no-unused-prop-types": [0, {
-      skipShapeProps: true,
-    }],
-
     // Import
     // "import/extensions": [2, "never", { "svg": "always", "png": "always" }],
     "import/prefer-default-export": 1,
 
     // jsx-a11y
     "jsx-a11y/no-static-element-interactions": 0,
+  },
+  settings: {
+    "import/resolver": {
+      webpack: {
+        config: "scripts/make-webpack-config.js",
+      },
+    },
   },
   plugins: [
     "react", "import", "jsx-a11y", "json", "jest", "babel", "flowtype"

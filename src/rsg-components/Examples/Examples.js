@@ -1,13 +1,6 @@
-/* eslint
-  import/no-extraneous-dependencies: off,
-  import/no-unresolved: off,
-  import/extensions: off,
-  react/forbid-prop-types: off,
-  react/jsx-filename-extension: off
-*/
-import React, { PropTypes } from 'react';
-import Playground from 'rsg-components/Playground';
-import Markdown from 'rsg-components/Markdown';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Playground, Markdown } from 'rsg-components';
 
 const Examples = ({ examples, name, props, isFlow }, { codeKey }) => (
 	<div>
