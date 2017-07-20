@@ -1,136 +1,152 @@
-// Based on https://github.com/joelburget/react-live-editor/blob/master/live-compile.jsx
-
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import noop from 'lodash/noop';
 import { transform } from 'buble';
 import PlaygroundError from 'rsg-components/PlaygroundError';
 import Wrapper from 'rsg-components/Wrapper';
 
-const compileCode = code => transform(code, {
-	objectAssign: 'Object.assign',
-}).code;
+/* eslint-disable react/no-multi-comp */
+
+const compileCode = (code, config) => transform(code, config).code;
+
+// Wrap everything in a React component to leverage the state management of this component
+class PreviewComponent extends Component {
+  static propTypes = {
+    component: PropTypes.func.isRequired,
+  };
+
+  constructor() {
+    super();
+    this.state = {};
+    this.setState = this.setState.bind(this);
+    this.setInitialState = this.setInitialState.bind(this);
+  }
+
+  // Synchronously set initial state, so it will be ready before first render
+  // Ignore all consequent calls
+  setInitialState(initialState) {
+    Object.assign(this.state, initialState);
+    this.setInitialState = noop;
+  }
+
+  render() {
+    return this.props.component(this.state, this.setState, this.setInitialState);
+  }
+}
 
 export default class Preview extends Component {
-	static propTypes = {
-		code: PropTypes.string.isRequired,
-		evalInContext: PropTypes.func.isRequired,
-	};
+  static propTypes = {
+    code: PropTypes.string.isRequired,
+    evalInContext: PropTypes.func.isRequired,
+  };
+  static contextTypes = {
+    config: PropTypes.object.isRequired,
+  };
 
-	constructor() {
-		super();
-		this.state = {
-			error: null,
-		};
-		this.componentState = {};
-	}
+  state = {
+    error: null,
+  };
 
-	componentDidMount() {
-		this.executeCode();
-	}
+  componentDidMount() {
+    this.executeCode();
+  }
 
-	componentDidUpdate(prevProps) {
-		if (this.props.code !== prevProps.code) {
-			this.executeCode();
-		}
-	}
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.error !== nextState.error || this.props.code !== nextProps.code;
+  }
 
-	executeCode() {
-		ReactDOM.unmountComponentAtNode(this.mountNode);
+  componentDidUpdate(prevProps) {
+    if (this.props.code !== prevProps.code) {
+      this.executeCode();
+    }
+  }
 
-		this.setState({
-			error: null,
-		});
+  componentWillUnmount() {
+    this.unmountPreview();
+  }
 
-		const { code } = this.props;
-		if (!code) {
-			return;
-		}
+  unmountPreview() {
+    if (this.mountNode) {
+      ReactDOM.unmountComponentAtNode(this.mountNode);
+    }
+  }
 
-		try {
-			const compiledCode = compileCode(this.props.code);
+  executeCode() {
+    this.setState({
+      error: null,
+    });
 
-			// Initiate state and set with the callback in the bottom component;
-			// Workaround for https://github.com/styleguidist/react-styleguidist/issues/155 - missed props on first render
-			// when using initialState
-			const initCode = `
-				var React = {};  // React.createElement will throw on first load
-				var initialState = {};
-				try {
-					${compiledCode}
-				}
-				catch (e) {
-					// Ignoring
-				}
-				finally {
-					__initialStateCB(initialState);
-				}
-			`;
+    const { code } = this.props;
+    if (!code) {
+      return;
+    }
 
-			// evalInContext returns a function which takes state, setState and a callback to handle the
-			// initial state and returns the evaluated code
-			const initial = this.props.evalInContext(initCode);
+    const compiledCode = this.compileCode(code);
+    console.log(code, compiledCode)
+    if (!compiledCode) {
+      return;
+    }
 
-			// 1) setup initialState so that we don't get an error;
-			// 2) use require data or make other setup for the example component;
-			// 3) return the example component
-			const exampleComponentCode = `
-				var initialState = {};
-				return eval(${JSON.stringify(compiledCode)});
-			`;
+    const exampleComponent = this.evalInContext(compiledCode);
+    const wrappedComponent = (
+      <Wrapper>
+        <PreviewComponent component={exampleComponent} />
+      </Wrapper>
+    );
 
-			const exampleComponent = this.props.evalInContext(exampleComponentCode);
+    window.requestAnimationFrame(() => {
+      try {
+        ReactDOM.render(wrappedComponent, this.mountNode);
+      } catch (err) {
+        this.handleError(err);
+      }
+    });
+  }
 
-			// Wrap everything in a react component to leverage the state management of this component
-			class PreviewComponent extends Component { // eslint-disable-line react/no-multi-comp
-				constructor() {
-					super();
+  compileCode(code) {
+    try {
+      return compileCode(code, { objectAssign: 'Object.assign' });
+    } catch (err) {
+      this.handleError(err);
+    }
+    return false;
+  }
 
-					const state = {};
-					const initialStateCB = (initialState) => {
-						Object.assign(state, initialState);
-					};
-					const setStateError = (partialState) => {
-						const err = 'Calling setState to setup the initial state is deprecated. Use\ninitialState = ';
-						Object.assign(state, { error: err + JSON.stringify(partialState) + ';' });
-					};
+  evalInContext(compiledCode) {
+    // 1. Use setter/with to call our callback function when user write `initialState = {...}`
+    // 2. Wrap code in JSON.stringify/eval to catch the component and return it
+    const exampleComponentCode = `
+      var stateWrapper = {
+        set initialState(value) {
+          __setInitialState(value)
+        },
+      }
+      with (stateWrapper) {
+        return eval(${JSON.stringify(compiledCode)})
+      }
+    `;
 
-					initial({}, setStateError, initialStateCB);
-					this.state = state;
-				}
+    return this.props.evalInContext(exampleComponentCode);
+  }
 
-				render() {
-					const { error } = this.state;
-					if (error) {
-						return <PlaygroundError message={error} />;
-					}
+  handleError(err) {
+    this.unmountPreview();
 
-					return exampleComponent(this.state, this.setState.bind(this), null);
-				}
-			}
+    this.setState({
+      error: err.toString(),
+    });
 
-			const wrappedComponent = (
-				<Wrapper>
-					<PreviewComponent />
-				</Wrapper>
-			);
+    console.error(err); // eslint-disable-line no-console
+  }
 
-			ReactDOM.render(wrappedComponent, this.mountNode);
-		}
-		catch (err) {
-			ReactDOM.unmountComponentAtNode(this.mountNode);
-			this.setState({
-				error: err.toString(),
-			});
-		}
-	}
-
-	render() {
-		const { error } = this.state;
-		return (
-			<div>
-				<div ref={ref => (this.mountNode = ref)}></div>
-				{error && <PlaygroundError message={error} />}
-			</div>
-		);
-	}
+  render() {
+    const { error } = this.state;
+    return (
+      <div>
+        <div ref={ref => (this.mountNode = ref)} />
+        {error && <PlaygroundError message={error} />}
+      </div>
+    );
+  }
 }

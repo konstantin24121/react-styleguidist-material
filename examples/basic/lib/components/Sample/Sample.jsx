@@ -1,7 +1,8 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import classNameBind from 'classnames/bind';
-import up from '../../utils/upperFirst';
 import map from 'lodash/map';
+import up from '../../utils/upperFirst';
 
 import s from './Sample.pcss';
 

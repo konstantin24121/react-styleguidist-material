@@ -4,7 +4,7 @@ Declaration
 
 Для использования компонента достаточно обернуть им любой узел или текст.
 
-    <A name="zad" onClick={() => {console.log(1)}}>Link</A>
+    <A name="zad" onClick={() => {console.log(1)}}>"Link"</A>
 
 Зад
 
@@ -12,16 +12,16 @@ Declaration
       name="zad"
       onClick={() => {console.log(1)}}
     >
-      Link
+      "Link"
     </A>
 
 Еще пример
 
     <A name="zad"
-      onClick={() => {console.log(1)}}>Link</A>
+      onClick={() => {console.log(1)}}>"Link"</A>
 
 Еще пример
 
     <A name="zad"
-      onClick={() => {console.log(1)}}>Link
+      onClick={() => {console.log(1)}}>"Link"
       </A>

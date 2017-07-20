@@ -4,7 +4,6 @@ const context = process.cwd();
 
 module.exports = {
   title: 'Material StyleGuide',
-  components: 'lib/components/**/[A-Z]*.js',
   baseStyles: path.resolve(__dirname, './lib/styles.pcss'),
   contextDependencies: [
     path.resolve(context, 'src/components'),

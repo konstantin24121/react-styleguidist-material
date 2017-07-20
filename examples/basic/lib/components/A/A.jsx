@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
  * Абстрактная ссылка без эффекта перехода но с кучей событий
  * @type {ReactStatelessComponent}
  * @name A
- * @namespace relap-ui
+ * @namespace example/lib
+ * @version 0.0.1
  */
 function A({ children, onClick, ...props }) {
   const handleClick = (e) => {

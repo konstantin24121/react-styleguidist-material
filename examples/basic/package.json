@@ -2,14 +2,10 @@
   "name": "react-styleguidist-example-basic",
   "description": "React styleguidist basic example",
   "version": "1.0.0",
-  "homepage": "https://github.com/styleguidist/react-styleguidist",
-  "author": {
-    "name": "Artem Sapegin",
-    "url": "http://sapegin.me/"
-  },
+  "homepage": "https://github.com/konstantin24121/react-styleguidist-material",
   "repository": {
     "type": "git",
-    "url": "git://github.com/styleguidist/react-styleguidist.git"
+    "url": "git://github.com/konstantin24121/react-styleguidist-material.git"
   },
   "license": "MIT",
   "engines": {
@@ -19,7 +15,10 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
+    "classnames": "^2.2.5",
     "dog-names": "^1.0.2",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-modal": "^1.6.3",
