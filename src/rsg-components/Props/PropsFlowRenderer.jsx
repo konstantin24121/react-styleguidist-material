@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Code from 'rsg-components/Code';
-import Markdown from 'rsg-components/Markdown';
+import { Code, Markdown } from 'rsg-components';
 import Group from 'react-group';
 import { unquote, getType, showSpaces } from './util';
 
@@ -13,11 +12,11 @@ function renderDefault(prop) {
       <Code plain>
         {showSpaces(unquote(prop.defaultValue.value))}
       </Code>
- 	);
+    );
   } else if (prop.required) {
     return (
       <span className={s.required}>Required</span>
- 	);
+    );
   }
   return '';
 }
@@ -73,7 +72,7 @@ function renderShape(signature) {
         <Code className={s.name}>{realKey}</Code>{': '}
         <Code className={s.type}>{renderType(value)}</Code>
       </div>
- 	);
+    );
   });
 }
 

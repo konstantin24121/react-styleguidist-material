@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import noop from 'lodash/noop';
 import { transform } from 'buble';
-import PlaygroundError from 'rsg-components/PlaygroundError';
-import Wrapper from 'rsg-components/Wrapper';
+import { PlaygroundError, Wrapper } from 'rsg-components';
 
 /* eslint-disable react/no-multi-comp */
 
@@ -83,7 +82,6 @@ export default class Preview extends Component {
     }
 
     const compiledCode = this.compileCode(code);
-    console.log(code, compiledCode);
     if (!compiledCode) {
       return;
     }

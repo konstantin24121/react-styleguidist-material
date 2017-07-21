@@ -6,7 +6,7 @@ import 'rsg-codemirror-theme.css';
 import React, { Component, PropTypes } from 'react';
 import debounce from 'lodash/debounce';
 import Codemirror from 'react-codemirror';
-import EditorRenderer from 'rsg-components/Editor/EditorRenderer';
+import EditorRenderer from './EditorRenderer';
 
 const codemirrorOptions = {
   mode: 'jsx',

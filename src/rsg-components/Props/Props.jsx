@@ -14,4 +14,8 @@ Props.propTypes = {
   props: PropTypes.object.isRequired,
 };
 
+Props.defaultProps = {
+  flow: false,
+};
+
 export default Props;

@@ -163,4 +163,17 @@ ReactComponentRenderer.propTypes = {
   stateless: PropTypes.bool,
 };
 
+ReactComponentRenderer.defaultProps = {
+  importString: '',
+  version: '',
+  description: null,
+  props: null,
+  examples: null,
+  changelog: null,
+  sidebar: false,
+  pure: false,
+  flow: false,
+  stateless: false,
+};
+
 export default ReactComponentRenderer;

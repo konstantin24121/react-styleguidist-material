@@ -37,6 +37,8 @@ class PropsEditorRenderer extends PureComponent {
   static defaultProps = {
     submitPosition: 0,
     submitIsVisible: false,
+    isFlow: false,
+    media: () => {},
   };
 
   componentWillMount() {

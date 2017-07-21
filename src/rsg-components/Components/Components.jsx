@@ -36,3 +36,7 @@ Components.propTypes = {
   sections: PropTypes.array.isRequired,
   sidebar: PropTypes.bool,
 };
+
+Components.defaultProps = {
+  sidebar: false,
+};

@@ -47,6 +47,10 @@ class Toolbar extends PureComponent {
     onPropsEditorClick: PropTypes.func.isRequired,
   };
 
+  static defaultProps = {
+    urlProps: [''],
+  };
+
   constructor(props) {
     super(props);
 

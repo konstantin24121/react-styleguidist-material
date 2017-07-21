@@ -1,6 +1,6 @@
 import { PropTypes } from 'react';
 import mapValues from 'lodash/mapValues';
-import renderMarkdown from 'utils/markdown-to-jsx';
+import renderMarkdown from 'utils/markdown-to-jsx'; // eslint-disable-line
 
 import s from './Markdown.css';
 

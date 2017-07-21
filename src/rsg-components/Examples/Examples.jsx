@@ -36,7 +36,11 @@ Examples.propTypes = {
   examples: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,
   props: PropTypes.object.isRequired,
-  isFlow: PropTypes.bool.isRequired,
+  isFlow: PropTypes.bool,
+};
+
+Examples.defaultProps = {
+  isFlow: false,
 };
 
 Examples.contextTypes = {

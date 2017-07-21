@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Section from 'rsg-components/Section';
-import SectionsRenderer from 'rsg-components/Sections/SectionsRenderer';
+import { Section } from 'rsg-components';
+import SectionsRenderer from './SectionsRenderer';
 
 export default function Sections({
   sections,
@@ -22,4 +22,8 @@ export default function Sections({
 Sections.propTypes = {
   sections: PropTypes.array.isRequired,
   sidebar: PropTypes.bool,
+};
+
+Sections.defaultProps = {
+  sidebar: true,
 };

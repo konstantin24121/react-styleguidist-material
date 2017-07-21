@@ -1,7 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import Markdown from 'rsg-components/Markdown';
-import Props from 'rsg-components/Props';
-import Examples from 'rsg-components/Examples';
+import { Markdown, Props, Examples } from 'rsg-components';
 import Responsive from 'react-responsive-decorator';
 import Paper from 'material-ui/Paper';
 import ReactComponentRenderer from './ReactComponentRenderer';
@@ -12,6 +10,10 @@ export default class ReactComponent extends Component {
   static propTypes = {
     component: PropTypes.object.isRequired,
     sidebar: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    sidebar: false,
   };
 
   static contextTypes = {

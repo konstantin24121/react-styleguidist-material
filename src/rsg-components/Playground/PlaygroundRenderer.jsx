@@ -1,6 +1,5 @@
 import React, { PropTypes, PureComponent } from 'react';
-import Editor from 'rsg-components/Editor';
-import Preview from 'rsg-components/Preview';
+import { Editor, Preview } from 'rsg-components';
 import IconButton from 'material-ui/IconButton';
 import Resizable from 'react-resizable-box';
 import FontIcon from 'material-ui/FontIcon';
@@ -44,6 +43,12 @@ export default class PlaygroundRenderer extends PureComponent {
     isFlow: PropTypes.bool,
     urlProps: PropTypes.arrayOf(PropTypes.string),
   };
+
+  static defaultProps = {
+    singleExample: false,
+    isFlow: false,
+    urlProps: [''],
+  }
 
   constructor(props) {
     super(props);

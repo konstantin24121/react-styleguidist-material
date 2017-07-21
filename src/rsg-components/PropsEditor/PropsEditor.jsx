@@ -14,6 +14,10 @@ export default class PropsEditor extends PureComponent {
     isFlow: PropTypes.bool,
   };
 
+  static defaultProps = {
+    isFlow: false,
+  }
+
   constructor(props) {
     super(props);
     this.state = {

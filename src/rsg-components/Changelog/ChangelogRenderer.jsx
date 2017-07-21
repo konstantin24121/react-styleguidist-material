@@ -6,6 +6,16 @@ import { Markdown } from 'rsg-components';
 const s = require('./Changelog.css');
 
 class ChangelogRenderer extends PureComponent {
+  static propTypes = {
+    text: PropTypes.string,
+    lastUpdate: PropTypes.string,
+  };
+
+  static defaultProps = {
+    text: '',
+    lastUpdate: '',
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -41,10 +51,5 @@ class ChangelogRenderer extends PureComponent {
     );
   }
 }
-
-ChangelogRenderer.propTypes = {
-  text: PropTypes.string.isRequired,
-  lastUpdate: PropTypes.string,
-};
 
 export default ChangelogRenderer;

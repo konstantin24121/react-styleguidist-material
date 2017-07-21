@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import React, { Component, PropTypes } from 'react';
 import debounce from 'lodash/debounce';
-import PlaygroundRenderer from 'rsg-components/Playground/PlaygroundRenderer';
+import PlaygroundRenderer from './PlaygroundRenderer';
 import { getQueryVariable } from '../utils/settingsLink';
 import { generateNewCode, generateProps, parseProps } from '../PropsEditor/utils';
 
@@ -13,6 +13,10 @@ export default class Playground extends Component {
     index: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     isFlow: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    isFlow: false,
   };
 
   static contextTypes = {
