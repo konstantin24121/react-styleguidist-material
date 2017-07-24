@@ -24,7 +24,7 @@ const SectionRenderer = ({ name, content, components }) => (
 SectionRenderer.propTypes = {
   name: PropTypes.string.isRequired,
   content: PropTypes.node,
-  components: PropTypes.object, // eslint-disable-line
+  components: PropTypes.object.isRequired,
 };
 
 SectionRenderer.defaultProps = {

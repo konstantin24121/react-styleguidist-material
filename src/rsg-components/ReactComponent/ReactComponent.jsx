@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Markdown, Props, Examples } from 'rsg-components';
 import Responsive from 'react-responsive-decorator';
 import Paper from 'material-ui/Paper';
@@ -6,7 +7,7 @@ import ReactComponentRenderer from './ReactComponentRenderer';
 import Changelog from '../Changelog';
 
 @Responsive
-export default class ReactComponent extends Component {
+export default class ReactComponent extends PureComponent {
   static propTypes = {
     component: PropTypes.object.isRequired,
     sidebar: PropTypes.bool,

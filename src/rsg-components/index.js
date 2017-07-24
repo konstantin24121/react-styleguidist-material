@@ -2,6 +2,7 @@ export { default as Changelog } from './Changelog';
 export { default as Code } from './Code';
 export { default as Components } from './Components';
 export { default as ComponentsList } from './ComponentsList';
+export { default as Examples } from './Examples';
 export { default as Editor } from './Editor';
 export { default as Markdown } from './Markdown';
 export { default as Message } from './Message';

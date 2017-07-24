@@ -13,9 +13,14 @@ const CodeRenderer = ({ className, children, plain }) => (
 );
 
 CodeRenderer.propTypes = {
-  className: PropTypes.string.isRequired,
-  plain: PropTypes.bool.isRequired,
+  className: PropTypes.string,
+  plain: PropTypes.bool,
   children: PropTypes.node.isRequired,
+};
+
+CodeRenderer.defaultProps = {
+  plain: false,
+  className: '',
 };
 
 export default CodeRenderer;

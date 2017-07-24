@@ -1,4 +1,5 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Editor, Preview } from 'rsg-components';
 import IconButton from 'material-ui/IconButton';
 import Resizable from 'react-resizable-box';

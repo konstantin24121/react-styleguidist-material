@@ -19,6 +19,7 @@ const Examples = ({ examples, name, props, isFlow }, { codeKey }) => (
             />
           );
         case 'markdown':
+
           return (
             <Markdown
               text={example.content}
@@ -34,13 +35,15 @@ const Examples = ({ examples, name, props, isFlow }, { codeKey }) => (
 
 Examples.propTypes = {
   examples: PropTypes.array.isRequired,
-  name: PropTypes.string.isRequired,
-  props: PropTypes.object.isRequired,
+  name: PropTypes.string,
+  props: PropTypes.object,
   isFlow: PropTypes.bool,
 };
 
 Examples.defaultProps = {
   isFlow: false,
+  name: '',
+  props: null,
 };
 
 Examples.contextTypes = {

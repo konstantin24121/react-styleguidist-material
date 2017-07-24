@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { ComponentsList } from 'rsg-components';
 import { filterComponentsByName, getFilterRegExp } from '../../utils/utils';
 import TableOfContentsRenderer from './TableOfContentsRenderer';
 
-export default class TableOfContents extends Component {
+export default class TableOfContents extends PureComponent {
  static propTypes = {
    components: PropTypes.array.isRequired,
    sections: PropTypes.array.isRequired,

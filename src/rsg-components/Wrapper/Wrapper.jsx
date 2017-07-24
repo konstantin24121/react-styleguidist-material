@@ -1,6 +1,7 @@
-import { Component, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-export default class Wrapper extends Component {
+export default class Wrapper extends PureComponent {
  static propTypes = {
    children: PropTypes.node.isRequired,
  };

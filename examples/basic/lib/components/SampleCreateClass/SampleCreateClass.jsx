@@ -3,10 +3,11 @@
    func-names: off,
    object-shorthand: off
 */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNameBind from 'classnames/bind';
-import up from '../../utils/upperFirst';
 import map from 'lodash/map';
+import up from '../../utils/upperFirst';
 
 import s from './SampleCreateClass.pcss';
 
@@ -41,7 +42,7 @@ const SampleCreateClass = React.createClass({
       PropTypes.string,
       PropTypes.number,
     ]),
-     /**
+    /**
       * Required props
       */
     required: PropTypes.string.isRequired,

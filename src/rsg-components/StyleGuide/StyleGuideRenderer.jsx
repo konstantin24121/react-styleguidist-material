@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Markdown from 'rsg-components/Markdown';
 import cx from 'classnames';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -13,7 +14,7 @@ injectTapEventPlugin();
 const s = require('./StyleGuide.css');
 
 @Responsive
-class StyleGuideRenderer extends Component {
+class StyleGuideRenderer extends PureComponent {
   static displayName = 'StyleGuideRenderer';
 
   static propTypes = {

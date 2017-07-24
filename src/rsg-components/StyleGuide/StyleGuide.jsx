@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import Components from 'rsg-components/Components';
 import TableOfContents from 'rsg-components/TableOfContents';
@@ -6,7 +7,7 @@ import Message from 'rsg-components/Message';
 import { HOMEPAGE, DOCS_CONFIG } from 'rsg-components/../../scripts/consts';
 import StyleGuideRenderer from './StyleGuideRenderer';
 
-export default class StyleGuide extends Component {
+export default class StyleGuide extends PureComponent {
   static propTypes = {
     config: PropTypes.object.isRequired,
     components: PropTypes.array.isRequired,
