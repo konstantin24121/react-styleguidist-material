@@ -8,12 +8,14 @@ import s from './TableOfContents.css';
 const TableOfContentsRenderer = ({ items, searchTerm, onSearchTermChange }) => (
   <div>
     <div className={s.root}>
-      <TextField
-        value={searchTerm}
-        hintText="Filter by name"
-        onChange={(event) => onSearchTermChange(event.target.value)}
-        style={{ width: '100%' }}
-      />
+      <div className={s.filter}>
+        <TextField
+          value={searchTerm}
+          hintText="Filter by name"
+          onChange={(event) => onSearchTermChange(event.target.value)}
+          style={{ width: '100%' }}
+        />
+      </div>
       {items}
     </div>
   </div>

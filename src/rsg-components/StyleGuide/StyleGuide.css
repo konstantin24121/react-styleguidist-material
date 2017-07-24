@@ -80,7 +80,7 @@ $sidebarWidth: 256px;
   width: 100%;
   height: 100%;
   position: absolute;
-  padding: 64px 0 45px;
+  padding: 64px 0 50px;
   top: 0;
   overflow: auto;
 }

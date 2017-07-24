@@ -1,4 +1,7 @@
 .root {
-  padding: 15px;
   width: 100%;
+}
+
+.filter {
+  padding: 0 15px;
 }

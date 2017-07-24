@@ -14,6 +14,9 @@ module.exports = {
     {
       name: 'Introduction',
       content: 'docs/introduction.md',
+      sections: [{
+        name: 'Welcome',
+      }],
     },
     {
       name: 'UI Components',
