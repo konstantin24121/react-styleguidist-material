@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Editor, Preview } from 'rsg-components';
 import IconButton from 'material-ui/IconButton';
@@ -32,7 +32,7 @@ const containerSizes = {
   },
 };
 
-export default class PlaygroundRenderer extends PureComponent {
+export default class PlaygroundRenderer extends Component {
   static propTypes = {
     code: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

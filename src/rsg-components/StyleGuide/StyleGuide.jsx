@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from 'lodash/isEmpty';
 import Components from 'rsg-components/Components';
@@ -7,7 +7,7 @@ import Message from 'rsg-components/Message';
 import { HOMEPAGE, DOCS_CONFIG } from 'rsg-components/../../scripts/consts';
 import StyleGuideRenderer from './StyleGuideRenderer';
 
-export default class StyleGuide extends PureComponent {
+ class StyleGuide extends Component {
   static propTypes = {
     config: PropTypes.object.isRequired,
     components: PropTypes.array.isRequired,
@@ -63,7 +63,6 @@ export default class StyleGuide extends PureComponent {
   render() {
     const { config, components, sections,
       sidebar, singleExample, targetComponentName } = this.props;
-
     return (
       <StyleGuideRenderer
         title={config.title}
@@ -78,3 +77,5 @@ export default class StyleGuide extends PureComponent {
     );
   }
 }
+
+export default StyleGuide;

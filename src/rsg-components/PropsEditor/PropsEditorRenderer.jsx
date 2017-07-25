@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import Subheader from 'material-ui/Subheader';
@@ -20,7 +20,7 @@ import { parseDefault, getTypeForLabel } from './utils';
 import s from './PropsEditor.css';
 
 @Responsive
-class PropsEditorRenderer extends PureComponent {
+class PropsEditorRenderer extends Component {
   static propTypes = {
     props: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,

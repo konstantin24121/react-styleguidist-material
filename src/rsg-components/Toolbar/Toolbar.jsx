@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
@@ -24,7 +24,7 @@ import { createSettingsLink } from '../utils/settingsLink';
 import s from './Toolbar.css';
 
 @Responsive
-class Toolbar extends PureComponent {
+class Toolbar extends Component {
   static propTypes = {
     containerSizeKey: PropTypes.string.isRequired,
     containerBg: PropTypes.string.isRequired,

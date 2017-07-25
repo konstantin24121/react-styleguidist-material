@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import 'highlight.js/styles/tomorrow.css';
 import 'baseStyles';
 import { StyleGuide } from 'rsg-components';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import {
   getComponentNameFromHash,
@@ -57,15 +58,17 @@ function renderStyleguide() {
   }
 
   ReactDOM.render(
-    <StyleGuide
-      codeKey={codeKey}
-      config={styleguide.config}
-      components={components}
-      sections={sections}
-      sidebar={sidebar}
-      singleExample={singleExample}
-      targetComponentName={targetComponentName}
-    />,
+      <Router>
+        <StyleGuide
+          codeKey={codeKey}
+          config={styleguide.config}
+          components={components}
+          sections={sections}
+          sidebar={sidebar}
+          singleExample={singleExample}
+          targetComponentName={targetComponentName}
+        />
+      </Router>,
     document.getElementById('app'),
   );
 }

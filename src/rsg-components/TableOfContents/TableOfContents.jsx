@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { SelectableList } from 'rsg-components';
 import TableOfContentsRenderer from './TableOfContentsRenderer';
 
-export default class TableOfContents extends PureComponent {
+class TableOfContents extends Component {
  static propTypes = {
    components: PropTypes.array.isRequired,
    sections: PropTypes.array.isRequired,
@@ -29,3 +29,5 @@ export default class TableOfContents extends PureComponent {
    );
  }
 }
+
+export default TableOfContents;

@@ -1,12 +1,12 @@
 import Immutable from 'immutable';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import PlaygroundRenderer from './PlaygroundRenderer';
 import { getQueryVariable } from '../utils/settingsLink';
 import { generateNewCode, generateProps, parseProps } from '../PropsEditor/utils';
 
-export default class Playground extends PureComponent {
+export default class Playground extends Component {
   static propTypes = {
     code: PropTypes.string.isRequired,
     props: PropTypes.object.isRequired,

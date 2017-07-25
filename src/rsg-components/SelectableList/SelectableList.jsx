@@ -1,15 +1,17 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
+import { withRouter } from 'react-router';
 import { filterComponentsByName, getFilterRegExp } from '../../utils/utils';
 
 const SelectableListMaterial = makeSelectable(List);
 
-export default class SelectableList extends PureComponent {
+class SelectableList extends Component {
  static propTypes = {
    components: PropTypes.array.isRequired,
    sections: PropTypes.array.isRequired,
    searchTerm: PropTypes.string,
+   history: PropTypes.object.isRequired,
  };
 
  static defaultProps = {
@@ -44,6 +46,8 @@ export default class SelectableList extends PureComponent {
  handleOnChange = (event, index) => {
    this.setState({
      activeItem: index,
+   }, () => {
+     this.props.history.push(index);
    });
  };
 
@@ -76,3 +80,5 @@ export default class SelectableList extends PureComponent {
    );
  }
 }
+
+export default withRouter(SelectableList);

@@ -85,6 +85,7 @@
     "react-group": "^1.0.5",
     "react-resizable-box": "^2.0.6",
     "react-responsive-decorator": "^0.0.1",
+    "react-router-dom": "next",
     "react-tap-event-plugin": "^2.0.1",
     "recast": "^0.12.6",
     "remark": "^7.0.1",

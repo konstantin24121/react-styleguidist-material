@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
@@ -9,7 +9,7 @@ import { lime500 } from 'material-ui/styles/colors';
 
 const s = require('./ReactComponent.css');
 
-class ReactComponentRenderer extends PureComponent {
+class ReactComponentRenderer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,13 +42,13 @@ class ReactComponentRenderer extends PureComponent {
             {version && <span className={s.version}>v{version}</span>}
             {pure &&
               <a
-                href="https://facebook.github.io/react/docs/react-api.html#react.purecomponent"
+                href="https://facebook.github.io/react/docs/react-api.html#react.Component"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ verticalAlign: 'middle' }}
               >
                 <IconButton
-                  tooltip="This component is PureComponent"
+                  tooltip="This component is Component"
                   tooltipPosition="top-right"
                   style={{ padding: 0, width: 'auto', height: 'auto' }}
                   iconStyle={{ fontSize: '0.9rem' }}

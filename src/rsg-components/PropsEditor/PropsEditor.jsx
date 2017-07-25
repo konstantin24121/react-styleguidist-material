@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 
@@ -6,7 +6,7 @@ import PropsEditorRenderer from './PropsEditorRenderer';
 
 import { parseProps, generateProps, generateNewCode } from './utils';
 
-export default class PropsEditor extends PureComponent {
+export default class PropsEditor extends Component {
   static propTypes = {
     props: PropTypes.object.isRequired,
     componentName: PropTypes.string.isRequired,
