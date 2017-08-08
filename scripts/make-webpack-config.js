@@ -188,6 +188,7 @@ module.exports = function(config, env) {
     webpackConfig = merge(webpackConfig, {
       entry: [
         'webpack-hot-middleware/client',
+        'react-hot-loader/patch',
         entryScript,
       ],
       cache: true,
