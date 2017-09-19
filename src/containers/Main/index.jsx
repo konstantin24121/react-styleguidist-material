@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Header } from 'sg/compounds';
 
 class Main extends Component {
   static propTypes = {
-    sample: PropTypes.string.isRequired,
+    /**
+     * Connected
+     */
+    title: PropTypes.string.isRequired,
   };
+
   render() {
-    return (<div>
-      {this.props.sample}
-    </div>);
+    return (
+      <div>
+        <Header title={this.props.title} />
+      </div>
+    );
   }
 }
 
 function mapStateToProps(store) {
   return {
-    sample: store.sample.string,
+    title: store.ui.title,
   };
 }
 

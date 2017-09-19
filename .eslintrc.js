@@ -70,8 +70,8 @@ module.exports = {
   },
   settings: {
     "import/extensions": ['.js', '.jsx'],
-    "import/core-modules": [ 'baseStyles', 'rsg-components', 'rsg-codemirror-theme.css', 'styleguide'],
-    "import/external-module-folders": [ 'utils' ],
+    "import/core-modules": [ 'baseStyles', 'sg', 'rsg-codemirror-theme.css', 'styleguide'],
+    "import/external-module-folders": [ 'utils', 'sg' ],
   },
   plugins: [
     "react", "import", "jsx-a11y", "json", "jest", "babel", "flowtype"

@@ -11,6 +11,9 @@ class SelectableList extends Component {
    components: PropTypes.array.isRequired,
    sections: PropTypes.array.isRequired,
    searchTerm: PropTypes.string,
+   /*
+    Connected
+    */
    history: PropTypes.object.isRequired,
  };
 

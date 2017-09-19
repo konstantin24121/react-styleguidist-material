@@ -67,7 +67,7 @@ module.exports = function(config, env) {
         codemirror: codeMirrorPath,
         'rsg-codemirror-theme.css': path.join(codeMirrorPath, `theme/${config.highlightTheme}.css`),
         baseStyles: config.baseStyles,
-        'rsg-components': path.join(sourceDir, 'rsg-components'),
+        sg: path.join(sourceDir),
       },
       extensions: ['.js', '.jsx', '.json'],
       modules: [
