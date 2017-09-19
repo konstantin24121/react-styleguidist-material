@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { modularScale } from 'sg/styles/theme';
 
 const headerScale = modularScale(2.5);
@@ -15,7 +16,7 @@ export const Grid = styled.div`
   height: 100%;
 
   > * {
-    padding: 0 ${modularScale(-1)}px;
+    padding: 0 ${modularScale(1)}px;
     height: 100%;
   }
 
@@ -24,6 +25,9 @@ export const Grid = styled.div`
     flex-shrink: 0;
     padding: 0;
     border-right: 1px solid ${(props) => props.theme.colors.uiLight};
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   > *:nth-child(2) {
     flex-basis: 100%;
@@ -31,7 +35,12 @@ export const Grid = styled.div`
     flex-shrink: 1;
   }
   > *:nth-child(3) {
-    flex-basis: 300px;
+    flex-basis: 500px;
     flex-grow: 2;
   }
+`;
+
+export const HeaderTitle = styled.div`
+  line-height: ${headerScale}px;
+  color: ${(props) => props.theme.colors.typoInverted};
 `;
