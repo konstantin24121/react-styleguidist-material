@@ -6,4 +6,4 @@
  */
 
 export Main from './Main';
-export Sidebar from './SideBar';
+export Sidebar from './Sidebar';

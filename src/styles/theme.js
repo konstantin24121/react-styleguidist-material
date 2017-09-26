@@ -17,6 +17,7 @@ const theme = {
   colors: {
     main: cyan300,
     uiLight: grey50,
+    uiDark: grey900,
 
     typoInverted: grey50,
     typoBase: grey900,
@@ -31,6 +32,10 @@ const theme = {
   },
   scales: {
     small: modularScale(1),
+  },
+  other: {
+    transitionDelay: '300ms',
+    transitionFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
   },
 };
 

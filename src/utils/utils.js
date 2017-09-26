@@ -157,3 +157,12 @@ export function filterComponentExamples(component, index) {
   newComponent.examples = [component.examples[index]];
   return newComponent;
 }
+
+/**
+ * Return component display name
+ * @param  {React.Component} Component
+ * @return {string}
+ */
+export function getDisplayName(Component) {
+  return Component.displayName || Component.name || 'Component';
+}

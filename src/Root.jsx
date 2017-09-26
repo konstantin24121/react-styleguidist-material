@@ -4,11 +4,27 @@ import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import DeviceProvider from 'sg/providers/DeviceProvider';
 // Containers
 import { Main } from './containers';
 
 import 'sg/styles/common';
 import theme from 'sg/styles/theme';
+
+const deviceTypes = [
+  {
+    name: 'HANDHOLD',
+    query: '(min-width: 480px)',
+  },
+  {
+    name: 'TABLET',
+    query: '(min-width: 758px)',
+  },
+  {
+    name: 'DESCTOPE',
+    query: '(min-width: 980px)',
+  },
+];
 
 export default function Root({ store, codeKey }) {
   return (
@@ -18,11 +34,13 @@ export default function Root({ store, codeKey }) {
       фараону помогло */}
       <MuiThemeProvider>
         <ThemeProvider theme={theme}>
-          <Router>
-            <div>
-              <Route exact path="/" component={Main} />
-            </div>
-          </Router>
+          <DeviceProvider deviceTypes={deviceTypes}>
+            <Router>
+              <div>
+                <Route exact path="/" component={Main} />
+              </div>
+            </Router>
+          </DeviceProvider>
         </ThemeProvider>
       </MuiThemeProvider>
     </Provider>

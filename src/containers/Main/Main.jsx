@@ -2,8 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header } from 'sg/compounds';
-
+import { Sidebar } from 'sg/containers';
 import { openSidebar, closeSidebar } from 'sg/actions/ui';
+
+import { Root, Box } from './MainStyled';
 
 class Main extends PureComponent {
   static propTypes = {
@@ -17,12 +19,19 @@ class Main extends PureComponent {
   };
 
   render() {
-    const { sidebarIsOpen } = this.props;
+    const { sidebarIsOpen, title } = this.props;
     const toggleHandle = sidebarIsOpen ? this.props.closeSidebar : this.props.openSidebar;
     return (
-      <div>
-        <Header title={this.props.title} onToggle={toggleHandle} />
-      </div>
+      <Root>
+        <Sidebar isOpen={sidebarIsOpen} />
+        <Box sidebarIsOpen={sidebarIsOpen}>
+          <Header
+            title={title}
+            sidebarIsOpen={sidebarIsOpen}
+            onToggle={toggleHandle}
+          />
+        </Box>
+      </Root>
     );
   }
 }
@@ -34,5 +43,7 @@ function mapStateToProps(store) {
   };
 }
 
-export default connect(mapStateToProps, { openSidebar,
-closeSidebar })(Main);
+export default connect(mapStateToProps, {
+  openSidebar,
+  closeSidebar,
+})(Main);
