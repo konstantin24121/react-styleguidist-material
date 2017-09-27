@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import { modularScale } from 'sg/styles/theme';
 import { media } from 'sg/styles/utils';
 
-const headerScale = modularScale(2.5);
+export const CONSTS = {
+  headerScale: modularScale(2.5),
+};
 
 export const Root = styled.header`
   width: 100%;
-  height: ${headerScale}px;
-  background-color: ${(props) => props.theme.colors.main};
+  height: ${CONSTS.headerScale}px;
+  background-color: ${(props) => props.theme.colors.uiPrimary};
 `;
 
 export const Grid = styled.div`
@@ -31,11 +33,12 @@ export const Grid = styled.div`
   }
 
   > *:nth-child(1) {
-    flex-basis: ${headerScale}px;
+    flex-basis: ${CONSTS.headerScale}px;
     flex-shrink: 0;
     padding: 0;
     border-left: 1px solid ${(props) => props.theme.colors.uiLight};
     ${media.desctope`
+      border-left: none;
       border-right: 1px solid ${(props) => props.theme.colors.uiLight};
     `}
     display: flex;
@@ -67,6 +70,6 @@ export const Grid = styled.div`
 `;
 
 export const HeaderTitle = styled.div`
-  line-height: ${headerScale}px;
+  line-height: ${CONSTS.headerScale}px;
   color: ${(props) => props.theme.colors.typoInverted};
 `;

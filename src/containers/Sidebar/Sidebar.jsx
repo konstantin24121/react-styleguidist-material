@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
-import { Root, paperStyle } from './SidebarStyled';
+import TextField from 'material-ui/TextField';
+import { Scrollbars } from 'react-custom-scrollbars';
+import { Root, Scrollbox, Grid, trackStyle,
+  thumbStyle, paperStyle,
+  filterStyle, scrollbarStyle } from './SidebarStyled';
 
 class Sidebar extends PureComponent {
   render() {
@@ -11,8 +15,38 @@ class Sidebar extends PureComponent {
       <Root
         isOpen={isOpen}
       >
-        <Paper style={paperStyle} zDepth={3} rounded={false}>
-          Sidebar
+        <Paper style={paperStyle} zDepth={isOpen ? 4 : 0} rounded={false}>
+          <Grid>
+            <div>
+              <Paper rounded={false} zDepth={0}>
+                <TextField
+                  floatingLabelText="Filter"
+                  style={filterStyle.root}
+                  inputStyle={filterStyle.input}
+                  floatingLabelStyle={filterStyle.floatingLabel}
+                  floatingLabelShrinkStyle={filterStyle.floatingLabelShrinkStyle}
+                  underlineStyle={filterStyle.underline}
+                />
+              </Paper>
+            </div>
+            <div>
+              <Scrollbars
+                style={scrollbarStyle}
+                renderTrackVertical={
+                  (props) => <div {...props} style={{ ...props.style, ...trackStyle }} />
+                }
+                renderThumbVertical={
+                  (props) => <div {...props} style={{ ...props.style, ...thumbStyle }} />
+                }
+              >
+                <Scrollbox>
+                  <p>And Now</p>
+                  <p>You Can Put</p>
+                  <p>A Long Content Here</p>
+                </Scrollbox>
+              </Scrollbars>
+            </div>
+          </Grid>
         </Paper>
       </Root>
     );
