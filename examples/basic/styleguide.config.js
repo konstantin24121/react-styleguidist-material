@@ -20,9 +20,10 @@ module.exports = {
     },
     {
       name: 'UI Components',
-      components: 'lib/components/[A-Z]*/[A-Z]*.jsx',
+      components: 'lib/components/[J-Z]*/[J-Z]*.jsx',
     },
   ],
+  components: 'lib/components/[A-F]*/[A-F]*.jsx',
   updateWebpackConfig(webpackConfig) {
     const dir = path.resolve(__dirname, 'lib');
     webpackConfig.module.loaders.push(

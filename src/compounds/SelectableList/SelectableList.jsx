@@ -2,24 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import { withRouter } from 'react-router';
-import { filterComponentsByName, getFilterRegExp } from '../../utils/utils';
 
 const SelectableListMaterial = makeSelectable(List);
 
 class SelectableList extends Component {
  static propTypes = {
-   components: PropTypes.array.isRequired,
    sections: PropTypes.array.isRequired,
-   searchTerm: PropTypes.string,
    /*
     Connected
     */
    history: PropTypes.object.isRequired,
  };
 
- static defaultProps = {
-   searchTerm: '',
- };
 
  constructor(props) {
    super(props);
@@ -28,18 +22,19 @@ class SelectableList extends Component {
    };
  }
 
- getComponents = (components, searchTerm) => filterComponentsByName(components || [], searchTerm);
-
- getSections(sections = [], searchTerm) {
-   const regExp = getFilterRegExp(searchTerm);
+ getSections(sections = []) {
    return sections.reduce(
      (filteredSections, { name, components: subComponents = [], sections: subSections }) => {
-       subComponents = this.getComponents(subComponents, searchTerm);
-       if (subComponents.length || !searchTerm || regExp.test(name)) {
+       if (subComponents.length) {
          filteredSections.push({
            heading: true,
            name,
-           content: this.renderItems(subComponents, subSections, searchTerm),
+           content: this.renderItems([...subComponents, ...subSections]),
+         });
+       } else {
+         filteredSections.push({
+           heading: true,
+           name,
          });
        }
        return filteredSections;
@@ -55,11 +50,8 @@ class SelectableList extends Component {
  };
 
 
- renderItems(components, sections, searchTerm) {
-   const items = [
-     ...this.getComponents(components, searchTerm),
-     ...this.getSections(sections, searchTerm),
-   ];
+ renderItems(sections) {
+   const items = this.getSections(sections);
    return items.map((item) => (
      <ListItem
        key={item.name}
@@ -72,13 +64,13 @@ class SelectableList extends Component {
  }
 
  render() {
-   const { components, sections, searchTerm } = this.props;
+   const { sections } = this.props;
    return (
      <SelectableListMaterial
        value={this.state.activeItem}
        onChange={this.handleOnChange}
      >
-       {this.renderItems(components, sections, searchTerm)}
+       {this.renderItems(sections)}
      </SelectableListMaterial>
    );
  }

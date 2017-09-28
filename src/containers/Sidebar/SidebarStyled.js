@@ -36,6 +36,7 @@ export const Grid = styled.div`
 
 export const Scrollbox = styled.div`
   padding-top: ${modularScale(-2)}px;
+  padding-right: 6px;
 `;
 
 export const trackStyle = {
@@ -61,7 +62,8 @@ export const filterStyle = {
     height: `${HeaderStyledConsts.headerScale + 1}px`,
   },
   input: {
-    paddingLeft: '1em',
+    paddingLeft: `${modularScale(0)}px`,
+    paddingTop: `${modularScale(0)}px`,
     marginTop: 0,
   },
   floatingLabel: {

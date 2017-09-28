@@ -1,6 +1,6 @@
 import ms from 'modularscale-js';
 import {
-  grey50, grey300, grey900,
+  grey50, grey300, grey400, grey900,
   cyan300 } from 'material-ui/styles/colors';
 
 const FONT_BASIS = 16;
@@ -22,6 +22,7 @@ const theme = {
     uiGradeout: grey300,
     typoInverted: grey50,
     typoBase: grey900,
+    textGradeout: grey400,
   },
   typorgraph: {
     fontBasis: FONT_BASIS,

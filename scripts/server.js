@@ -13,6 +13,7 @@ module.exports = function server(config, callback) {
 	app.use(require('webpack-dev-middleware')(compiler, {
 		noInfo: true,
 		stats,
+    historyFallback: true,
 	}));
 
 	app.use(require('webpack-hot-middleware')(compiler));

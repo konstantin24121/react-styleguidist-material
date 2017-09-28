@@ -6,3 +6,4 @@
  */
 
 export Title from './Title';
+export Hr from './Hr';

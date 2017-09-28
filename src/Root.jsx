@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import DeviceProvider from 'sg/providers/DeviceProvider';
 // Containers
 import { Main } from './containers';
@@ -37,7 +37,7 @@ export default function Root({ store, codeKey }) {
           <DeviceProvider deviceTypes={deviceTypes}>
             <Router>
               <div>
-                <Route exact path="/" component={Main} />
+                <Route path="/" component={Main} />
               </div>
             </Router>
           </DeviceProvider>
