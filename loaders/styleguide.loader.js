@@ -20,12 +20,13 @@ const toCode = utils.toCode;
  * @param {object} config
  * @returns {string}
  */
-function processComponent(filepath, config) {
+function processComponent(filepath, config, parentPath) {
   const nameFallback = getNameFallback(filepath);
   const examplesFile = config.getExampleFilename(filepath);
   const changelogFile = config.getChangelogFilename(filepath);
   const componentPath = path.relative(config.configDir, filepath);
   return toCode({
+    path: JSON.stringify(`${parentPath}/${nameFallback}`),
     filepath: JSON.stringify(filepath),
     nameFallback: JSON.stringify(nameFallback),
     pathLine: JSON.stringify(config.getComponentPathLine(componentPath)),
@@ -146,7 +147,7 @@ function expandSectionComponents(section, config) {
  * @param {object} config
  * @returns {string}
  */
-function processComponentsSource(componentFiles, config) {
+function processComponentsSource(componentFiles, config, parentPath = '') {
   if (config.verbose) {
     console.log();
     console.log('Loading components:');
@@ -157,7 +158,7 @@ function processComponentsSource(componentFiles, config) {
   if (config.skipComponentsWithoutExample) {
     componentFiles = componentFiles.filter(filepath => fs.existsSync(config.getExampleFilename(filepath)));
   }
-  return toCode(componentFiles.map(filepath => processComponent(filepath, config)));
+  return toCode(componentFiles.map(filepath => processComponent(filepath, config, parentPath)));
 }
 
 /**
@@ -166,12 +167,14 @@ function processComponentsSource(componentFiles, config) {
  * @param {string} config
  * @returns {string}
  */
-function processSection(section, config) {
+function processSection(section, config, parentPath = '') {
+  const currentPath = `${parentPath}/${section.name}`;
   return toCode({
     name: JSON.stringify(section.name),
+    path: JSON.stringify(currentPath),
     content: (section.content ? requireIt('examples!' + path.resolve(config.configDir, section.content)) : null),
-    components: processComponentsSource(section.componentFiles, config),
-    sections: processSectionsList(section.sections, config),
+    components: processComponentsSource(section.componentFiles, config, currentPath),
+    sections: processSectionsList(section.sections, config, currentPath),
   });
 }
 
@@ -182,12 +185,12 @@ function processSection(section, config) {
  * @param {object} config
  * @returns {string}
  */
-function processSectionsList(sections, config) {
+function processSectionsList(sections, config, parentPath) {
   if (!sections) {
     return null;
   }
 
-  return toCode(sections.map(section => processSection(section, config)));
+  return toCode(sections.map(section => processSection(section, config, parentPath)));
 }
 
 /**

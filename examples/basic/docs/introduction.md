@@ -1,1 +1,1 @@
-## Welcome to Material styleguide
+## Introduction to Material styleguide

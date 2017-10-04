@@ -1,23 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { Title } from 'sg/components';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui/svg-icons/navigation/menu';
-import CloseIcon from 'material-ui/svg-icons/navigation/close';
-import TextFormatIcon from 'material-ui/svg-icons/content/text-format';
-import { withTheme } from 'styled-components';
+import { SidebarToggle } from 'sg/compounds';
+import { FontSettings } from 'sg/containers';
 import { withDeviceType } from 'sg/providers/DeviceProvider';
 import { Root, Grid, HeaderTitle } from './HeaderStyled';
 
-const Header = ({ title, sidebarIsOpen, theme, onToggle, device }) => {
+const Header = ({ title, sidebarIsOpen, onToggle, device }) => {
   return (
     <Root>
       <Grid>
         <div>
-          <IconButton onClick={onToggle}>
-            {!sidebarIsOpen && <MenuIcon color={theme.colors.typoInverted} />}
-            {sidebarIsOpen && <CloseIcon color={theme.colors.typoInverted} />}
-          </IconButton>
+          <SidebarToggle onToggle={onToggle} isOpen={sidebarIsOpen} />
         </div>
         <div>
           <HeaderTitle>
@@ -26,9 +21,7 @@ const Header = ({ title, sidebarIsOpen, theme, onToggle, device }) => {
         </div>
         {device.matchDevice('HANDHOLD') && (
           <div>
-            <IconButton>
-              <TextFormatIcon color={theme.colors.typoInverted} />
-            </IconButton>
+            <FontSettings />
           </div>
         )}
       </Grid>
@@ -52,7 +45,6 @@ Header.propTypes = {
   /**
    * Connected
    */
-  theme: PropTypes.any.isRequired,
   device: PropTypes.any.isRequired,
 };
 
@@ -60,4 +52,4 @@ Header.defaultProps = {
   onToggle: () => {},
 };
 
-export default withTheme(withDeviceType(Header));
+export default withDeviceType(Header);

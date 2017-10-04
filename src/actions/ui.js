@@ -15,4 +15,18 @@ export function closeSidebar() {
   };
 }
 
+export function toggleSidebar() {
+  return (dispatch, getState) => {
+    const sidebarIsOpen = getState().ui.sidebarIsOpen;
+    if (sidebarIsOpen) {
+      return dispatch({
+        type: TYPES.closeSidebar,
+      });
+    }
+    return dispatch({
+      type: TYPES.openSidebar,
+    });
+  };
+}
+
 export { TYPES };

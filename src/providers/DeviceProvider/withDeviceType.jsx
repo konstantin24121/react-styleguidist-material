@@ -21,7 +21,8 @@ function withDeviceType(WrappedComponent) {
     }
 
     render() {
-      return <WrappedComponent device={this.context.device} {...this.props} />;
+      const device = { ...this.context.device };
+      return <WrappedComponent device={device} {...this.props} />;
     }
   }
   WithDeviceType.displayName = `WithDeviceType(${getDisplayName(WrappedComponent)})`;

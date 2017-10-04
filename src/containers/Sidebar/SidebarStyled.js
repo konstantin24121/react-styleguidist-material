@@ -26,9 +26,15 @@ export const Root = styled.div`
 export const Grid = styled.div`
   > *:nth-child(1){
     position: relative;
+    z-index: 3;
+  }
+
+  > *:nth-child(2){
+    position: relative;
     z-index: 2;
   }
-    > *:nth-child(2){
+
+  > *:nth-child(3){
     position: relative;
     z-index: 1;
   }
@@ -37,6 +43,29 @@ export const Grid = styled.div`
 export const Scrollbox = styled.div`
   padding-top: ${modularScale(-2)}px;
   padding-right: 6px;
+`;
+
+export const Header = styled.div`
+  height: ${HeaderStyledConsts.headerScale}px;
+  background-color: ${(props) => props.theme.colors.uiPrimary};
+`;
+
+export const HeaderGrid = styled.div`
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+
+  > *:nth-child(1){
+    height: 100%;
+    border-right: 1px solid ${(props) => props.theme.colors.uiLight};
+    display: flex;
+    align-items: center;
+  }
+
+  > *:nth-child(2){
+
+  }
 `;
 
 export const trackStyle = {
@@ -77,7 +106,6 @@ export const filterStyle = {
     bottom: 0,
   },
 };
-
 
 export const scrollbarStyle = {
   width: '100%',

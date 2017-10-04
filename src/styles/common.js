@@ -68,5 +68,6 @@ injectGlobal`
     margin: 0;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    overflow-x: hidden;
   }
 `

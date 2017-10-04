@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import { withRouter } from 'react-router';
+import { getFilterRegExp, filterComponentsByName } from 'sg/utils/utils';
 
 const SelectableListMaterial = makeSelectable(List);
 
-class SelectableList extends Component {
+class SelectableList extends React.PureComponent {
  static propTypes = {
    sections: PropTypes.array.isRequired,
    /*
     Connected
     */
    history: PropTypes.object.isRequired,
+   location: PropTypes.object.isRequired,
  };
 
 
@@ -22,19 +24,33 @@ class SelectableList extends Component {
    };
  }
 
+ componentWillReceiveProps(nextProps) {
+   if (nextProps.location !== this.props.location) {
+     this.setState({
+       activeItem: nextProps.location.pathname,
+     });
+   }
+ }
+
+ getComponents = (components, searchTerm) => filterComponentsByName(components || [], searchTerm);
+
  getSections(sections = []) {
    return sections.reduce(
-     (filteredSections, { name, components: subComponents = [], sections: subSections }) => {
-       if (subComponents.length) {
+     (filteredSections, {
+       name, path, components: subComponents = [], sections: subSections = [],
+     }) => {
+       if (subComponents.length || subSections.length) {
          filteredSections.push({
            heading: true,
            name,
-           content: this.renderItems([...subComponents, ...subSections]),
+           url: path,
+           subsections: this.getSections([...subSections, ...subComponents]),
          });
        } else {
          filteredSections.push({
            heading: true,
            name,
+           url: path,
          });
        }
        return filteredSections;
@@ -49,16 +65,14 @@ class SelectableList extends Component {
    });
  };
 
-
  renderItems(sections) {
-   const items = this.getSections(sections);
-   return items.map((item) => (
+   return sections.map((section) => (
      <ListItem
-       key={item.name}
-       value={item.name}
-       primaryText={item.name}
+       key={section.url}
+       value={section.url}
+       primaryText={section.name}
        initiallyOpen
-       nestedItems={item.content}
+       nestedItems={this.renderItems(section.subsections || [])}
      />
    ));
  }
@@ -70,7 +84,7 @@ class SelectableList extends Component {
        value={this.state.activeItem}
        onChange={this.handleOnChange}
      >
-       {this.renderItems(sections)}
+       {this.renderItems(this.getSections(sections))}
      </SelectableListMaterial>
    );
  }

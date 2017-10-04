@@ -7,11 +7,14 @@ const sections = processSections(styleguide.sections || []);
 if (components.length) {
   sections.push({
     name: 'Components',
+    path: 'Components',
     sections: [],
     content: '',
     components,
   });
 }
+
+
 /*
   Sections reduser
  */

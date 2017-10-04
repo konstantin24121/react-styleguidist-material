@@ -8,3 +8,4 @@
 export SelectableList from './SelectableList';
 export FilteredList from './FilteredList';
 export Header from './Header';
+export SidebarToggle from './SidebarToggle';

@@ -1,26 +1,25 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 import { Header } from 'sg/compounds';
 import { Sidebar } from 'sg/containers';
-import { openSidebar, closeSidebar } from 'sg/actions/ui';
+import * as uiActions from 'sg/actions/ui';
 
 import { Root, Box } from './MainStyled';
 
-class Main extends PureComponent {
+class Main extends React.PureComponent {
   static propTypes = {
     /**
      * Connected
      */
     title: PropTypes.string.isRequired,
     sidebarIsOpen: PropTypes.bool.isRequired,
-    openSidebar: PropTypes.func.isRequired,
-    closeSidebar: PropTypes.func.isRequired,
+    toggleSidebar: PropTypes.func.isRequired,
   };
 
   render() {
-    const { sidebarIsOpen, title } = this.props;
-    const toggleHandle = sidebarIsOpen ? this.props.closeSidebar : this.props.openSidebar;
+    const { sidebarIsOpen, title, toggleSidebar } = this.props;
     return (
       <Root>
         <Sidebar isOpen={sidebarIsOpen} />
@@ -28,22 +27,22 @@ class Main extends PureComponent {
           <Header
             title={title}
             sidebarIsOpen={sidebarIsOpen}
-            onToggle={toggleHandle}
+            onToggle={toggleSidebar}
           />
+          <Route path="/component/:name" render={({ match }) => {
+            return (<div>{match.params.name}</div>)
+          }} />
         </Box>
       </Root>
     );
   }
 }
 
-function mapStateToProps(store) {
+function mapStateToProps(state) {
   return {
-    sidebarIsOpen: store.ui.sidebarIsOpen,
-    title: store.ui.title,
+    sidebarIsOpen: state.ui.sidebarIsOpen,
+    title: state.ui.title,
   };
 }
 
-export default connect(mapStateToProps, {
-  openSidebar,
-  closeSidebar,
-})(Main);
+export default connect(mapStateToProps, uiActions)(Main);

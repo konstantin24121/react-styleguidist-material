@@ -1,8 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 
 const styleguide = require('styleguide!index.js'); // eslint-disable-line
 
 const middleware = [
+  thunk,
 ];
 
 let enhancer;
