@@ -5,9 +5,11 @@ import { Title } from 'sg/components';
 import { SidebarToggle } from 'sg/compounds';
 import { FontSettings } from 'sg/containers';
 import { withDeviceType } from 'sg/providers/DeviceProvider';
+import { withRouter } from 'react-router';
 import { Root, Grid, HeaderTitle } from './HeaderStyled';
 
-const Header = ({ title, sidebarIsOpen, onToggle, device }) => {
+const Header = ({ title, sidebarIsOpen, onToggle, device, location }) => {
+  const routeLocation = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
   return (
     <Root>
       <Grid>
@@ -16,7 +18,12 @@ const Header = ({ title, sidebarIsOpen, onToggle, device }) => {
         </div>
         <div>
           <HeaderTitle>
-            <Title size={5} withoutMargin>{title}</Title>
+            <Title size={5} withoutMargin>
+              {routeLocation}
+            </Title>
+            <Title size={5} withoutMargin>
+              {title} {routeLocation.length && (<span>-&nbsp;</span>)}
+            </Title>
           </HeaderTitle>
         </div>
         {device.matchDevice('HANDHOLD') && (
@@ -46,10 +53,11 @@ Header.propTypes = {
    * Connected
    */
   device: PropTypes.any.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 Header.defaultProps = {
   onToggle: () => {},
 };
 
-export default withDeviceType(Header);
+export default withRouter(withDeviceType(Header));

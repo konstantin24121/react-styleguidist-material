@@ -73,7 +73,6 @@ export function processSections(sections) {
 export function getFilterRegExp(query) {
   // eslint-disable-next-line no-param-reassign
   query = query
-    .replace(/[^a-z0-9]/gi, '')
     .split('')
     .join('.*')
   ;

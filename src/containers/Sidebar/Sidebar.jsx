@@ -23,6 +23,14 @@ class Sidebar extends React.PureComponent {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      if (!nextProps.device.matchDevice('DESCTOPE')) {
+        this.props.toggleSidebar();
+      }
+    }
+  }
+
   handleChangeSearchTerm = (event) => {
     this.setState({
       searchTerm: event.target.value,
@@ -110,6 +118,7 @@ Sidebar.propTypes = {
    */
   isOpen: PropTypes.bool.isRequired,
   // Connected
+  location: PropTypes.object.isRequired,
   device: PropTypes.any.isRequired,
   sections: PropTypes.any.isRequired,
   sidebarIsOpen: PropTypes.bool.isRequired,

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Header } from 'sg/compounds';
 import { Sidebar } from 'sg/containers';
 import * as uiActions from 'sg/actions/ui';
@@ -29,9 +29,14 @@ class Main extends React.PureComponent {
             sidebarIsOpen={sidebarIsOpen}
             onToggle={toggleSidebar}
           />
-          <Route path="/component/:name" render={({ match }) => {
-            return (<div>{match.params.name}</div>)
-          }} />
+          <Switch>
+            <Route path="/sandbox/:component" render={({ match }) => {
+              return (<div>{match.params.component}</div>)
+            }} />
+            <Route path="/:page" render={({ match, location }) => {
+              return (<div>{location.pathname}</div>)
+            }} />
+          </Switch>
         </Box>
       </Root>
     );

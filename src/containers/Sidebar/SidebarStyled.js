@@ -82,7 +82,7 @@ export const thumbStyle = {
 export const paperStyle = {
   height: '100%',
   overflow: 'hidden',
-  borderRight: `1px ${theme.colors.uiGradeout} solid`,
+  borderRight: `1px ${theme.colors.uiGradeout} solid`
 };
 
 export const filterStyle = {

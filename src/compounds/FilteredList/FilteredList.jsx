@@ -18,6 +18,10 @@ class FilteredList extends Component {
     return sections.reduce(
       (filteredSections, nextSection) => {
         const subComponents = this.getComponents(nextSection.components, searchTerm);
+        if (nextSection.sections.length) {
+          const filteredSubSections = this.filter(nextSection.sections);
+          filteredSections = filteredSections.concat(filteredSubSections);
+        }
         if (subComponents.length) {
           filteredSections = filteredSections.concat(subComponents);
         }
@@ -25,7 +29,7 @@ class FilteredList extends Component {
           filteredSections.push({
             ...nextSection,
             components: [],
-            sections: []
+            sections: [],
           });
         }
         return filteredSections;
@@ -33,7 +37,11 @@ class FilteredList extends Component {
   }
 
   render() {
-    const { sections } = this.props;
+    const { sections, searchTerm } = this.props;
+    if (searchTerm.length < 3) {
+      const plural = searchTerm.length === 1 ? 'two' : 'one';
+      return (<Noresults>Type {plural} more than </Noresults>);
+    }
     const filteredSections = this.filter(sections);
     if (!filteredSections.length) {
       return (<Noresults>No results</Noresults>);

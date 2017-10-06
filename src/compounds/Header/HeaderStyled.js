@@ -11,6 +11,8 @@ export const Root = styled.header`
   width: 100%;
   height: ${CONSTS.headerScale}px;
   background-color: ${(props) => props.theme.colors.uiPrimary};
+  overflow: hidden;
+  max-width: 100vw;
 `;
 
 export const Grid = styled.div`
@@ -72,4 +74,8 @@ export const Grid = styled.div`
 export const HeaderTitle = styled.div`
   line-height: ${CONSTS.headerScale}px;
   color: ${(props) => props.theme.colors.typoInverted};
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 `;
