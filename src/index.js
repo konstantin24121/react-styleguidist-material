@@ -1,25 +1,16 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import _ from 'lodash';
-// import isFinite from 'lodash/isFinite';
 import ReactDOM from 'react-dom';
+import _ from 'lodash';
+
 import 'highlight.js/styles/tomorrow.css';
 import 'baseStyles';
-// import { StyleGuide } from 'rsg-components';
+
 import { AppContainer } from 'react-hot-loader';
 import Root from './Root';
-import createStore from './config/store';
+import createStore from './redux/store';
 
-// import {
-//   getComponentNameFromHash,
-//   filterComponentsByExactName,
-//   filterComponentExamples,
-//   filterComponentsInSectionsByExactName,
-//   processComponents,
-//   processSections,
-// } from './utils/utils';
-
-import './styles.css';
+import './styles/global.css';
 
 // Make libraries available in examples
 global.React = React;
@@ -29,6 +20,27 @@ let codeKey = 0;
 
 const dest = document.getElementById('app');
 const store = createStore();
+
+ReactDOM.render(
+  <AppContainer>
+    <Root store={store} codeKey={codeKey} />
+  </AppContainer>,
+  dest,
+);
+
+if (module.hot) {
+  module.hot.accept(['./Root'], () => {
+    codeKey += 1;
+    const nextStore = createStore();
+    const NextApp = require('./Root').default;
+    ReactDOM.render(
+      <AppContainer>
+        <NextApp store={nextStore} codeKey={codeKey} />
+      </AppContainer>,
+      dest,
+    );
+  });
+}
 
 // function renderStyleguide(Component) {
 //   // const styleguide = require('styleguide!index.js'); // eslint-disable-line
@@ -83,42 +95,3 @@ const store = createStore();
 //     dest,
 //   );
 // }
-
-ReactDOM.render(
-  <AppContainer>
-    <Root store={store} codeKey={codeKey} />
-    {/* <StyleGuide
-        codeKey={codeKey}
-        config={styleguide.config}
-        components={components}
-        sections={sections}
-        sidebar={sidebar}
-        singleExample={singleExample}
-        targetComponentName={targetComponentName}
-    /> */}
-  </AppContainer>,
-  dest,
-);
-
-if (module.hot) {
-  module.hot.accept('styleguide!index.js', () => {
-    codeKey += 1;
-    const NextApp = require('./Root').default;
-    ReactDOM.render(
-      <AppContainer>
-        <NextApp store={store} codeKey={codeKey} />
-      </AppContainer>,
-      dest,
-    );
-  });
-  module.hot.accept('./Root', () => {
-    codeKey += 1;
-    const NextApp = require('./Root').default;
-    ReactDOM.render(
-      <AppContainer>
-        <NextApp store={store} codeKey={codeKey} />
-      </AppContainer>,
-      dest,
-    );
-  });
-};

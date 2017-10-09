@@ -34,6 +34,7 @@ const theme = {
   },
   scales: {
     small: modularScale(1),
+    big: modularScale(3),
   },
   other: {
     transitionDelay: '300ms',

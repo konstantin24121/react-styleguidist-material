@@ -22,7 +22,7 @@ const Header = ({ title, sidebarIsOpen, onToggle, device, location }) => {
               {routeLocation}
             </Title>
             <Title size={5} withoutMargin>
-              {title} {routeLocation.length && (<span>-&nbsp;</span>)}
+              {title} {!!routeLocation.length && (<span>-&nbsp;</span>)}
             </Title>
           </HeaderTitle>
         </div>

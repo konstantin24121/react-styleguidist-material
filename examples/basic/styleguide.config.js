@@ -13,6 +13,7 @@ module.exports = {
   sections: [
     {
       name: 'Introduction',
+      mainPage: true,
       content: 'docs/introduction.md',
       sections: [{
         name: 'Welcome',

@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
@@ -8,6 +6,7 @@ const flatMapDeep = require('lodash/flatMapDeep');
 const commonDir = require('common-dir');
 const pick = require('lodash/pick');
 const utils = require('./utils/js');
+
 const requireIt = utils.requireIt;
 const toCode = utils.toCode;
 
@@ -38,7 +37,8 @@ function processComponent(filepath, config, parentPath) {
 }
 
 /**
- * If component name can’t be detected at runtime, use filename (or folder name if file name is 'index')
+ * If component name can’t be detected at runtime,
+ * use filename (or folder name if file name is 'index')
  *
  * @param {string} filepath
  * @returns {string}
@@ -102,7 +102,7 @@ function getComponentFiles(components, config) {
   else {
     componentFiles = glob.sync(path.resolve(config.configDir, components));
   }
-  componentFiles = componentFiles.map(file => path.resolve(config.configDir, file));
+  componentFiles = componentFiles.map((file) => path.resolve(config.configDir, file));
 
   return componentFiles;
 }
@@ -119,7 +119,7 @@ function mapSectionsToSectionsWithComponentFiles(sections, config) {
     return [];
   }
 
-  return sections.map(section => expandSectionComponents(section, config));
+  return sections.map((section) => expandSectionComponents(section, config));
 }
 
 /**
@@ -136,7 +136,7 @@ function expandSectionComponents(section, config) {
     {
       componentFiles: getComponentFiles(section.components, config),
       sections: mapSectionsToSectionsWithComponentFiles(section.sections, config),
-    }
+    },
   );
 }
 
@@ -156,9 +156,13 @@ function processComponentsSource(componentFiles, config, parentPath = '') {
   }
 
   if (config.skipComponentsWithoutExample) {
-    componentFiles = componentFiles.filter(filepath => fs.existsSync(config.getExampleFilename(filepath)));
+    componentFiles = componentFiles.filter(
+      (filepath) => fs.existsSync(config.getExampleFilename(filepath)),
+    );
   }
-  return toCode(componentFiles.map(filepath => processComponent(filepath, config, parentPath)));
+  return toCode(componentFiles.map(
+    (filepath) => processComponent(filepath, config, parentPath)),
+  );
 }
 
 /**
@@ -171,8 +175,9 @@ function processSection(section, config, parentPath = '') {
   const currentPath = `${parentPath}/${section.name}`;
   return toCode({
     name: JSON.stringify(section.name),
-    path: JSON.stringify(currentPath),
-    content: (section.content ? requireIt('examples!' + path.resolve(config.configDir, section.content)) : null),
+    path: section.mainPage ? JSON.stringify('/') : JSON.stringify(currentPath),
+    content: (section.content ?
+      requireIt('examples!' + path.resolve(config.configDir, section.content)) : null),
     components: processComponentsSource(section.componentFiles, config, currentPath),
     sections: processSectionsList(section.sections, config, currentPath),
   });
@@ -190,7 +195,9 @@ function processSectionsList(sections, config, parentPath) {
     return null;
   }
 
-  return toCode(sections.map(section => processSection(section, config, parentPath)));
+  return toCode(sections.map(
+    (section, index) => processSection(section, config, parentPath, index)),
+  );
 }
 
 /**
@@ -232,9 +239,8 @@ module.exports.pitch = function() {
     mapSectionsToSectionsWithComponentFiles(config.sections, config);
 
   if (config.contextDependencies) {
-    config.contextDependencies.forEach(d => this.addContextDependency(d));
-  }
-  else {
+    config.contextDependencies.forEach((dependency) => this.addContextDependency(dependency));
+  } else {
     const allComponentFiles = flattenComponentFiles(componentFiles, sectionsWithFiles);
     if (allComponentFiles.length) {
       const contextDir = commonDir(allComponentFiles);
@@ -247,5 +253,10 @@ module.exports.pitch = function() {
     components: processComponentsSource(componentFiles, config),
     sections: processSectionsList(sectionsWithFiles, config),
   });
-  return `module.exports = ${code};`;
+  return `
+  if (module.hot) {
+    module.hot.accept([])
+    }
+
+    module.exports = ${code};`;
 };

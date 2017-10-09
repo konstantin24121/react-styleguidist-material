@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import ui from './ui';
-import sections from './sections';
+import ui from './modules/ui';
+import sections from './modules/sections';
 
 const rootReduser = combineReducers({
   ui,

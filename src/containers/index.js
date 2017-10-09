@@ -8,3 +8,4 @@
 export Main from './Main';
 export Sidebar from './Sidebar';
 export FontSettings from './FontSettings';
+export DocPage from './DocPage';

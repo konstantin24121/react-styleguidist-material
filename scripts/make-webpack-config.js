@@ -187,12 +187,12 @@ module.exports = function(config, env) {
   } else {
     webpackConfig = merge(webpackConfig, {
       entry: [
-        'webpack-hot-middleware/client',
         'react-hot-loader/patch',
+  	  	'webpack-hot-middleware/client',
         entryScript,
       ],
       cache: true,
-      devtool: 'eval',
+      devtool: 'eval-source-map',
       stats: {
         colors: true,
         reasons: true,

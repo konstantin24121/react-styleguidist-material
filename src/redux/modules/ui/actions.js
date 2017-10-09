@@ -1,7 +1,4 @@
-const TYPES = {
-  openSidebar: 'UI_OPEN_SIDEBAR',
-  closeSidebar: 'UI_CLOSE_SIDEBAR',
-};
+import TYPES from './types';
 
 export function openSidebar() {
   return {
@@ -28,5 +25,3 @@ export function toggleSidebar() {
     });
   };
 }
-
-export { TYPES };

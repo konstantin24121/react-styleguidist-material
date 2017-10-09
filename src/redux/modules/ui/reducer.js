@@ -1,4 +1,4 @@
-import { TYPES } from 'sg/actions/ui';
+import TYPES from './types';
 
 const styleguide = require('styleguide!index.js'); // eslint-disable-line
 /*
@@ -11,7 +11,7 @@ const initialState = {
 };
 
 
-export default function (store = initialState, { type, payload }) {
+export default function (store = initialState, { type }) {
   switch (type) {
     case TYPES.openSidebar: {
       return { ...store, sidebarIsOpen: true };

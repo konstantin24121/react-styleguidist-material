@@ -10,10 +10,12 @@ import { Hr } from 'sg/components';
 import { SelectableList, FilteredList, SidebarToggle } from 'sg/compounds';
 import { FontSettings } from 'sg/containers';
 import { withDeviceType } from 'sg/providers/DeviceProvider';
+
+import { ACTIONS as uiActions } from 'sg/redux/modules/ui';
+
 import { Root, Scrollbox, Grid, Header, HeaderGrid,
   trackStyle, thumbStyle, paperStyle,
   filterStyle, scrollbarStyle } from './SidebarStyled';
-import * as uiActions from 'sg/actions/ui';
 
 class Sidebar extends React.PureComponent {
   constructor(props) {

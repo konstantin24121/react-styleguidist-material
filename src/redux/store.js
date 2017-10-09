@@ -22,13 +22,13 @@ if (typeof window === 'object') {
 }
 
 const configureStore = (initialState) => {
-  const rootReducer = require('../reducers').default;
+  const rootReducer = require('./combine').default;
   const store = createStore(rootReducer, initialState, enhancer);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers').default;
+    module.hot.accept('./combine', () => {
+      const nextRootReducer = require('./combine').default;
       store.replaceReducer(nextRootReducer);
     });
   }
