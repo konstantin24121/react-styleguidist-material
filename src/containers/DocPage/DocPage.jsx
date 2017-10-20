@@ -1,16 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { Title, Hr } from 'sg/components';
 import { SELECTORS as sectionsSelectors } from 'sg/redux/modules/sections';
 
-import { Root } from './DocPageStyled';
+import { Root, Grid } from './DocPageStyled';
 
 class DocPage extends React.Component {
   render() {
-    const { location } = this.props;
+    const { location, dockSegment } = this.props;
+    const { name } = dockSegment;
     return (
-      <Root>{location.pathname}</Root>
+      <Root>
+        <Grid>
+          <div>
+            <Title size={3} isThin>{name}</Title>
+          </div>
+          <Hr />
+        </Grid>
+      </Root>
     );
   }
 }

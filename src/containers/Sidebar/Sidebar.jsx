@@ -10,7 +10,7 @@ import { Hr } from 'sg/components';
 import { SelectableList, FilteredList, SidebarToggle } from 'sg/compounds';
 import { FontSettings } from 'sg/containers';
 import { withDeviceType } from 'sg/providers/DeviceProvider';
-
+import { throttle } from 'lodash';
 import { ACTIONS as uiActions } from 'sg/redux/modules/ui';
 
 import { Root, Scrollbox, Grid, Header, HeaderGrid,
@@ -22,7 +22,13 @@ class Sidebar extends React.PureComponent {
     super(props);
     this.state = {
       searchTerm: '',
+      disableTransition: false,
     };
+    this.handleStopTransitionThrottled = throttle(this.handleStopTransition, 300);
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleStopTransitionThrottled);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,6 +37,23 @@ class Sidebar extends React.PureComponent {
         this.props.toggleSidebar();
       }
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleStopTransitionThrottled);
+    this.handleStopTransitionThrottled.cancel();
+  }
+
+  handleStopTransition = () => {
+    this.setState({
+      disableTransition: true,
+    }, () => {
+      setTimeout(() => {
+        this.setState({
+          disableTransition: false,
+        });
+      }, 500);
+    });
   }
 
   handleChangeSearchTerm = (event) => {
@@ -57,10 +80,11 @@ class Sidebar extends React.PureComponent {
 
   render() {
     const { isOpen, sections, device } = this.props;
-    const { searchTerm } = this.state;
+    const { searchTerm, disableTransition } = this.state;
     return (
       <Root
         isOpen={isOpen}
+        disableTransition={disableTransition}
       >
         <Paper style={paperStyle} zDepth={isOpen ? 4 : 0} rounded={false}>
           <Grid>
@@ -98,7 +122,7 @@ class Sidebar extends React.PureComponent {
                         sections={sections}
                         searchTerm={searchTerm}
                       />
-                      <Hr />
+                      <Hr width={'80%'} />
                     </span>
                   )}
                   <SelectableList

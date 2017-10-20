@@ -1,3 +1,7 @@
+const path = require('path');
+const sourceDir = path.resolve(__dirname, 'src');
+const nodeModulesDir = path.resolve(__dirname, '../node_modules');
+
 module.exports = {
   parser: "babel-eslint",
   parserOptions: {
@@ -14,6 +18,7 @@ module.exports = {
     jest: true,
   },
   globals: {
+    styleguide: true,
   },
   "rules": {
     "linebreak-style": 0,
@@ -31,6 +36,7 @@ module.exports = {
     "guard-for-in": 0,
     "no-duplicate-imports": 0,
     "no-param-reassign": [1, { "props": false }],
+    "no-unused-expressions": [1, { "allowTaggedTemplates": true }],
     // React
     "react/jsx-indent": [1, 2],
     "react/prefer-stateless-function": 1,
@@ -62,7 +68,7 @@ module.exports = {
 
     // Import
     // "import/extensions": [2, "never", { "svg": "always", "png": "always" }],
-    "import/prefer-default-export": 1,
+    "import/prefer-default-export": 0,
 
     // jsx-a11y
     "jsx-a11y/no-static-element-interactions": 0,
@@ -70,8 +76,25 @@ module.exports = {
   },
   settings: {
     "import/extensions": ['.js', '.jsx'],
-    "import/core-modules": [ 'baseStyles', 'sg', 'rsg-codemirror-theme.css', 'styleguide'],
+    "import/core-modules": [ 'baseStyles', 'rsg-codemirror-theme.css', 'styleguide'],
     "import/external-module-folders": [ 'utils', 'sg' ],
+    "import/resolver": {
+      webpack: {
+        config: {
+          resolve: {
+            alias: {
+              sg: path.join(sourceDir),
+            },
+            extensions: ['.js', '.jsx', '.json'],
+            modules: [
+              sourceDir,
+              nodeModulesDir,
+              'node_modules',
+            ],
+          }
+        },
+      }
+    }
   },
   plugins: [
     "react", "import", "jsx-a11y", "json", "jest", "babel", "flowtype"

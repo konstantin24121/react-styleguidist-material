@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import DeviceProvider from 'sg/providers/DeviceProvider';
 // Containers
-import { Main } from './containers';
+import { Main } from 'sg/containers';
 
 import 'sg/styles/common';
 import theme from 'sg/styles/theme';

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { media, transition } from 'sg/styles/utils';
-import theme, { modularScale } from 'sg/styles/theme';
+import { media, transition, modularScale, lineScale } from 'sg/styles/utils';
+import theme from 'sg/styles/theme';
 import { stylesConsts as HeaderStyledConsts } from 'sg/compounds/Header';
 
 export const CONSTS = {
@@ -14,12 +14,12 @@ export const Root = styled.div`
   right: 0;
   height: 100%;
   z-index: 100;
-  transform: translateX(${(props) => { return props.isOpen ? '0' : '100%'; }});
-  ${(props) => transition('transform', props.theme)}
+  transform: translateX(${(p) => (p.isOpen ? '0' : '100%')});
+  ${(p) => (!p.disableTransition ? transition('transform', p.theme) : '')}
 
   ${media.desctope`
     right: auto;
-    transform: translateX(${(props) => { return props.isOpen ? '0' : '-100%'; }});
+    transform: translateX(${(p) => (p.isOpen ? '0' : '-100%')});
   `}
 `;
 
@@ -41,13 +41,13 @@ export const Grid = styled.div`
 `;
 
 export const Scrollbox = styled.div`
-  padding-top: ${modularScale(-2)}px;
+  padding-top: ${lineScale(0.5)}px;
   padding-right: 6px;
 `;
 
 export const Header = styled.div`
   height: ${HeaderStyledConsts.headerScale}px;
-  background-color: ${(props) => props.theme.colors.uiPrimary};
+  background-color: ${(p) => p.theme.colors.uiPrimary};
 `;
 
 export const HeaderGrid = styled.div`
@@ -58,7 +58,7 @@ export const HeaderGrid = styled.div`
 
   > *:nth-child(1){
     height: 100%;
-    border-right: 1px solid ${(props) => props.theme.colors.uiLight};
+    border-right: 1px solid ${(p) => p.theme.colors.uiLight};
     display: flex;
     align-items: center;
   }
@@ -82,7 +82,7 @@ export const thumbStyle = {
 export const paperStyle = {
   height: '100%',
   overflow: 'hidden',
-  borderRight: `1px ${theme.colors.uiGradeout} solid`
+  borderRight: `1px ${theme.colors.uiGradeout} solid`,
 };
 
 export const filterStyle = {

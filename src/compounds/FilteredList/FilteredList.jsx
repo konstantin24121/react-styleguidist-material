@@ -17,22 +17,23 @@ class FilteredList extends Component {
     const regExp = getFilterRegExp(searchTerm);
     return sections.reduce(
       (filteredSections, nextSection) => {
+        let nextFilteredSections = [...filteredSections];
         const subComponents = this.getComponents(nextSection.components, searchTerm);
         if (nextSection.sections.length) {
           const filteredSubSections = this.filter(nextSection.sections);
-          filteredSections = filteredSections.concat(filteredSubSections);
+          nextFilteredSections = filteredSections.concat(filteredSubSections);
         }
         if (subComponents.length) {
-          filteredSections = filteredSections.concat(subComponents);
+          nextFilteredSections = filteredSections.concat(subComponents);
         }
         if (regExp.test(nextSection.name)) {
-          filteredSections.push({
+          nextFilteredSections.push({
             ...nextSection,
             components: [],
             sections: [],
           });
         }
-        return filteredSections;
+        return nextFilteredSections;
       }, []);
   }
 

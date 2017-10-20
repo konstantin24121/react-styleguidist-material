@@ -1,12 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { Header } from 'sg/compounds';
 import { Sidebar, DocPage } from 'sg/containers';
 import { ACTIONS as uiActions } from 'sg/redux/modules/ui';
+import { ACTIONS as sectionActions } from 'sg/redux/modules/sections';
 
 import { Root, Box } from './MainStyled';
+
+require('styleguide!index.js'); // eslint-disable-line
 
 class Main extends React.PureComponent {
   static propTypes = {
@@ -16,7 +19,13 @@ class Main extends React.PureComponent {
     title: PropTypes.string.isRequired,
     sidebarIsOpen: PropTypes.bool.isRequired,
     toggleSidebar: PropTypes.func.isRequired,
+    replaceSections: PropTypes.func.isRequired,
   };
+
+
+  componentWillMount() {
+    this.props.replaceSections(styleguide);
+  }
 
   render() {
     const { sidebarIsOpen, title, toggleSidebar } = this.props;
@@ -25,7 +34,7 @@ class Main extends React.PureComponent {
         <Route
           path="/sandbox/:component"
           render={({ match }) => {
-            return (<div>{match.params.component}</div>)
+            return (<div>{match.params.component}</div>);
           }}
         />
         <Route
@@ -57,4 +66,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, uiActions)(Main);
+export default connect(mapStateToProps, { ...uiActions, ...sectionActions })(Main);

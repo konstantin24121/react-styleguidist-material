@@ -18,10 +18,10 @@ const Header = ({ title, sidebarIsOpen, onToggle, device, location }) => {
         </div>
         <div>
           <HeaderTitle>
-            <Title size={5} withoutMargin>
+            <Title size={5} withoutMargin fitInLine>
               {routeLocation}
             </Title>
-            <Title size={5} withoutMargin>
+            <Title size={5} withoutMargin fitInLine>
               {title} {!!routeLocation.length && (<span>-&nbsp;</span>)}
             </Title>
           </HeaderTitle>

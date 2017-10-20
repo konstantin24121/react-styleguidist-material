@@ -17,6 +17,12 @@ export function setComponentsNames(components) {
   return components;
 }
 
+export function fixComponentsPathes(components) {
+  // eslint-disable-next-line no-return-assign
+  components.map((component) => component.path = `/Components${component.path}`);
+  return components;
+}
+
 export function globalizeComponents(components) {
   // eslint-disable-next-line array-callback-return
   components.map((component) => {
@@ -46,11 +52,14 @@ export function flattenChildren(components) {
   });
 }
 
-export function processComponents(components) {
+export function processComponents(components, fixPathes = false) {
   /* eslint-disable no-param-reassign */
   components = flattenChildren(components);
   components = promoteInlineExamples(components);
   components = setComponentsNames(components);
+  if (fixPathes) {
+    components = fixComponentsPathes(components);
+  }
   /* eslint-enable no-param-reassign */
   globalizeComponents(components);
   return components;

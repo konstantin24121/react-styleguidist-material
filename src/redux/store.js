@@ -1,8 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-const styleguide = require('styleguide!index.js'); // eslint-disable-line
-
 const middleware = [
   thunk,
 ];
@@ -11,7 +9,7 @@ let enhancer;
 if (typeof window === 'object') {
   if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      name: styleguide.config.title,
+      // name: styleguide.config.title,
     }) || compose;
     enhancer = composeEnhancers(
       applyMiddleware(...middleware),

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { modularScale } from 'sg/styles/theme';
+import { lineScale } from 'sg/styles/utils';
 
 export const Noresults = styled.div`
-  padding: ${modularScale(0)}px;
-  color: ${(props) => props.theme.colors.textGradeout };
+  padding: ${lineScale(1)}px;
+  color: ${(p) => p.theme.colors.textGradeout};
   font-style: italic;
 `;

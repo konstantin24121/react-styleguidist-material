@@ -190,7 +190,7 @@ function processSection(section, config, parentPath = '') {
  * @param {object} config
  * @returns {string}
  */
-function processSectionsList(sections, config, parentPath) {
+function processSectionsList(sections, config, parentPath = '') {
   if (!sections) {
     return null;
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { DeviceShape } from './Device';
 import { getDisplayName } from 'sg/utils/utils';
+import { DeviceShape } from './Device';
 
 function withDeviceType(WrappedComponent) {
   class WithDeviceType extends Component {

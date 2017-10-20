@@ -70,4 +70,4 @@ injectGlobal`
     font-size: 16px;
     overflow-x: hidden;
   }
-`
+`;

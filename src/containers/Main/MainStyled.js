@@ -7,31 +7,31 @@ export const Root = styled.div`
   min-height: 100vh;
   overflow: hidden;
   display: flex;
+  font-size: ${(p) => p.theme.typography.fontBasis}px;
+  line-height: ${(p) => p.theme.typography.lineHeightBasis};
 `;
 
 export const Box = styled.div`
   flex-basis: 100%;
   position: relative;
   ${media.desctope`
-     padding-left: ${(props) => {
-       return props.sidebarIsOpen ? SidebarStyledConsts.sideBarWidth : 0;
-     }}px;
-     ${(props) => transition('padding-left', props.theme)};
+   padding-left: ${(p) => (p.sidebarIsOpen ? SidebarStyledConsts.sideBarWidth : 0)}px;
+     ${(p) => transition('padding-left', p.theme)};
   `}
 
   &::after {
     content: '';
     display: block;
     position: absolute;
-    visibility: ${(props) => { return props.sidebarIsOpen ? 'visible' : 'hidden'; }};
+    visibility: ${(p) => (p.sidebarIsOpen ? 'visible' : 'hidden')};
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 1;
-    background-color: ${(props) => props.theme.colors.uiDark};
-    opacity: ${(props) => { return props.sidebarIsOpen ? 0.7 : 0; }};
-    ${(props) => transition('opacity', props.theme)};
+    background-color: ${(p) => p.theme.colors.uiDark};
+    opacity: ${(p) => (p.sidebarIsOpen ? 0.7 : 0)};
+    ${(p) => transition('opacity', p.theme)};
     ${media.desctope`
       display: none;
     `}

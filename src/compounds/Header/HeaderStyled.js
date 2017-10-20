@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-import { modularScale } from 'sg/styles/theme';
-import { media } from 'sg/styles/utils';
+import theme from 'sg/styles/theme';
+import { media, modularScale } from 'sg/styles/utils';
 
 export const CONSTS = {
-  headerScale: modularScale(2.5),
+  headerScale: theme.scales.big,
 };
 
 export const Root = styled.header`
@@ -78,4 +78,5 @@ export const HeaderTitle = styled.div`
   flex-direction: row-reverse;
   justify-content: flex-end;
   flex-wrap: wrap;
+  height: 100%;
 `;

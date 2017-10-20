@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import { withRouter } from 'react-router';
-import { getFilterRegExp, filterComponentsByName } from 'sg/utils/utils';
+import { filterComponentsByName } from 'sg/utils/utils';
+import { lineScale } from 'sg/styles/utils';
 
 const SelectableListMaterial = makeSelectable(List);
 
@@ -20,7 +21,7 @@ class SelectableList extends React.PureComponent {
  constructor(props) {
    super(props);
    this.state = {
-     activeItem: null,
+     activeItem: props.location.pathname,
    };
  }
 
@@ -73,6 +74,9 @@ class SelectableList extends React.PureComponent {
        primaryText={section.name}
        initiallyOpen
        nestedItems={this.renderItems(section.subsections || [])}
+       nestedListStyle={{
+         padding: '0',
+       }}
      />
    ));
  }
@@ -81,6 +85,9 @@ class SelectableList extends React.PureComponent {
    const { sections } = this.props;
    return (
      <SelectableListMaterial
+       style={{
+         padding: `0 0 ${lineScale(0.5)}px`,
+       }}
        value={this.state.activeItem}
        onChange={this.handleOnChange}
      >

@@ -11,7 +11,7 @@ class FontSettings extends React.PureComponent {
       <IconButton>
         <TextFormatIcon color={theme.colors.typoInverted} />
       </IconButton>
-    )
+    );
   }
 }
 

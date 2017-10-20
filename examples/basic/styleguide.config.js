@@ -17,7 +17,7 @@ module.exports = {
       content: 'docs/introduction.md',
       sections: [{
         name: 'Welcome',
-        content: 'docs/introduction.md',
+        content: 'docs/welcome.md',
         sections: [{
           name: 'Example',
           content: 'docs/example.md',
