@@ -9,7 +9,7 @@ class FontSettings extends React.PureComponent {
     const { theme } = this.props;
     return (
       <IconButton>
-        <TextFormatIcon color={theme.colors.typoInverted} />
+        <TextFormatIcon color={theme.colors.textInverted} />
       </IconButton>
     );
   }

@@ -73,7 +73,7 @@ export const Grid = styled.div`
 
 export const HeaderTitle = styled.div`
   line-height: ${CONSTS.headerScale}px;
-  color: ${(props) => props.theme.colors.typoInverted};
+  color: ${(props) => props.theme.colors.textInverted};
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;

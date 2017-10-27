@@ -422,12 +422,12 @@ export default function markdownToJSX(markdown, { overrides = {} } = {}) {
     const key = index || '0';
 
     if (ast.type === 'code' && ast.value) {
-      const className = get(overrides, 'pre.props.className');
+      const Component = get(overrides, 'pre.component');
       /* eslint-disable react/no-danger */
       return (
-        <pre key={key} className={className}>
+        <Component key={key}>
           <code className={`lang-${ast.lang}`} dangerouslySetInnerHTML={{ __html: ast.value }} />
-        </pre>
+        </Component>
       );
     }
     /* Refers to fenced blocks, need to create a pre:code nested structure */
@@ -448,24 +448,29 @@ export default function markdownToJSX(markdown, { overrides = {} } = {}) {
 
     if (ast.type === 'listItem') {
       if (ast.checked === true || ast.checked === false) {
+        const Checkbox = get(overrides, 'inputCheckbox.component');
+        const LiFlex = get(overrides, 'LiFlex.component');
         return (
-          <li key={key}>
-            <input
+          <LiFlex key={key}>
+            <Checkbox
               key="checkbox"
-              type="checkbox"
               checked={ast.checked}
               disabled
+              label={ast.children.map(astToJSX)}
+              style={{
+                display: 'inline-block'
+              }}
             />
-            {ast.children.map(astToJSX)}
-          </li>
+          </LiFlex>
         );
       }
       /* gfm task list, need to add a checkbox */
     }
 
     if (ast.type === 'html') {
+      const Component = get(overrides, 'div.component');
       return (
-        <div key={key} dangerouslySetInnerHTML={{ __html: ast.value }} />
+        <Component key={key} dangerouslySetInnerHTML={{ __html: ast.value }} />
       );
     }
     /* arbitrary HTML, do the gross thing for now */
@@ -492,7 +497,7 @@ export default function markdownToJSX(markdown, { overrides = {} } = {}) {
         }
 
         return children;
-      }, [tbody]);
+      }, [tbody])
     }
     /* React yells if things aren't in the proper structure, so need to
       delve into the immediate children and wrap tablerow(s) in a tbody */
@@ -566,6 +571,12 @@ export default function markdownToJSX(markdown, { overrides = {} } = {}) {
     const children = Array.isArray(ast.children)
       ? ast.children.map(astToJSX)
       : ast.children;
+
+    if (ast.type === 'table') {
+      const tableJsx = React.createElement(htmlNodeType, finalProps, ast.value || children);
+      const Wrapper = get(overrides, 'scrolableDiv.component');
+      return (<Wrapper>{tableJsx}</Wrapper>)
+    }
 
     return React.createElement(htmlNodeType, finalProps, ast.value || children);
   }

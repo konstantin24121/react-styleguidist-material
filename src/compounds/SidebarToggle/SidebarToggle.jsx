@@ -7,8 +7,8 @@ import CloseIcon from 'material-ui/svg-icons/navigation/close';
 
 const SidebarToggle = ({ onToggle, theme, isOpen }) => (
   <IconButton onClick={onToggle}>
-    {!isOpen && <MenuIcon color={theme.colors.typoInverted} />}
-    {isOpen && <CloseIcon color={theme.colors.typoInverted} />}
+    {!isOpen && <MenuIcon color={theme.colors.textInverted} />}
+    {isOpen && <CloseIcon color={theme.colors.textInverted} />}
   </IconButton>
 );
 

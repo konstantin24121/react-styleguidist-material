@@ -15,6 +15,7 @@ export function closeSidebar() {
 export function toggleSidebar() {
   return (dispatch, getState) => {
     const sidebarIsOpen = getState().ui.sidebarIsOpen;
+    console.log(sidebarIsOpen);
     if (sidebarIsOpen) {
       return dispatch({
         type: TYPES.closeSidebar,

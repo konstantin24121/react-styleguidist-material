@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { Header } from 'sg/compounds';
 import { Sidebar, DocPage } from 'sg/containers';
 import { ACTIONS as uiActions } from 'sg/redux/modules/ui';
 import { ACTIONS as sectionActions } from 'sg/redux/modules/sections';
-
-import { Root, Box } from './MainStyled';
+import { Root, Box, Content } from './MainStyled';
 
 require('styleguide!index.js'); // eslint-disable-line
 
@@ -30,31 +29,19 @@ class Main extends React.PureComponent {
   render() {
     const { sidebarIsOpen, title, toggleSidebar } = this.props;
     return (
-      <Switch>
-        <Route
-          path="/sandbox/:component"
-          render={({ match }) => {
-            return (<div>{match.params.component}</div>);
-          }}
-        />
-        <Route
-          path="/"
-          render={({ ...props }) => (
-            <Root>
-              <Sidebar isOpen={sidebarIsOpen} />
-              <Box sidebarIsOpen={sidebarIsOpen}>
-                <Header
-                  title={title}
-                  sidebarIsOpen={sidebarIsOpen}
-                  onToggle={toggleSidebar}
-                />
-                <DocPage {...props} />
-              </Box>
-            </Root>
-          )}
-        />
-      </Switch>
-
+      <Root>
+        <Sidebar isOpen={sidebarIsOpen} />
+        <Box sidebarIsOpen={sidebarIsOpen}>
+          <Header
+            title={title}
+            sidebarIsOpen={sidebarIsOpen}
+            onToggle={toggleSidebar}
+          />
+          <Content>
+            <Route component={DocPage} />
+          </Content>
+        </Box>
+      </Root>
     );
   }
 }

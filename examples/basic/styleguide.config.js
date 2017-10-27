@@ -13,7 +13,6 @@ module.exports = {
   sections: [
     {
       name: 'Introduction',
-      mainPage: true,
       content: 'docs/introduction.md',
       sections: [{
         name: 'Welcome',
@@ -26,6 +25,10 @@ module.exports = {
     },
     {
       name: 'UI Components',
+      sections: [{
+        name: 'UI Example',
+        content: 'docs/example.md',
+      }],
       components: 'lib/components/[J-Z]*/[J-Z]*.jsx',
     },
   ],

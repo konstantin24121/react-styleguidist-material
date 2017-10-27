@@ -10,7 +10,7 @@ export const CONSTS = {
 export const Root = styled.div`
   width: 100%;
   max-width: ${CONSTS.sideBarWidth}px;
-  position: absolute;
+  position: fixed;
   right: 0;
   height: 100%;
   z-index: 100;

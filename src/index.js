@@ -9,8 +9,6 @@ import 'baseStyles';
 import { AppContainer } from 'react-hot-loader';
 import createStore from './redux/store';
 
-import './styles/global.css';
-
 // Make libraries available in examples
 global.React = React;
 global._ = _;

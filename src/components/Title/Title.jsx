@@ -2,23 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { propTypes as MyPropTypes } from 'sg/utils';
 
-import { H1, H2, H3, H4, H5, H6 } from './TitleStyled';
+import * as Titles from './TitleStyled';
 
-const Title = ({ size, children, withoutMargin, isThin, fitInLine }) => {
+const Title = ({ size, children, withoutMargin, isThin, fitInLine, hiddenSize }) => {
   const props = {
     isThin,
     withoutMargin,
     fitInLine,
   };
-  switch (size) {
-    case 1: return <H1 {...props}>{children}</H1>;
-    case 2: return <H2 {...props}>{children}</H2>;
-    case 3: return <H3 {...props}>{children}</H3>;
-    case 4: return <H4 {...props}>{children}</H4>;
-    case 5: return <H5 {...props}>{children}</H5>;
-    case 6: return <H6 {...props}>{children}</H6>;
-    default: return null;
+  const Component = Titles[`H${size}`];
+  if (hiddenSize) {
+    const HiddenH = Component.withComponent(`h${hiddenSize}`);
+    return <HiddenH {...props}>{children}</HiddenH>;
   }
+  return <Component {...props}>{children}</Component>;
 };
 
 Title.propTypes = {
@@ -26,6 +23,10 @@ Title.propTypes = {
    * Размер заголовка
    */
   size: MyPropTypes.intRange(1, 6).isRequired,
+  /**
+   * Скрытый размер заголовка, если необходимо использовать симантически другой tag
+   */
+  hiddenSize: MyPropTypes.intRange(0, 6),
   /**
    * Без вертикальных отступов
    */
@@ -43,6 +44,7 @@ Title.propTypes = {
 
 Title.defaultProps = {
   withoutMargin: false,
+  hiddenSize: 0,
   isThin: false,
   fitInLine: false,
 };

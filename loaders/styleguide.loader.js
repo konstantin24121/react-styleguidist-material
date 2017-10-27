@@ -176,6 +176,7 @@ function processSection(section, config, parentPath = '') {
   return toCode({
     name: JSON.stringify(section.name),
     path: section.mainPage ? JSON.stringify('/') : JSON.stringify(currentPath),
+    isMainSection: section.mainPage,
     content: (section.content ?
       requireIt('examples!' + path.resolve(config.configDir, section.content)) : null),
     components: processComponentsSource(section.componentFiles, config, currentPath),

@@ -14,6 +14,7 @@ export const Root = styled.div`
 export const Box = styled.div`
   flex-basis: 100%;
   position: relative;
+  width: 100%;
   ${media.desctope`
    padding-left: ${(p) => (p.sidebarIsOpen ? SidebarStyledConsts.sideBarWidth : 0)}px;
      ${(p) => transition('padding-left', p.theme)};
@@ -36,4 +37,18 @@ export const Box = styled.div`
       display: none;
     `}
   }
+`;
+
+export const Content = styled.div`
+  padding: ${(p) => p.theme.scales.small}px ${(p) => p.theme.scales.small}px;
+  max-width: 850px;
+  margin: 0 auto;
+
+  ${media.handhold`
+    padding: ${(p) => p.theme.scales.small}px;
+  `}
+
+  ${media.desctope`
+    padding: ${(p) => p.theme.scales.medium}px;
+  `}
 `;
