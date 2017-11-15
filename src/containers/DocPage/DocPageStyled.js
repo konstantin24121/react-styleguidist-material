@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from 'styles/theme';
 import { media, lineScale } from 'sg/styles/utils';
 import { lime500 } from 'material-ui/styles/colors';
@@ -48,9 +48,62 @@ export const Grid = styled.div`
   }
 `;
 
+
+export const GridComponent = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto auto;
+  grid-template-areas:
+    "appPath importString"
+    "description description"
+    "props props"
+    "examples examples"
+    "changelog changelog";
+
+  width: 100%;
+  align-items: baseline;
+
+  > *:nth-child(1) {
+    grid-area: appPath;
+  }
+  > *:nth-child(2) {
+    grid-area: importString;
+  }
+  > *:nth-child(3) {
+    grid-area: description;
+  }
+  > *:nth-child(4) {
+    grid-area: props;
+  }
+  > *:nth-child(5) {
+    grid-area: examples;
+  }
+  > *:nth-child(6) {
+    grid-area: changelog;
+  }
+`;
+
 export const Version = styled.span`
   color: ${(p) => p.theme.colors.textGradeout};
   margin-right: ${(p) => p.theme.scales.small}px;
+`;
+
+const applyFirstLine = (p) => css`
+  font-size: ${p.theme.typography.tiny}px;
+  line-height: ${lineScale(1)}px;
+  margin-bottom: ${lineScale(0.5)}px;
+`;
+
+export const ProjectPath = styled.div`
+  color: ${(p) => p.theme.colors.textGradeout};
+  ${applyFirstLine}
+`;
+
+export const ImportString = styled.div`
+  text-align: right;
+  cursor: pointer;
+  color: ${(p) => p.theme.colors.uiPrimary};
+  ${applyFirstLine};
 `;
 
 export const iconBtnStyles = {

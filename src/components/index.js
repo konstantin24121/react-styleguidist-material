@@ -7,3 +7,5 @@
 
 export Title from './Title';
 export Hr from './Hr';
+export P from './P';
+export Markdown from './Markdown';

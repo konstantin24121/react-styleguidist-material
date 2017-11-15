@@ -2,6 +2,6 @@ examples/**/styleguide/build
 examples/**/styleguide/index.html
 .publish/
 node_modules/
-Changelog.md
+/сhangelog.md
 
 npm-debug.log

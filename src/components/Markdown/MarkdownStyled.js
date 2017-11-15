@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
-import { lineScale, media } from 'sg/styles/utils';
+import { lineScale } from 'sg/styles/utils';
 import { Styled as TitleStyled } from 'sg/components/Title';
 import { Hr } from 'sg/components';
+import { P } from 'sg/components';
 
 const base = styled.span`
   line-height: ${lineScale(1)}px;
@@ -45,8 +46,6 @@ const reset = css`
   display: block;
   box-sizing: border-box;
 `;
-
-export const p = base.withComponent('p');
 
 export const a = styled.a`
   color: ${(props) => props.theme.colors.textPrimary};
@@ -157,3 +156,4 @@ export const h2 = TitleStyled.H2;
 export const h3 = TitleStyled.H3;
 export const h4 = TitleStyled.H4;
 export const h5 = TitleStyled.H5;
+export const p = P;
