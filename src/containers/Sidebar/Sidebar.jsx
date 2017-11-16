@@ -71,7 +71,7 @@ class Sidebar extends React.PureComponent {
             <SidebarToggle onToggle={toggleSidebar} isOpen={sidebarIsOpen} />
           </div>
           <div>
-            {!device.matchDevice('HANDHOLD') && <FontSettings />}
+            {!device.matchDevice('HANDHOLD') && <FontSettings enableDialog />}
           </div>
         </HeaderGrid>
       </Header>

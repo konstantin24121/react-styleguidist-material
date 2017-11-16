@@ -13,6 +13,9 @@
         "sg/utils": {
           "transform": "sg/utils/${member}",
         },
+        "materual-ui": {
+          "transform": "materual-ui/${member}",
+        },
     }],
 
 	]

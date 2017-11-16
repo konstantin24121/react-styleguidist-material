@@ -158,8 +158,8 @@ class ComponentRenderer extends React.Component {
             <div>
               <P>{props.description}</P>
             </div>
-            <div>props</div>
-            <div>examples</div>
+            <div><P>props</P></div>
+            <div><P>examples</P></div>
             <div>
               {changelog && this.renderChangelog()}
             </div>

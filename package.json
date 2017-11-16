@@ -85,7 +85,7 @@
     "react-docgen-displayname-handler": "1.0.0",
     "react-dom": "^16.0.0",
     "react-group": "^1.0.5",
-    "react-hot-loader": "next",
+    "react-hot-loader": "^3.0.0",
     "react-redux": "^5.0.5",
     "react-resizable-box": "^2.0.6",
     "react-responsive-decorator": "^0.0.1",

@@ -28,7 +28,7 @@ const rawTheme = {
   fontFamilies: {
     base: '"Roboto", sans-serif',
     sans: '"Roboto", sans-serif',
-    sansSerif: '"Roboto", sans-serif',
+    serif: '"Roboto Slab", serif',
     monospace: 'Consolas, "Liberation Mono", Menlo, monospace',
   },
   other: {

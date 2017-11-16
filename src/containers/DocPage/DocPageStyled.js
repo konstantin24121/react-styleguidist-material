@@ -102,7 +102,7 @@ export const ProjectPath = styled.div`
 export const ImportString = styled.div`
   text-align: right;
   cursor: pointer;
-  color: ${(p) => p.theme.colors.uiPrimary};
+  color: ${(p) => p.theme.colors.textPrimary};
   ${applyFirstLine};
 `;
 
