@@ -3,8 +3,13 @@ import theme from 'styles/theme';
 import { media, lineScale } from 'sg/styles/utils';
 import { lime500 } from 'material-ui/styles/colors';
 
-export const Root = styled.div`
+const applyRootStyles = (p) => css`
+  font-family: ${p.fontStyle === 'sans' ? p.theme.fontFamilies.sans : p.theme.fontFamilies.serif};
+  zoom: ${p.textSize};
+`;
 
+export const Root = styled.div`
+  ${applyRootStyles}
 `;
 
 export const Grid = styled.div`

@@ -15,7 +15,6 @@ export function closeSidebar() {
 export function toggleSidebar() {
   return (dispatch, getState) => {
     const sidebarIsOpen = getState().ui.sidebarIsOpen;
-    console.log(sidebarIsOpen);
     if (sidebarIsOpen) {
       return dispatch({
         type: TYPES.closeSidebar,
@@ -24,5 +23,12 @@ export function toggleSidebar() {
     return dispatch({
       type: TYPES.openSidebar,
     });
+  };
+}
+
+export function changeUiParams(uiParams) {
+  return {
+    type: TYPES.changeParams,
+    payload: uiParams,
   };
 }

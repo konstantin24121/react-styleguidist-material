@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { IconButton, IconMenu, MenuItem, Divider, Dialog, Menu, FlatButton } from 'material-ui';
+import { IconButton, IconMenu, MenuItem, Divider, Dialog, Menu, FlatButton, FontIcon } from 'material-ui';
 import TextFormatIcon from 'material-ui/svg-icons/content/text-format';
 import BrightnessLowIcon from 'material-ui/svg-icons/image/brightness-3';
 import BrightnessMediumIcon from 'material-ui/svg-icons/image/brightness-6';
 import BrightnessHighIcon from 'material-ui/svg-icons/image/brightness-5';
 import TextIcon from 'material-ui/svg-icons/editor/title';
-import FontIcon from 'material-ui/FontIcon';
 import { withTheme } from 'styled-components';
+import { connect } from 'react-redux';
+import { ACTIONS } from 'sg/redux/modules/ui';
 import { smallIcon, sans, serif, activeIcon } from './FontSettingsStyled';
 
 class FontSettings extends React.PureComponent {
@@ -26,18 +27,77 @@ class FontSettings extends React.PureComponent {
     this.setState({ dialogOpen: false });
   };
 
+  handleChangeUIParams = (uiParams) => () => {
+    this.props.changeUiParams(uiParams);
+  }
+
   renderMenuItems() {
-    const { theme } = this.props;
+    const { theme, textSize, fontStyle, mod } = this.props;
+
     return [
-      <MenuItem primaryText="Standart text size" leftIcon={<TextIcon color={theme.colors.uiPrimary} style={smallIcon} />} />,
-      <MenuItem primaryText="Big text size" leftIcon={<TextIcon />} />,
-      <Divider />,
-      <MenuItem primaryText="Sans font" leftIcon={<FontIcon style={{ ...sans, ...activeIcon }}>A</FontIcon>} />,
-      <MenuItem primaryText="Serif font" leftIcon={<FontIcon style={serif}>A</FontIcon>} />,
-      <Divider />,
-      <MenuItem primaryText="Day mode" leftIcon={<BrightnessHighIcon color={theme.colors.uiPrimary} />} />,
-      <MenuItem primaryText="Sepia mode" leftIcon={<BrightnessMediumIcon />} />,
-      <MenuItem primaryText="Night mode" leftIcon={<BrightnessLowIcon />} />,
+      <MenuItem
+        key="textSizeStandart"
+        primaryText="Standart text size"
+        leftIcon={
+          <TextIcon
+            color={textSize === 1 ? theme.colors.uiPrimary : null}
+            style={smallIcon}
+          />
+        }
+        onClick={this.handleChangeUIParams({ textSize: 1 })}
+      />,
+      <MenuItem
+        key="textSizeBig"
+        primaryText="Big text size"
+        leftIcon={
+          <TextIcon color={textSize > 1 ? theme.colors.uiPrimary : null} />
+        }
+        onClick={this.handleChangeUIParams({ textSize: 1.4 })}
+      />,
+      <Divider key="deviderOne" />,
+      <MenuItem
+        key="fontStyleSerif"
+        primaryText="Serif font"
+        leftIcon={
+          <FontIcon style={fontStyle === 'serif' ? { ...serif, ...activeIcon } : serif}>A</FontIcon>
+        }
+        onClick={this.handleChangeUIParams({ fontStyle: 'serif' })}
+      />,
+      <MenuItem
+        key="fontStyleSans"
+        primaryText="Sans font"
+        leftIcon={
+          <FontIcon style={fontStyle === 'sans' ? { ...sans, ...activeIcon } : sans}>
+            A
+          </FontIcon>
+        }
+        onClick={this.handleChangeUIParams({ fontStyle: 'sans' })}
+      />,
+      <Divider key="deviderTwo" />,
+      <MenuItem
+        key="dayMode"
+        primaryText="Day mod"
+        leftIcon={
+          <BrightnessHighIcon color={mod === 'day' ? theme.colors.uiPrimary : null} />
+        }
+        onClick={this.handleChangeUIParams({ mod: 'day' })}
+      />,
+      <MenuItem
+        key="sepiaMod"
+        primaryText="Sepia mod"
+        leftIcon={
+          <BrightnessMediumIcon color={mod === 'sepia' ? theme.colors.uiPrimary : null} />
+        }
+        onClick={this.handleChangeUIParams({ mod: 'sepia' })}
+      />,
+      <MenuItem
+        key="nightMod"
+        primaryText="Night mod"
+        leftIcon={
+          <BrightnessLowIcon color={mod === 'night' ? theme.colors.uiPrimary : null} />
+        }
+        onClick={this.handleChangeUIParams({ mod: 'night' })}
+      />,
     ];
   }
 
@@ -99,11 +159,25 @@ FontSettings.propTypes = {
   /*
     Connected
    */
+  textSize: PropTypes.number.isRequired,
+  fontStyle: PropTypes.oneOf(['sans', 'serif']).isRequired,
+  mod: PropTypes.oneOf(['day', 'sepia', 'night']).isRequired,
   theme: PropTypes.any.isRequired,
+  changeUiParams: PropTypes.func.isRequired,
 };
 
 FontSettings.defaultProps = {
   enableDialog: false,
 };
 
-export default withTheme(FontSettings);
+const mapStateToProps = (store) => ({
+  textSize: store.ui.textSize,
+  fontStyle: store.ui.fontStyle,
+  mod: store.ui.mod,
+});
+
+const containerActions = {
+  changeUiParams: ACTIONS.changeUiParams,
+};
+
+export default connect(mapStateToProps, containerActions)(withTheme(FontSettings));

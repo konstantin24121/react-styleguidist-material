@@ -5,14 +5,13 @@ import { Hr } from 'sg/components';
 import { P } from 'sg/components';
 
 const base = styled.span`
-  line-height: ${lineScale(1)}px;
+  line-height: ${lineScale(1.5)}px;
   margin: ${lineScale(1)}px 0;
 `;
 
 export const Root = base.withComponent('div').extend`
-  font-family: ${(props) => props.theme.fontFamilies.base};
+  font-family: inherit;
   margin: 0;
-  zoom: 1;
 `;
 
 export const span = base;
@@ -85,8 +84,10 @@ export const ul = base.withComponent('ul').extend`
 
   li {
     margin: ${lineScale(0.5)}px 0;
+    line-height: ${lineScale(1)}px;
   }
 `;
+
 export const ol = ul.withComponent('ol');
 export const pre = base.withComponent('pre').extend`
   padding: ${lineScale(0.5)}px;

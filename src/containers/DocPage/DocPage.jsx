@@ -8,7 +8,7 @@ import SectionRenderer from './SectionRenderer';
 import ComponentRenderer from './ComponentRenderer';
 import { Root } from './DocPageStyled';
 
-const DocPage = ({ location, dockSegment, device }) => {
+const DocPage = ({ location, dockSegment, device, fontStyle, textSize }) => {
   if (!dockSegment) {
     return (
       <Redirect
@@ -21,9 +21,11 @@ const DocPage = ({ location, dockSegment, device }) => {
   }
   const { props } = dockSegment;
   return (
-    <Root>
+    <Root fontStyle={fontStyle} textSize={textSize} >
       {!props && <SectionRenderer dockSegment={dockSegment} />}
-      {!!props && <ComponentRenderer dockSegment={dockSegment} device={device} />}
+      {!!props && (
+        <ComponentRenderer dockSegment={dockSegment} device={device} />
+      )}
     </Root>
   );
 };
@@ -35,11 +37,15 @@ DocPage.propTypes = {
   device: PropTypes.any.isRequired,
   location: PropTypes.object.isRequired,
   dockSegment: PropTypes.object.isRequired,
+  fontStyle: PropTypes.string.isRequired,
+  textSize: PropTypes.number.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     dockSegment: sectionsSelectors.getActiveSection(state, ownProps),
+    fontStyle: state.ui.fontStyle,
+    textSize: state.ui.textSize,
   };
 }
 

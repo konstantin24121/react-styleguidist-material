@@ -39,6 +39,8 @@
 
 Так же есть консольная утилита, запустить ее можно командой `yarn flow`.
 
+<img height="240" src="https://octodex.github.com/images/yaktocat.png" />
+
 ### [Stylelint](https://stylelint.io/)
 
 Линтинг pcss/css кода, показывает ошибки в стилях, дает советы по стилю написания, основывающийся на пресете stylelint-config-standard. Соблюдать стиль написания стилей это обязательное требование.
