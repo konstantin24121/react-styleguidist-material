@@ -5,7 +5,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { ThemeProvider } from 'styled-components';
 import DeviceProvider from 'sg/providers/DeviceProvider';
 import AppRouter from 'sg/providers/Router';
-
 import 'sg/styles/common';
 import theme from 'sg/styles/theme';
 

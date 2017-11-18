@@ -56,14 +56,6 @@ class FontSettings extends React.PureComponent {
       />,
       <Divider key="deviderOne" />,
       <MenuItem
-        key="fontStyleSerif"
-        primaryText="Serif font"
-        leftIcon={
-          <FontIcon style={fontStyle === 'serif' ? { ...serif, ...activeIcon } : serif}>A</FontIcon>
-        }
-        onClick={this.handleChangeUIParams({ fontStyle: 'serif' })}
-      />,
-      <MenuItem
         key="fontStyleSans"
         primaryText="Sans font"
         leftIcon={
@@ -72,6 +64,14 @@ class FontSettings extends React.PureComponent {
           </FontIcon>
         }
         onClick={this.handleChangeUIParams({ fontStyle: 'sans' })}
+      />,
+      <MenuItem
+        key="fontStyleSerif"
+        primaryText="Serif font"
+        leftIcon={
+          <FontIcon style={fontStyle === 'serif' ? { ...serif, ...activeIcon } : serif}>A</FontIcon>
+        }
+        onClick={this.handleChangeUIParams({ fontStyle: 'serif' })}
       />,
       <Divider key="deviderTwo" />,
       <MenuItem
@@ -84,11 +84,11 @@ class FontSettings extends React.PureComponent {
       />,
       <MenuItem
         key="sepiaMod"
-        primaryText="Sepia mod"
+        primaryText="Bluelight filter"
         leftIcon={
-          <BrightnessMediumIcon color={mod === 'sepia' ? theme.colors.uiPrimary : null} />
+          <BrightnessMediumIcon color={mod === 'bluefilter' ? theme.colors.uiPrimary : null} />
         }
-        onClick={this.handleChangeUIParams({ mod: 'sepia' })}
+        onClick={this.handleChangeUIParams({ mod: 'bluefilter' })}
       />,
       <MenuItem
         key="nightMod"
@@ -161,7 +161,7 @@ FontSettings.propTypes = {
    */
   textSize: PropTypes.number.isRequired,
   fontStyle: PropTypes.oneOf(['sans', 'serif']).isRequired,
-  mod: PropTypes.oneOf(['day', 'sepia', 'night']).isRequired,
+  mod: PropTypes.oneOf(['day', 'bluefilter', 'night']).isRequired,
   theme: PropTypes.any.isRequired,
   changeUiParams: PropTypes.func.isRequired,
 };

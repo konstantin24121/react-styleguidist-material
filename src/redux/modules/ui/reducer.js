@@ -9,7 +9,7 @@ const styleguide = require('styleguide!index.js'); // eslint-disable-line
 const initialState = {
   sidebarIsOpen: false,
   textSize: 1,
-  fontStyle: 'serif',
+  fontStyle: 'sans',
   mod: 'day',
   ...styleguide.config,
 };

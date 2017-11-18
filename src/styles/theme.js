@@ -11,6 +11,7 @@ const rawTheme = {
     desctope: 'min-width: 980px',
   },
   colors: {
+    background: 'white',
     main: cyan300,
     uiLight: grey100,
     uiPrimary: cyan300,
