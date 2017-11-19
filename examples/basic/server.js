@@ -1,17 +1,11 @@
 /* eslint-disable */
-const path = require('path');
-const express = require('express');
+const express = require('express')
+const path = require('path')
+const PORT = process.env.PORT || 5000
 
-const server = express();
-
-const port = 5000;
-const context = process.cwd();
-
-server.use(express.static(path.join(context, 'examples/basic/styleguide')));
-server.listen(port, function (err) {
-  if (err) {
-    return console.error(err);
-  }
-
-  console.info(`=> 💻  Listening on ${port}`);
-});
+express()
+  .use(express.static(path.join(context, 'examples/basic/styleguide')))
+  .get('*', function (req, res) {
+    res.sendFile(path.join(context, 'examples/basic/styleguide/index.html'));
+  })
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
