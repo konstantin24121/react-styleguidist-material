@@ -4,8 +4,8 @@
   "description": "React components style guide generator",
   "homepage": "https://github.com/konstantin24121/react-styleguidist-material",
   "scripts": {
+    "postinstall": "npm run build",
     "start": "node bin/styleguidist.js server --config examples/basic/styleguide.config.js",
-    "exampleProd": "npm run build && node examples/basic/server.js",
     "lint": "npm run eslint & npm run stylelint",
     "stylelint": "stylelint src/**/*.css",
     "eslint": "eslint --ext .jsx --ext .js src",

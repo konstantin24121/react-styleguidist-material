@@ -1,1 +1,1 @@
-web: npm run exampleProd
+web: node examples/basic/server.js
