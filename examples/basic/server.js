@@ -2,6 +2,7 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
+const context = process.cwd();
 
 express()
   .use(express.static(path.join(context, 'examples/basic/styleguide')))
