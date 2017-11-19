@@ -62,11 +62,6 @@ module.exports = {
             loader: 'postcss-loader',
           },
         ],
-      },
-      {
-        test: /\.json$/,
-        include: path.dirname(require.resolve('dog-names/package.json')),
-        use: 'json',
       }
     );
     return webpackConfig;
