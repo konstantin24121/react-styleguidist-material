@@ -4,7 +4,7 @@ const express = require('express');
 
 const server = express();
 
-const port = 3000;
+const port = 5000;
 const context = process.cwd();
 
 server.use(express.static(path.join(context, 'examples/basic/styleguide')));
