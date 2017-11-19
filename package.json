@@ -3,24 +3,14 @@
   "version": "4.4.6",
   "description": "React components style guide generator",
   "homepage": "https://github.com/konstantin24121/react-styleguidist-material",
-  "author": {
-    "name": "Artem Sapegin",
-    "url": "http://sapegin.me/"
+  "scripts": {
+    "start": "node bin/styleguidist.js server --config examples/basic/styleguide.config.js",
+    "exampleProd": "npm run build && node examples/basic/server.js",
+    "lint": "npm run eslint & npm run stylelint",
+    "stylelint": "stylelint src/**/*.css",
+    "eslint": "eslint --ext .jsx --ext .js src",
+    "build": "node bin/styleguidist.js build --config examples/basic/styleguide.config.js"
   },
-  "contributors": [
-    {
-      "name": "Konstantin Cherkasov",
-      "email": "konstantin24121@gmail.com"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/konstantin24121/react-styleguidist-material.git"
-  },
-  "bugs": {
-    "url": "https://github.com/konstantin24121/react-styleguidist-material/issues"
-  },
-  "license": "MIT",
   "main": "scripts/index.js",
   "bin": {
     "styleguidist": "bin/styleguidist.js"
@@ -136,13 +126,24 @@
     "eslint-plugin-react": "^7.1.0",
     "webpack": "^3.4.1"
   },
-  "scripts": {
-    "start": "node bin/styleguidist.js server --config examples/basic/styleguide.config.js",
-    "lint": "npm run eslint & npm run stylelint",
-    "stylelint": "stylelint src/**/*.css",
-    "eslint": "eslint --ext .jsx --ext .js src",
-    "build": "node bin/styleguidist.js build --config examples/basic/styleguide.config.js"
+  "author": {
+    "name": "Artem Sapegin",
+    "url": "http://sapegin.me/"
   },
+  "contributors": [
+    {
+      "name": "Konstantin Cherkasov",
+      "email": "konstantin24121@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/konstantin24121/react-styleguidist-material.git"
+  },
+  "bugs": {
+    "url": "https://github.com/konstantin24121/react-styleguidist-material/issues"
+  },
+  "license": "MIT",
   "keywords": [
     "react",
     "jsx",
