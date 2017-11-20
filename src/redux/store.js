@@ -6,15 +6,13 @@ const middleware = [
 ];
 
 let enhancer;
-if (typeof window === 'object') {
-  if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
-    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      // name: styleguide.config.title,
-    }) || compose;
-    enhancer = composeEnhancers(
-      applyMiddleware(...middleware),
-    );
-  }
+if (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    // name: styleguide.config.title,
+  }) || compose;
+  enhancer = composeEnhancers(
+    applyMiddleware(...middleware),
+  );
 } else {
   enhancer = applyMiddleware(...middleware);
 }
