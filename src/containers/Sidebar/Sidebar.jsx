@@ -18,6 +18,8 @@ import { Root, Scrollbox, Grid, Header, HeaderGrid,
   filterStyle, scrollbarStyle } from './SidebarStyled';
 
 class Sidebar extends React.PureComponent {
+  static touchstartX = 0;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -28,10 +30,20 @@ class Sidebar extends React.PureComponent {
   }
 
   componentDidMount() {
+    if (this.props.isOpen && !this.props.device.matchDevice('HANDHOLD')) {
+      document.addEventListener('click', this.handleCloseSidebar);
+    }
     window.addEventListener('resize', this.handleStopTransitionThrottled);
+    document.addEventListener('touchstart', this.handleSwipeStart, false);
+    document.addEventListener('touchend', this.handleSwipeEnd, false);
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.isOpen && !nextProps.device.matchDevice('HANDHOLD')) {
+      document.addEventListener('click', this.handleCloseSidebar);
+    } else {
+      document.removeEventListener('click', this.handleCloseSidebar);
+    }
     if (nextProps.location !== this.props.location) {
       if (!nextProps.device.matchDevice('DESCTOPE')) {
         this.props.toggleSidebar();
@@ -41,6 +53,9 @@ class Sidebar extends React.PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleStopTransitionThrottled);
+    document.removeEventListener('click', this.handleCloseSidebar);
+    document.removeEventListener('touchstart', this.handleSwipeStart, false);
+    document.removeEventListener('touchend', this.handleSwipeEnd, false);
     this.handleStopTransitionThrottled.cancel();
   }
 
@@ -54,6 +69,26 @@ class Sidebar extends React.PureComponent {
         });
       }, 500);
     });
+  }
+
+  handleCloseSidebar = (event) => {
+    if (this.rootRef.contains(event.target)) return false;
+    return this.props.closeSidebar();
+  }
+
+  handleSwipeStart = (event) => {
+    this.touchstartX = event.changedTouches[0].screenX;
+  }
+
+  handleSwipeEnd = (event) => {
+    const touchendX = event.changedTouches[0].screenX;
+    const swipeDiff = Math.abs(touchendX) - Math.abs(this.touchstartX);
+    if (swipeDiff > 100) {
+      this.props.openSidebar();
+    }
+    if (swipeDiff < -100) {
+      this.props.closeSidebar();
+    }
   }
 
   handleChangeSearchTerm = (event) => {
@@ -83,6 +118,7 @@ class Sidebar extends React.PureComponent {
     const { searchTerm, disableTransition } = this.state;
     return (
       <Root
+        innerRef={(node) => { this.rootRef = node; }}
         isOpen={isOpen}
         disableTransition={disableTransition}
       >
@@ -149,6 +185,8 @@ Sidebar.propTypes = {
   sections: PropTypes.any.isRequired,
   sidebarIsOpen: PropTypes.bool.isRequired,
   toggleSidebar: PropTypes.func.isRequired,
+  openSidebar: PropTypes.func.isRequired,
+  closeSidebar: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => (
