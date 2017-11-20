@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { RootStyles } from 'sg/containers';
 import { ThemeProvider } from 'styled-components';
 import DeviceProvider from 'sg/providers/DeviceProvider';
 import AppRouter from 'sg/providers/Router';
@@ -32,7 +33,9 @@ export default function Root({ store, codeKey }) {
       <MuiThemeProvider>
         <ThemeProvider theme={theme}>
           <DeviceProvider deviceTypes={deviceTypes}>
-            <AppRouter />
+            <RootStyles>
+              <AppRouter />
+            </RootStyles>
           </DeviceProvider>
         </ThemeProvider>
       </MuiThemeProvider>
