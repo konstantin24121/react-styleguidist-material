@@ -30,7 +30,11 @@ class Sidebar extends React.PureComponent {
   }
 
   componentDidMount() {
-    if (this.props.isOpen && !this.props.device.matchDevice('HANDHOLD')) {
+    if (
+      this.props.sidebarIsOpen &&
+      !this.props.settingsDialogIsOpen &&
+      !this.props.device.matchDevice('HANDHOLD')
+    ) {
       document.addEventListener('click', this.handleCloseSidebar);
     }
     window.addEventListener('resize', this.handleStopTransitionThrottled);
@@ -39,7 +43,11 @@ class Sidebar extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isOpen && !nextProps.device.matchDevice('HANDHOLD')) {
+    if (
+      nextProps.sidebarIsOpen &&
+      !nextProps.settingsDialogIsOpen &&
+      !nextProps.device.matchDevice('HANDHOLD')
+    ) {
       document.addEventListener('click', this.handleCloseSidebar);
     } else {
       document.removeEventListener('click', this.handleCloseSidebar);
@@ -83,10 +91,11 @@ class Sidebar extends React.PureComponent {
   handleSwipeEnd = (event) => {
     const touchendX = event.changedTouches[0].screenX;
     const swipeDiff = Math.abs(touchendX) - Math.abs(this.touchstartX);
-    if (swipeDiff > 100) {
+    if (Math.abs(swipeDiff) < 100) return;
+    if (swipeDiff > 0) {
       this.props.openSidebar();
     }
-    if (swipeDiff < -100) {
+    if (swipeDiff < 0) {
       this.props.closeSidebar();
     }
   }
@@ -114,15 +123,15 @@ class Sidebar extends React.PureComponent {
   }
 
   render() {
-    const { isOpen, sections, device } = this.props;
+    const { sidebarIsOpen, sections, device } = this.props;
     const { searchTerm, disableTransition } = this.state;
     return (
       <Root
         innerRef={(node) => { this.rootRef = node; }}
-        isOpen={isOpen}
+        isOpen={sidebarIsOpen}
         disableTransition={disableTransition}
       >
-        <Paper style={paperStyle} zDepth={isOpen ? 4 : 0} rounded={false}>
+        <Paper style={paperStyle} zDepth={sidebarIsOpen ? 4 : 0} rounded={false}>
           <Grid>
             <div>
               {!device.matchDevice('DESCTOPE') && this.renderMobileHeader()}
@@ -175,15 +184,12 @@ class Sidebar extends React.PureComponent {
 }
 
 Sidebar.propTypes = {
-  /**
-   * Sidebar is open?
-   */
-  isOpen: PropTypes.bool.isRequired,
   // Connected
   location: PropTypes.object.isRequired,
   device: PropTypes.any.isRequired,
   sections: PropTypes.any.isRequired,
   sidebarIsOpen: PropTypes.bool.isRequired,
+  settingsDialogIsOpen: PropTypes.bool.isRequired,
   toggleSidebar: PropTypes.func.isRequired,
   openSidebar: PropTypes.func.isRequired,
   closeSidebar: PropTypes.func.isRequired,
@@ -193,6 +199,7 @@ const mapStateToProps = (state) => (
   {
     sections: state.sections.sections,
     sidebarIsOpen: state.ui.sidebarIsOpen,
+    settingsDialogIsOpen: state.ui.settingsDialogIsOpen,
   }
 );
 

@@ -56,17 +56,30 @@ export const Grid = styled.div`
 
 export const GridComponent = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: 1fr auto auto;
   grid-template-areas:
-    "appPath importString"
-    "description description"
-    "props props"
-    "examples examples"
-    "changelog changelog";
+    "appPath"
+    "importString"
+    "description"
+    "props"
+    "examples"
+    "changelog";
 
   width: 100%;
   align-items: baseline;
+
+
+  ${media.tablet`
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto auto;
+    grid-template-areas:
+      "appPath importString"
+      "description description"
+      "props props"
+      "examples examples"
+      "changelog changelog";
+  `}
 
   > *:nth-child(1) {
     grid-area: appPath;
@@ -101,14 +114,19 @@ const applyFirstLine = (p) => css`
 
 export const ProjectPath = styled.div`
   color: ${(p) => p.theme.colors.textGradeout};
+  word-break: break-all;
   ${applyFirstLine}
 `;
 
 export const ImportString = styled.div`
-  text-align: right;
   cursor: pointer;
   color: ${(p) => p.theme.colors.textPrimary};
+  word-break: break-all;
   ${applyFirstLine};
+
+  ${media.tablet`
+    text-align: right;
+  `}
 `;
 
 export const iconBtnStyles = {

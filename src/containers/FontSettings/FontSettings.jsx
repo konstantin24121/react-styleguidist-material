@@ -12,21 +12,6 @@ import { ACTIONS } from 'sg/redux/modules/ui';
 import { smallIcon, sans, serif, activeIcon } from './FontSettingsStyled';
 
 class FontSettings extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dialogOpen: false,
-    };
-  }
-
-  handleOpen = () => {
-    this.setState({ dialogOpen: true });
-  };
-
-  handleClose = () => {
-    this.setState({ dialogOpen: false });
-  };
-
   handleChangeUIParams = (uiParams) => () => {
     this.props.changeUiParams(uiParams);
   }
@@ -108,16 +93,16 @@ class FontSettings extends React.PureComponent {
         label="Ok"
         primary
         keyboardFocused
-        onClick={this.handleClose}
+        onClick={this.props.closeSettingsDialog}
       />,
     ];
     return (
-      <IconButton onClick={this.handleOpen}>
+      <IconButton onClick={this.props.openSettingsDialog}>
         <TextFormatIcon color={theme.colors.textInverted} />
         <Dialog
           actions={actions}
           modal={false}
-          open={this.state.dialogOpen}
+          open={this.props.settingsDialogIsOpen}
           onRequestClose={this.handleClose}
           bodyStyle={{ padding: 0 }}
         >
@@ -159,11 +144,14 @@ FontSettings.propTypes = {
   /*
     Connected
    */
+  settingsDialogIsOpen: PropTypes.bool.isRequired,
   textSize: PropTypes.number.isRequired,
   fontStyle: PropTypes.oneOf(['sans', 'serif']).isRequired,
   mod: PropTypes.oneOf(['day', 'bluefilter', 'night']).isRequired,
   theme: PropTypes.any.isRequired,
   changeUiParams: PropTypes.func.isRequired,
+  closeSettingsDialog: PropTypes.func.isRequired,
+  openSettingsDialog: PropTypes.func.isRequired,
 };
 
 FontSettings.defaultProps = {
@@ -171,6 +159,7 @@ FontSettings.defaultProps = {
 };
 
 const mapStateToProps = (store) => ({
+  settingsDialogIsOpen: store.ui.settingsDialogIsOpen,
   textSize: store.ui.textSize,
   fontStyle: store.ui.fontStyle,
   mod: store.ui.mod,
@@ -178,6 +167,8 @@ const mapStateToProps = (store) => ({
 
 const containerActions = {
   changeUiParams: ACTIONS.changeUiParams,
+  closeSettingsDialog: ACTIONS.closeSettingsDialog,
+  openSettingsDialog: ACTIONS.openSettingsDialog,
 };
 
 export default connect(mapStateToProps, containerActions)(withTheme(FontSettings));

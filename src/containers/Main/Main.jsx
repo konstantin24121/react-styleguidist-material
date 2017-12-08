@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { Header } from 'sg/compounds';
+import { Header, BackTop } from 'sg/compounds';
 import { Sidebar, DocPage } from 'sg/containers';
 import { ACTIONS as uiActions } from 'sg/redux/modules/ui';
 import { ACTIONS as sectionActions } from 'sg/redux/modules/sections';
@@ -27,10 +27,10 @@ class Main extends React.PureComponent {
   }
 
   render() {
-    const { sidebarIsOpen, title, toggleSidebar } = this.props;
+    const { title, toggleSidebar, sidebarIsOpen } = this.props;
     return (
       <Root>
-        <Sidebar isOpen={sidebarIsOpen} />
+        <Sidebar />
         <Box sidebarIsOpen={sidebarIsOpen}>
           <Header
             title={title}
@@ -40,6 +40,7 @@ class Main extends React.PureComponent {
           <Content>
             <Route component={DocPage} />
           </Content>
+          <BackTop isShifted={sidebarIsOpen} />
         </Box>
       </Root>
     );

@@ -33,7 +33,8 @@ const rawTheme = {
     monospace: 'Consolas, "Liberation Mono", Menlo, monospace',
   },
   other: {
-    transitionDelay: '300ms',
+    transitionDelay: '0ms',
+    transitionDuration: '300ms',
     transitionFunction: 'cubic-bezier(0.23, 1, 0.32, 1)',
   },
 };

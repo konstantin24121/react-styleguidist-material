@@ -2,13 +2,37 @@ import TYPES from './types';
 
 export function openSidebar() {
   return {
-    type: TYPES.openSidebar,
+    type: TYPES.changeParams,
+    payload: {
+      sidebarIsOpen: true,
+    },
   };
 }
 
 export function closeSidebar() {
   return {
-    type: TYPES.closeSidebar,
+    type: TYPES.changeParams,
+    payload: {
+      sidebarIsOpen: false,
+    },
+  };
+}
+
+export function openSettingsDialog() {
+  return {
+    type: TYPES.changeParams,
+    payload: {
+      settingsDialogIsOpen: true,
+    },
+  };
+}
+
+export function closeSettingsDialog() {
+  return {
+    type: TYPES.changeParams,
+    payload: {
+      settingsDialogIsOpen: false,
+    },
   };
 }
 
@@ -17,11 +41,17 @@ export function toggleSidebar() {
     const sidebarIsOpen = getState().ui.sidebarIsOpen;
     if (sidebarIsOpen) {
       return dispatch({
-        type: TYPES.closeSidebar,
+        type: TYPES.changeParams,
+        payload: {
+          sidebarIsOpen: false,
+        },
       });
     }
     return dispatch({
-      type: TYPES.openSidebar,
+      type: TYPES.changeParams,
+      payload: {
+        sidebarIsOpen: true,
+      },
     });
   };
 }
