@@ -1,6 +1,6 @@
 import {
   grey50, grey100, grey300, grey400, grey900,
-  cyan300, lightBlue900 } from 'material-ui/styles/colors';
+  cyan300, lightBlue900, green500 } from 'material-ui/styles/colors';
 import { lineScale, modularScale } from 'sg/styles/utils';
 import { FONT_BASIS, LINE_HEIGHT_BASIS } from 'sg/styles/constants';
 
@@ -21,6 +21,7 @@ const rawTheme = {
     textBase: grey900,
     textGradeout: grey400,
     textPrimary: lightBlue900,
+    textAccented: green500,
   },
   typography: {
     fontBasis: FONT_BASIS,

@@ -8,4 +8,6 @@
 export Title from './Title';
 export Hr from './Hr';
 export P from './P';
+export Caption from './Caption';
 export Markdown from './Markdown';
+export Monotype from './Monotype';

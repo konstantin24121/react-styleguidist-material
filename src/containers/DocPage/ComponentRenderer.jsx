@@ -5,7 +5,7 @@ import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Snackbar from 'material-ui/Snackbar';
-import { MarkdownContent } from 'sg/compounds';
+import { MarkdownContent, PropsTable } from 'sg/compounds';
 import { Grid, GridComponent, Version,
   ProjectPath, ImportString,
   iconStyles, iconBtnStyles } from './DocPageStyled';
@@ -158,7 +158,10 @@ class ComponentRenderer extends React.Component {
             <div>
               <P>{props.description}</P>
             </div>
-            <div><P>props</P></div>
+            <div>
+              <Title size={4} isThin>Properties</Title>
+              <PropsTable properties={props.props} isFlow={props.flow} />
+            </div>
             <div><P>examples</P></div>
             <div>
               {changelog && this.renderChangelog()}

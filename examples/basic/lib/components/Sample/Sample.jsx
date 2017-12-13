@@ -19,6 +19,10 @@ class Sample extends PureComponent {
   static propTypes = {
     /**
      * String array props
+     * Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+     * Odio, deleniti ut quisquam optio sit similique asperiores tempora.
+     * In consectetur labore, iusto omnis commodi similique!
+     * Sed dolores nostrum praesentium, laborum exercitationem.
      */
     array: PropTypes.arrayOf(PropTypes.string),
     /**

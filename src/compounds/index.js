@@ -10,5 +10,6 @@ export FilteredList from './FilteredList';
 export Header from './Header';
 export SidebarToggle from './SidebarToggle';
 export BackTop from './BackTop';
+export PropsTable from './PropsTable';
 
 export MarkdownContent from './MarkdownContent';

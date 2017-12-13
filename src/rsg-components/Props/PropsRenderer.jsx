@@ -6,37 +6,6 @@ import { unquote, getType, showSpaces } from './util';
 
 import s from './Props.css';
 
-function renderDefault(prop) {
-  if (prop.defaultValue) {
-    return (
-      <Code plain>
-        {showSpaces(unquote(prop.defaultValue.value))}
-      </Code>
-    );
-  } else if (prop.required) {
-    return (
-      <span className={s.required}>Required</span>
-    );
-  }
-  return '';
-}
-
-function renderType(type) {
-  if (!type) {
-    return 'unknown';
-  }
-
-  const { name } = type;
-
-  switch (name) {
-    case 'arrayOf':
-      return `${type.value.name}[]`;
-    case 'instanceOf':
-      return type.value;
-    default:
-      return name;
-  }
-}
 
 function renderEnum(prop) {
   if (!Array.isArray(getType(prop).value)) {
