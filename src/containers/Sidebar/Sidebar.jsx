@@ -12,13 +12,14 @@ import { FontSettings } from 'sg/containers';
 import { withDeviceType } from 'sg/providers/DeviceProvider';
 import { throttle } from 'lodash';
 import { ACTIONS as uiActions } from 'sg/redux/modules/ui';
-
+import { isOverflown } from 'sg/utils';
 import { Root, Scrollbox, Grid, Header, HeaderGrid,
   trackStyle, thumbStyle, paperStyle,
   filterStyle, scrollbarStyle } from './SidebarStyled';
 
 class Sidebar extends React.PureComponent {
   static touchstartX = 0;
+  static touchstartY = 0;
 
   constructor(props) {
     super(props);
@@ -54,7 +55,7 @@ class Sidebar extends React.PureComponent {
     }
     if (nextProps.location !== this.props.location) {
       if (!nextProps.device.matchDevice('DESCTOPE')) {
-        this.props.toggleSidebar();
+        this.props.closeSidebar();
       }
     }
   }
@@ -65,6 +66,15 @@ class Sidebar extends React.PureComponent {
     document.removeEventListener('touchstart', this.handleSwipeStart, false);
     document.removeEventListener('touchend', this.handleSwipeEnd, false);
     this.handleStopTransitionThrottled.cancel();
+  }
+
+  checkInteruptSwipe = (path) => {
+    let interuptSwipe;
+    for (let i = 0; i < path.length; i += 1) {
+      interuptSwipe = isOverflown(path[i], { horizontal: true });
+      if (interuptSwipe) break;
+    }
+    return interuptSwipe;
   }
 
   handleStopTransition = () => {
@@ -85,19 +95,26 @@ class Sidebar extends React.PureComponent {
   }
 
   handleSwipeStart = (event) => {
-    this.touchstartX = event.changedTouches[0].screenX;
+    if (this.checkInteruptSwipe(event.path)) return;
+    this.touchstartX = event.changedTouches[0].clientX;
+    this.touchstartY = event.changedTouches[0].clientY;
   }
 
   handleSwipeEnd = (event) => {
-    const touchendX = event.changedTouches[0].screenX;
-    const swipeDiff = Math.abs(touchendX) - Math.abs(this.touchstartX);
-    if (Math.abs(swipeDiff) < 100) return;
-    if (swipeDiff > 0) {
+    if (this.checkInteruptSwipe(event.path)) return;
+    const touchendX = event.changedTouches[0].clientX;
+    const touchendY = event.changedTouches[0].clientY;
+    const swipeDiffX = Math.abs(touchendX) - Math.abs(this.touchstartX);
+    const swipeDiffY = Math.abs(touchendY) - Math.abs(this.touchstartY);
+    if (Math.abs(swipeDiffX) < 100 || Math.abs(swipeDiffY) > 40) return;
+    if (swipeDiffX < 0) {
       this.props.openSidebar();
     }
-    if (swipeDiff < 0) {
+    if (swipeDiffX > 0) {
       this.props.closeSidebar();
     }
+    this.touchstartX = 0;
+    this.touchstartY = 0;
   }
 
   handleChangeSearchTerm = (event) => {

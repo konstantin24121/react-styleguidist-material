@@ -18,7 +18,7 @@ export const Root = styled.div`
   transform: translateX(${applyIsShifted}) translateY(${applyIsVisible});
   ${applyRootStyle}
 
-  ${media.handhold`
+  ${media.tablet`
     bottom: ${lineScale(2)}px;
     left: ${lineScale(2)}px;
     right: auto;
