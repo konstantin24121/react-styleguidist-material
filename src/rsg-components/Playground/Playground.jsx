@@ -103,7 +103,7 @@ export default class Playground extends Component {
 
   render() {
     const { code, urlProps } = this.state;
-    const { evalInContext, index, name, props, isFlow } = this.props;
+    const { evalInContext, index, name, props } = this.props;
     const { singleExample } = this.context;
 
     return (
@@ -115,7 +115,6 @@ export default class Playground extends Component {
         props={props}
         singleExample={singleExample}
         evalInContext={evalInContext}
-        isFlow={isFlow}
         onChange={
           (newCode, newProps, settings) => {
             this.handleChange(newCode, newProps, settings);

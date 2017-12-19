@@ -55,49 +55,26 @@ export const Grid = styled.div`
 
 
 export const GridComponent = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto auto;
-  grid-template-areas:
-    "appPath"
-    "importString"
-    "description"
-    "props"
-    "examples"
-    "changelog";
-
   width: 100%;
   align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
 
-
-  ${media.tablet`
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr auto auto;
-    grid-template-areas:
-      "appPath importString"
-      "description description"
-      "props props"
-      "examples examples"
-      "changelog changelog";
-  `}
+  > * {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
 
   > *:nth-child(1) {
-    grid-area: appPath;
+    ${media.handhold`
+      flex-basis: 50%;
+    `}
   }
   > *:nth-child(2) {
-    grid-area: importString;
-  }
-  > *:nth-child(3) {
-    grid-area: description;
-  }
-  > *:nth-child(4) {
-    grid-area: props;
-  }
-  > *:nth-child(5) {
-    grid-area: examples;
-  }
-  > *:nth-child(6) {
-    grid-area: changelog;
+
+    ${media.handhold`
+      flex-basis: 50%;
+    `}
   }
 `;
 
@@ -129,6 +106,12 @@ export const ImportString = styled.div`
   `}
 `;
 
+export const KeyTooltil = styled.div`
+  font-family: ${(p) => p.theme.fontFamilies.monospace};
+  font-size: ${(p) => p.theme.typography.tiny}px;
+  color: ${(p) => p.theme.colors.textGradeout};
+`;
+
 export const iconBtnStyles = {
   padding: 0,
   width: 'auto',
@@ -142,3 +125,9 @@ export const iconStyles = {
   position: 'relative',
   bottom: `-${theme.typography.base * 0.2}px`,
 };
+
+export const Footer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: ${lineScale(2)}px 0;
+`;

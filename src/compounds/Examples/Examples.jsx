@@ -1,23 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Playground, Markdown } from 'rsg-components';
+// import { Playground } from 'rsg-components';
+import { Markdown } from 'sg/components';
 
-const Examples = ({ examples, name, props, isFlow }, { codeKey }) => (
+const Examples = ({ examples, name, props }) => (
   <div>
     {examples.map((example, index) => {
       switch (example.type) {
         case 'code':
-          return (
-            <Playground
-              code={example.content}
-              evalInContext={example.evalInContext}
-              key={`${codeKey}/${index}`}
-              name={name}
-              index={index}
-              props={props}
-              isFlow={isFlow}
-            />
-          );
+          return null;
+          // return (
+          //   <Playground
+          //     code={example.content}
+          //     evalInContext={example.evalInContext}
+          //     key={`${name}/${index}`}
+          //     name={name}
+          //     index={index}
+          //     props={props}
+          //   />
+          // );
         case 'markdown':
 
           return (
@@ -37,18 +38,11 @@ Examples.propTypes = {
   examples: PropTypes.array.isRequired,
   name: PropTypes.string,
   props: PropTypes.object,
-  isFlow: PropTypes.bool,
 };
 
 Examples.defaultProps = {
-  isFlow: false,
   name: '',
   props: null,
 };
-
-Examples.contextTypes = {
-  codeKey: PropTypes.number.isRequired,
-};
-
 
 export default Examples;

@@ -19,11 +19,20 @@ class Main extends React.PureComponent {
     sidebarIsOpen: PropTypes.bool.isRequired,
     toggleSidebar: PropTypes.func.isRequired,
     replaceSections: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
   };
 
 
   componentWillMount() {
     this.props.replaceSections(styleguide);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      const { documentElement, body } = document;
+      documentElement.scrollTop = 0;
+      body.scrollTop = 0;
+    }
   }
 
   render() {

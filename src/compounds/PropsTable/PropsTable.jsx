@@ -8,6 +8,7 @@ import {
   TableRow,
 } from 'material-ui/Table';
 import { Caption } from 'sg/components';
+import { scrolableDiv as ScrolableDiv } from 'sg/components/Markdown/MarkdownStyled';
 import { Required, rowStyles, headerStyle } from './PropTypesStyled';
 
 import renderFlowTableData from './renderFlowTableData';
@@ -16,10 +17,11 @@ import renderTableData from './renderTableData';
 const PropsTable = ({ isFlow, properties }) => {
   const hasRequiredIndex = Object.values(properties).findIndex((prop) => prop.required);
   const hasRequired = hasRequiredIndex !== -1;
-  return (
-    <span>
+  return [
+    <ScrolableDiv key="table-wrapper">
       <Table
         selectable={false}
+        bodyStyle={{ overflowX: null, overflowY: null }}
       >
         <TableHeader
           displaySelectAll={false}
@@ -59,9 +61,9 @@ const PropsTable = ({ isFlow, properties }) => {
           {isFlow ? renderFlowTableData(properties) : renderTableData(properties)}
         </TableBody>
       </Table>
-      {hasRequired && <Caption><Required>*</Required> - required property</Caption>}
-    </span>
-  );
+    </ScrolableDiv>,
+    hasRequired && <Caption key="table-caption"><Required>*</Required> - required property</Caption>,
+  ];
 };
 
 PropsTable.propTypes = {

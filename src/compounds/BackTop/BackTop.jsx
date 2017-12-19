@@ -23,7 +23,7 @@ class BackTop extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.throttledHandleScroll);
-    this.throttledHandleScroll.cansel();
+    this.throttledHandleScroll.cancel();
   }
 
   handleScroll = () => {

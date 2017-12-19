@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { lineScale, modularScale } from 'sg/styles/utils';
+import { P } from 'sg/components';
 
 export const Required = styled.span`
   color: ${(p) => p.theme.colors.textAccented};
@@ -9,14 +10,9 @@ export const Name = styled.span`
   color: ${(p) => p.theme.colors.textPrimary};
 `;
 
-export const Default = styled.pre`
-  word-break: normal;
-  white-space: pre-wrap;
-  margin: 0;
-`;
-
-export const Extra = styled.span`
+export const Extra = P.withComponent('span').extend`
   color: ${(p) => p.theme.colors.textGradeout};
+  margin: 0;
 `;
 
 export const headerStyle = {

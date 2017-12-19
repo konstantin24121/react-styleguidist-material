@@ -5,7 +5,7 @@ import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Snackbar from 'material-ui/Snackbar';
-import { MarkdownContent, PropsTable } from 'sg/compounds';
+import { MarkdownContent, PropsTable, Examples } from 'sg/compounds';
 import { Grid, GridComponent, Version,
   ProjectPath, ImportString,
   iconStyles, iconBtnStyles } from './DocPageStyled';
@@ -138,7 +138,7 @@ class ComponentRenderer extends React.Component {
   }
 
   render() {
-    const { name, pathLine, props, changelog } = this.props.dockSegment;
+    const { name, pathLine, props, changelog, examples } = this.props.dockSegment;
     const { importString } = props;
     return (
       <Grid>
@@ -162,7 +162,7 @@ class ComponentRenderer extends React.Component {
               <Title size={4} isThin>Properties</Title>
               <PropsTable properties={props.props} isFlow={props.flow} />
             </div>
-            <div><P>examples</P></div>
+            <div><Examples examples={examples} name={name} props={props} /></div>
             <div>
               {changelog && this.renderChangelog()}
             </div>

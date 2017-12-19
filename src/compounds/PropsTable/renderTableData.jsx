@@ -2,7 +2,7 @@ import React from 'react';
 import Group from 'react-group';
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import { Monotype, P } from 'sg/components';
-import { Required, Name, Default, Extra, rowStyles } from './PropTypesStyled';
+import { Required, Name, Extra, rowStyles } from './PropTypesStyled';
 import { unquote, getType } from './util';
 
 function renderType(type) {
@@ -22,7 +22,8 @@ function renderType(type) {
 
 function renderDefault(prop) {
   const type = getType(prop);
-  if (type.name === 'bool' && prop.defaultValue) {
+  if (type.name === 'arrayOf' || type.name === 'shape' || type.name === 'objectOf' || type.name === 'func') return '';
+  if (prop.defaultValue) {
     return unquote(prop.defaultValue.value);
   }
   return '';
@@ -93,7 +94,7 @@ function renderDescription(prop) {
   return (
     <Group>
       <P key="descr" smallLine>{description}</P>
-      {extra && <P key="extra" smallLine><Extra>{extra}</Extra></P>}
+      {extra && <Extra smallLine>{extra}</Extra>}
     </Group>
   );
 }
@@ -118,9 +119,7 @@ const renderTableData = (props) => {
         </TableRowColumn>
         <TableRowColumn style={{ width: '100px', ...rowStyles }}>
           <Monotype smallLine>
-            <Default>
-              {renderDefault(row)}
-            </Default>
+            {renderDefault(row)}
           </Monotype>
         </TableRowColumn>
         <TableRowColumn

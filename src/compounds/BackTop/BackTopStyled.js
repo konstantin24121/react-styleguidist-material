@@ -21,5 +21,6 @@ export const Root = styled.div`
   ${media.handhold`
     bottom: ${lineScale(2)}px;
     left: ${lineScale(2)}px;
+    right: auto;
   `}
   `;

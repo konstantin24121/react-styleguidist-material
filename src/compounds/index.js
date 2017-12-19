@@ -11,5 +11,6 @@ export Header from './Header';
 export SidebarToggle from './SidebarToggle';
 export BackTop from './BackTop';
 export PropsTable from './PropsTable';
+export Examples from './Examples';
 
 export MarkdownContent from './MarkdownContent';
