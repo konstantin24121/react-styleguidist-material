@@ -162,7 +162,7 @@ class ComponentRenderer extends React.Component {
               <Title size={4} isThin>Properties</Title>
               <PropsTable properties={props.props} isFlow={props.flow} />
             </div>
-            <div><Examples examples={examples} name={name} props={props} /></div>
+            <div><Examples examples={examples} /></div>
             <div>
               {changelog && this.renderChangelog()}
             </div>

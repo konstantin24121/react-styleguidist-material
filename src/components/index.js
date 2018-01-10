@@ -11,4 +11,7 @@ export P from './P';
 export Flex from './Flex';
 export Caption from './Caption';
 export Markdown from './Markdown';
+export Preview from './Preview';
+export PreviewError from './PreviewError';
 export Monotype from './Monotype';
+export Wrapper from './Wrapper';

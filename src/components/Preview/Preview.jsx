@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import noop from 'lodash/noop';
+import ThemeProvider from 'sg/providers/Theme';
 import { transform } from 'buble';
-import { PlaygroundError, Wrapper } from 'rsg-components';
+import Paper from 'material-ui/Paper';
+import { PreviewError, Wrapper } from 'sg/components';
+import { Root } from './PreviewStyled';
 
 /* eslint-disable react/no-multi-comp */
 
@@ -30,7 +33,11 @@ class PreviewComponent extends Component {
   }
 
   render() {
-    return this.props.component(this.state, this.setState, this.setInitialState);
+    return (
+      <Root>
+        {this.props.component(this.state, this.setState, this.setInitialState)}
+      </Root>
+    );
   }
 }
 
@@ -38,9 +45,6 @@ export default class Preview extends Component {
   static propTypes = {
     code: PropTypes.string.isRequired,
     evalInContext: PropTypes.func.isRequired,
-  };
-  static contextTypes = {
-    config: PropTypes.object.isRequired,
   };
 
   state = {
@@ -88,9 +92,13 @@ export default class Preview extends Component {
 
     const exampleComponent = this.evalInContext(compiledCode);
     const wrappedComponent = (
-      <Wrapper>
-        <PreviewComponent component={exampleComponent} />
-      </Wrapper>
+      <ThemeProvider>
+        <Paper>
+          <Wrapper>
+            <PreviewComponent component={exampleComponent} />
+          </Wrapper>
+        </Paper>
+      </ThemeProvider>
     );
 
     window.requestAnimationFrame(() => {
@@ -142,8 +150,8 @@ export default class Preview extends Component {
     const { error } = this.state;
     return (
       <div>
-        <div ref={(ref) => (this.mountNode = ref)} />
-        {error && <PlaygroundError message={error} />}
+        <div ref={(ref) => { this.mountNode = ref; }} />
+        {error && <PreviewError message={error} />}
       </div>
     );
   }

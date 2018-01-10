@@ -133,7 +133,7 @@ const findNextSection = (pathArray, parentSection) => {
   } = findParentCollection({ pathArray, parentSection });
 
   if (index < collection.length - 1) return collection[index + 1];
-  if (isSectionCollection && parent.components.length) {
+  if (parent && isSectionCollection && parent.components && parent.components.length) {
     return parent.components[0];
   }
   return undefined;

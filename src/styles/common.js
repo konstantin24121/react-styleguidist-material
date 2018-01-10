@@ -18,4 +18,8 @@ injectGlobal`
     line-height: ${theme.typography.lineHeightBasis}px;
     overflow-x: hidden;
   }
+
+  #app{
+    min-height: 100vh;
+  }
 `;
