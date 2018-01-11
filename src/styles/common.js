@@ -17,6 +17,10 @@ injectGlobal`
     font-size: ${theme.typography.fontBasis}px;
     line-height: ${theme.typography.lineHeightBasis}px;
     overflow-x: hidden;
+
+    &.freezeScroll {
+      overflow-y: hidden;
+    }
   }
 
   #app{

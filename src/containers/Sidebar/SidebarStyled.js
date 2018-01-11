@@ -107,7 +107,7 @@ export const filterStyle = {
   },
 };
 
-export const scrollbarStyle = {
+export const scrollbarStyle = (viewportHeight = '100vh', headerMultiply = 1) => ({
   width: '100%',
-  height: `calc(100vh - ${HeaderStyledConsts.headerScale}px`,
-};
+  height: `calc(${viewportHeight} - ${HeaderStyledConsts.headerScale * headerMultiply}px`,
+});

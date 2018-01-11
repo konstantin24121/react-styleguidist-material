@@ -50,8 +50,10 @@ class Sidebar extends React.PureComponent {
       !nextProps.device.matchDevice('HANDHOLD')
     ) {
       document.addEventListener('click', this.handleCloseSidebar);
+      document.body.classList.add('freezeScroll');
     } else {
       document.removeEventListener('click', this.handleCloseSidebar);
+      document.body.classList.remove('freezeScroll');
     }
     if (nextProps.location !== this.props.location) {
       if (!nextProps.device.matchDevice('DESCTOPE')) {
@@ -90,7 +92,7 @@ class Sidebar extends React.PureComponent {
   }
 
   handleCloseSidebar = (event) => {
-    if (this.rootRef.contains(event.target)) return false;
+    if (event.path.includes(this.rootRef)) return false;
     return this.props.closeSidebar();
   }
 
@@ -142,6 +144,8 @@ class Sidebar extends React.PureComponent {
   render() {
     const { sidebarIsOpen, sections, device } = this.props;
     const { searchTerm, disableTransition } = this.state;
+    const viewportHeight = window.innerHeight;
+    const headerMultiply = !device.matchDevice('HANDHOLD') ? 2 : 1;
     return (
       <Root
         innerRef={(node) => { this.rootRef = node; }}
@@ -169,7 +173,7 @@ class Sidebar extends React.PureComponent {
             </div>
             <div>
               <Scrollbars
-                style={scrollbarStyle}
+                style={scrollbarStyle(`${viewportHeight}px`, headerMultiply)}
                 renderTrackVertical={
                   (props) => <div {...props} style={{ ...props.style, ...trackStyle }} />
                 }

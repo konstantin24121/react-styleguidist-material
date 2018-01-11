@@ -32,6 +32,9 @@ class Device {
     return window.matchMedia(this.types[deviceIndex].query).matches;
   }
 
+  checkTouchScreen = () =>
+    ('ontouchstart' in window) || (navigator.MaxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+
   subscribe(observer) {
     this.subscriptions.push(observer);
   }

@@ -50,6 +50,7 @@ class DocPage extends React.Component {
       );
     }
     const { props } = dockSegment;
+    const enableKeyTooltips = !device.checkTouchScreen();
     return (
       <Root fontStyle={fontStyle} textSize={textSize} >
         {!props && <SectionRenderer dockSegment={dockSegment} />}
@@ -63,7 +64,7 @@ class DocPage extends React.Component {
                 label="Prev"
                 onClick={this.handleMoveToPrevPage}
               />
-              <KeyTooltil>← + shift</KeyTooltil>
+              {enableKeyTooltips && <KeyTooltil>← + shift</KeyTooltil>}
             </Flex>
           )}
           &nbsp;
@@ -71,13 +72,13 @@ class DocPage extends React.Component {
           {nextDockSegmentPath && (
             <Flex align="center" direction="column" justify="center">
               <FlatButton label="Next" onClick={this.handleMoveToNextPage} />
-              <KeyTooltil >shift + →</KeyTooltil>
+              {enableKeyTooltips && <KeyTooltil >shift + →</KeyTooltil>}
             </Flex>
           )}
         </Footer>
       </Root>
     );
-  };
+  }
 }
 
 DocPage.propTypes = {
