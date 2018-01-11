@@ -5,13 +5,16 @@ export const Root = styled.div`
   height: 100vh;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const SvgContainer = styled.div`
   max-width: 500px;
   max-height: 500px;
   width: 100%;
-  margin: auto;
+  margin: 20px;
 `;
 
 export const Segment = styled.g.attrs({

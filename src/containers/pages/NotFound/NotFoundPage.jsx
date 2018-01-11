@@ -1,14 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Root, SvgContainer, styles, Segment, Icon } from './NotFoundPageStyled';
+import { Title } from 'sg/components';
 
 class NotFoundPage extends React.Component {
-  handleLink = (link) => () => {
-    location = link;
+  handleLink = (link, external = true) => () => {
+    if (!external) return this.props.history.push(link);
+    return location = link;
   }
 
   render() {
     return (
       <Root>
+        <Title size={1}>Ups.. We have no such as page</Title>
         <SvgContainer>
           <svg
             x="0px"
@@ -224,7 +228,7 @@ class NotFoundPage extends React.Component {
               />
             </g>
             <g id="Segments">
-              <Segment onClick={this.handleLink('/')}>
+              <Segment onClick={this.handleLink('/', false)}>
                 <path
                   id="Segment5"
                   style={styles.st2}
@@ -309,9 +313,14 @@ class NotFoundPage extends React.Component {
             </g>
           </svg>
         </SvgContainer>
+        <Title size={2}>404 Error</Title>
       </Root>
     );
   }
+}
+
+NotFoundPage.propTypes = {
+  hystory: PropTypes.object.isRequired,
 };
 
 export default NotFoundPage;
