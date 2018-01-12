@@ -15,3 +15,4 @@ export Preview from './Preview';
 export PreviewError from './PreviewError';
 export Monotype from './Monotype';
 export Wrapper from './Wrapper';
+export Editor from './Editor';

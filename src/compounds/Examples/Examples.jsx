@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Markdown, Preview } from 'sg/components';
+import { Markdown } from 'sg/components';
+import { ExamplePreview } from 'sg/compounds';
 
 const Examples = ({ examples }) => (
   <div>
@@ -8,7 +9,7 @@ const Examples = ({ examples }) => (
       switch (example.type) {
         case 'code':
           return (
-            <Preview
+            <ExamplePreview
               code={example.content}
               evalInContext={example.evalInContext}
               key={index}
@@ -31,6 +32,6 @@ const Examples = ({ examples }) => (
 
 Examples.propTypes = {
   examples: PropTypes.array.isRequired,
-}
+};
 
 export default Examples;

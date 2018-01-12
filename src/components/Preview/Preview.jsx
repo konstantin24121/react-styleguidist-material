@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import noop from 'lodash/noop';
-import ThemeProvider from 'sg/providers/Theme';
 import { transform } from 'buble';
-import Paper from 'material-ui/Paper';
 import { PreviewError, Wrapper } from 'sg/components';
 import { Root } from './PreviewStyled';
 
@@ -92,13 +90,9 @@ export default class Preview extends Component {
 
     const exampleComponent = this.evalInContext(compiledCode);
     const wrappedComponent = (
-      <ThemeProvider>
-        <Paper>
-          <Wrapper>
-            <PreviewComponent component={exampleComponent} />
-          </Wrapper>
-        </Paper>
-      </ThemeProvider>
+      <Wrapper>
+        <PreviewComponent component={exampleComponent} />
+      </Wrapper>
     );
 
     window.requestAnimationFrame(() => {

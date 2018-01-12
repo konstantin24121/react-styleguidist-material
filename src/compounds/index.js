@@ -7,6 +7,7 @@
 
 export SelectableList from './SelectableList';
 export FilteredList from './FilteredList';
+export ExamplePreview from './ExamplePreview';
 export Header from './Header';
 export SidebarToggle from './SidebarToggle';
 export BackTop from './BackTop';
