@@ -6,9 +6,12 @@ import Snackbar from 'material-ui/Snackbar';
 import IconButton from 'material-ui/IconButton';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import CodeIcon from 'material-ui/svg-icons/action/code';
+import { withTheme } from 'styled-components';
 import { withDeviceType } from 'sg/providers/DeviceProvider';
 import KeyboardIcon from 'material-ui/svg-icons/hardware/keyboard';
-import { Root, Toolbar, styleIcon } from './ExamplePreviewStyled';
+import SandBoxIcon from 'material-ui/svg-icons/content/move-to-inbox';
+import { Link } from 'react-router-dom';
+import { Root, Toolbar, iconStyle, hoveredIconStyle } from './ExamplePreviewStyled';
 
 class ExamplePreview extends React.Component {
   constructor(props) {
@@ -38,7 +41,7 @@ class ExamplePreview extends React.Component {
   }
 
   render() {
-    const { code, device } = this.props;
+    const { code, device, theme, index, path } = this.props;
     const { isCollapsed, isCopied } = this.state;
     const isTouch = device.checkTouchScreen();
     return (
@@ -49,16 +52,32 @@ class ExamplePreview extends React.Component {
               text={code}
               onCopy={this.handleCopy}
             >
-              <IconButton onClick={this.handleCopy} iconStyle={styleIcon}>
+              <IconButton
+                onClick={this.handleCopy}
+                iconStyle={iconStyle(theme)}
+                hoveredStyle={hoveredIconStyle(theme)}
+              >
                 <KeyboardIcon />
               </IconButton>
             </CopyToClipboard>
-            <IconButton onClick={this.handleCollapseToogle} iconStyle={styleIcon}>
+            <IconButton
+              onClick={this.handleCollapseToogle}
+              iconStyle={iconStyle(theme)}
+              hoveredStyle={hoveredIconStyle(theme)}
+            >
               <CodeIcon />
             </IconButton>
+            <Link to={`/sandbox${path}/${index}`}>
+              <IconButton
+                iconStyle={iconStyle(theme)}
+                hoveredStyle={hoveredIconStyle(theme)}
+              >
+                <SandBoxIcon />
+              </IconButton>
+            </Link>
           </Toolbar>
           <Preview {...this.props} />
-          {!isCollapsed && <Editor code={code} />}
+          {!isCollapsed && <Editor code={code} isReadOnly />}
           <Snackbar
             open={isCopied}
             message="Code copied into youy buffer"
@@ -73,7 +92,11 @@ class ExamplePreview extends React.Component {
 
 ExamplePreview.propTypes = {
   code: PropTypes.string.isRequired,
+  componentName: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   device: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
-export default withDeviceType(ExamplePreview);
+export default withDeviceType(withTheme(ExamplePreview));

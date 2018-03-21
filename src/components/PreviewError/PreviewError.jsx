@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Root } from './PreviewErrorStyled';
 
 const PreviewError = ({ message }) => (
-  <Root>{message}</Root>
+  <Root>
+    {message}
+  </Root>
 );
 
 PreviewError.propTypes = {

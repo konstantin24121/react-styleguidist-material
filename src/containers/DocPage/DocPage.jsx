@@ -101,10 +101,11 @@ DocPage.defaultProps = {
 };
 
 function mapStateToProps(state, ownProps) {
+  const pathname = ownProps.location.pathname;
   return {
-    dockSegment: sectionsSelectors.getActiveSection(state, ownProps),
-    prevDockSegmentPath: sectionsSelectors.getPrevPagePath(state, ownProps),
-    nextDockSegmentPath: sectionsSelectors.getNextPagePath(state, ownProps),
+    dockSegment: sectionsSelectors.getActiveSection(state, { pathname }),
+    prevDockSegmentPath: sectionsSelectors.getPrevPagePath(state, { pathname }),
+    nextDockSegmentPath: sectionsSelectors.getNextPagePath(state, { pathname }),
     fontStyle: state.ui.fontStyle,
     textSize: state.ui.textSize,
   };

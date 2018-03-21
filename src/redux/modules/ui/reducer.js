@@ -12,6 +12,9 @@ const initialState = {
   textSize: 1,
   fontStyle: 'sans',
   mod: 'day',
+  sandbox: {
+    codeEditorIsOpen: false,
+  },
   ...styleguide.config,
 };
 

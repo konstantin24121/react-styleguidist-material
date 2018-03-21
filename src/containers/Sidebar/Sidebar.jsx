@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Scrollbars } from 'react-custom-scrollbars';
+
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
-import { Hr } from 'sg/components';
+import { Hr, Scrollable } from 'sg/components';
 import { SelectableList, FilteredList, SidebarToggle } from 'sg/compounds';
 import { FontSettings } from 'sg/containers';
 import { withDeviceType } from 'sg/providers/DeviceProvider';
@@ -14,8 +14,7 @@ import { throttle } from 'lodash';
 import { ACTIONS as uiActions } from 'sg/redux/modules/ui';
 import { isOverflown } from 'sg/utils';
 import { Root, Scrollbox, Grid, Header, HeaderGrid,
-  trackStyle, thumbStyle, paperStyle,
-  filterStyle, scrollbarStyle } from './SidebarStyled';
+  paperStyle, filterStyle, scrollbarStyle } from './SidebarStyled';
 
 class Sidebar extends React.PureComponent {
   static touchstartX = 0;
@@ -172,14 +171,8 @@ class Sidebar extends React.PureComponent {
               </Paper>
             </div>
             <div>
-              <Scrollbars
+              <Scrollable
                 style={scrollbarStyle(`${viewportHeight}px`, headerMultiply)}
-                renderTrackVertical={
-                  (props) => <div {...props} style={{ ...props.style, ...trackStyle }} />
-                }
-                renderThumbVertical={
-                  (props) => <div {...props} style={{ ...props.style, ...thumbStyle }} />
-                }
               >
                 <Scrollbox>
                   {searchTerm && (
@@ -195,7 +188,7 @@ class Sidebar extends React.PureComponent {
                     sections={sections}
                   />
                 </Scrollbox>
-              </Scrollbars>
+              </Scrollable>
             </div>
           </Grid>
         </Paper>

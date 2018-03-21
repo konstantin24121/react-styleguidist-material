@@ -8,6 +8,9 @@ injectGlobal`
   /* Base styles */
   * {
     box-sizing: border-box;
+    transition-duration: ${theme.other.transitionDuration};
+    transition-timing-function: ${theme.other.transitionFunction};
+    transition-delay: ${theme.other.transitionDelay};
   }
 
   body {

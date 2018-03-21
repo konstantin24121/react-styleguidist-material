@@ -138,7 +138,7 @@ class ComponentRenderer extends React.Component {
   }
 
   render() {
-    const { name, pathLine, props, changelog, examples } = this.props.dockSegment;
+    const { path, name, pathLine, props, changelog, examples } = this.props.dockSegment;
     const { importString } = props;
     return (
       <Grid>
@@ -162,7 +162,7 @@ class ComponentRenderer extends React.Component {
               <Title size={4} isThin>Properties</Title>
               <PropsTable properties={props.props} isFlow={props.flow} />
             </div>
-            <div><Examples examples={examples} /></div>
+            <div><Examples examples={examples} componentName={name} path={path} /></div>
             <div>
               {changelog && this.renderChangelog()}
             </div>

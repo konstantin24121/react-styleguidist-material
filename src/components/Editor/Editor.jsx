@@ -24,10 +24,12 @@ const UPDATE_DELAY = 10;
 export default class Editor extends React.Component {
   static propTypes = {
     code: PropTypes.string.isRequired,
+    isReadOnly: PropTypes.bool,
     onChange: PropTypes.func,
   };
 
   static defaultProps = {
+    isReadOnly: false,
     onChange: () => {},
   }
 
@@ -36,7 +38,7 @@ export default class Editor extends React.Component {
     this.state = {
       code: props.code,
     };
-    this.handleChange = debounce(this.handleChange.bind(this), UPDATE_DELAY);
+    this.handleChangeDebounced = debounce(this.handleChange, UPDATE_DELAY);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -49,16 +51,32 @@ export default class Editor extends React.Component {
     return netxState.code !== this.state.code;
   }
 
-  handleChange(newCode) {
-    this.setState({ code: newCode });
-    this.props.onChange(newCode);
+  componentWillUnmount() {
+    this.handleChangeDebounced.cancel();
+  }
+
+  handleChange = (editor, data, value) => {
+    this.props.onChange(value);
+  }
+
+  handleBeforeChange = (editor, data, value) => {
+    this.setState({ code: value });
   }
 
   render() {
     const { code } = this.state;
+    const { isReadOnly } = this.props;
     return (
       <EditorRenderer>
-        <CodeMirror value={code} onChange={this.handleChange} options={codemirrorOptions} />
+        <CodeMirror
+          value={code}
+          onChange={this.handleChangeDebounced}
+          onBeforeChange={this.handleBeforeChange}
+          options={{
+            ...codemirrorOptions,
+            readOnly: isReadOnly,
+          }}
+        />
       </EditorRenderer>
     );
   }

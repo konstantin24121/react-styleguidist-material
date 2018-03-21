@@ -7,5 +7,6 @@
 
 export Main from './Main';
 export Sidebar from './Sidebar';
+export Toolbar from './Toolbar';
 export FontSettings from './FontSettings';
 export DocPage from './DocPage';

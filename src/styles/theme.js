@@ -1,6 +1,6 @@
 import {
   grey50, grey100, grey300, grey400, grey900,
-  cyan300, lightBlue900, green500 } from 'material-ui/styles/colors';
+  cyan300, lightBlue900, green500, red700 } from 'material-ui/styles/colors';
 import { lineScale, modularScale } from 'sg/styles/utils';
 import { FONT_BASIS, LINE_HEIGHT_BASIS } from 'sg/styles/constants';
 
@@ -15,6 +15,7 @@ const rawTheme = {
     main: cyan300,
     uiLight: grey100,
     uiPrimary: cyan300,
+    uiDanger: red700,
     uiDark: grey900,
     uiGradeout: grey300,
     textInverted: grey50,

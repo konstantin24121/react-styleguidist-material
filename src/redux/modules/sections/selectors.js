@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 const getSections = (state) => state.sections;
-const getActiveSectionName = (state, props) => props.location.pathname;
+const getActiveSectionName = (state, { pathname }) => pathname;
 
 const getActiveSection = createSelector(
   [getActiveSectionName, getSections],

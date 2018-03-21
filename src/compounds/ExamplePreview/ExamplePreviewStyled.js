@@ -23,6 +23,11 @@ export const Toolbar = styled.div`
   }
 `;
 
-export const styleIcon = {
+export const iconStyle = () => ({
   width: 20,
-};
+  color: 'currentColor',
+});
+
+export const hoveredIconStyle = (theme) => ({
+  color: theme.colors.textPrimary,
+});
